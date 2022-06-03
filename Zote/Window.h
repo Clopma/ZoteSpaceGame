@@ -11,9 +11,11 @@ namespace Zote
 	{
 		int width = 800;
 		int height = 600;
+		
 
 	public:
 		Window();
+		Window(int width, int height);
 
 	};
 }
