@@ -22,9 +22,9 @@ namespace Zote
 		//OpenGL version 3.3
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, glMajorVersion);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, glMinorVersion);
-		//Limitador para no usar código deprecated
+		//Disables deprecated code
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-		//Permitir código nuevo.
+		//Enables new code
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, true);
 	}
 
@@ -47,22 +47,18 @@ namespace Zote
 			return false;
 		}
 
-		//Recuperamos Buffer size information (se explicará en el futuro).
 		glfwGetFramebufferSize(glfwWindow, &bufferWidth, &bufferHeight);
 
-		//Inicializamos el contexto para GLEW
-		/* Le decimos a GLEW que esta será la ventana a la que
-		estará conectada el contexto de Open GL.*/
+		//Provides glfwWindow as open gl context.
 		glfwMakeContextCurrent(glfwWindow);
 
-		//ASIGNAR INPUTS
+		//INPUT ASSIGNEMENT
 
-		//encapsulamos y desactivamos el cursor
+		//Cursor settings
 		//glfwSetInputMode(glfwWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 		glewExperimental = true;
 
-		//Inciamos GLEW
 		if (glewInit() != GLEW_OK)
 		{
 			LOG("GLEW initialisation failed!");
@@ -72,10 +68,7 @@ namespace Zote
 		}
 
 		glEnable(GL_DEPTH_TEST);
-
-		//Elegimos el tamaño del Viewport
 		glViewport(0, 0, bufferWidth, bufferHeight);
-
 		glfwSetWindowUserPointer(glfwWindow, this);
 
 		initialized = true;
@@ -89,14 +82,10 @@ namespace Zote
 
 		while (!glfwWindowShouldClose(glfwWindow))
 		{
-			//Eventos de Input
+			//Input events
 			glfwPollEvents();
 
-			//Limpiar la ventana
 			glClearColor(color.r, color.g, color.b, color.a);
-			/* Cuando se pintan píxeles en la pantalla la información que contienen no sólo es de color.
-			Con la siguiente función especifico qué datos de los pixeles se han de limpiar.
-			(clear color buffer) */
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			//DRAW STUFF
