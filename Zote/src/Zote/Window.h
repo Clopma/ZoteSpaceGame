@@ -13,9 +13,9 @@ namespace Zote
 {
 	class ZOTE_API Window
 	{
-		const std::string& name;
+		const std::string name;
 		int width, height;
-		const Color& color;
+		const Color color;
 		
 		GLFWwindow* glfwWindow = 0;
 		int bufferWidth = 0;
@@ -29,7 +29,7 @@ namespace Zote
 
 	public:
 		Window();
-		Window(const std::string& name, int width, int height, const Color& color);
+		Window(const std::string name, int width, int height, const Color color);
 		~Window();
 
 		bool Init();

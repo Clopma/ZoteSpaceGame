@@ -1,8 +1,9 @@
 #pragma once
+#include "../Core.h"
 
 namespace Zote
 {
-	struct Color
+	struct ZOTE_API Color
 	{
 		float r, g, b, a;
 
@@ -10,6 +11,8 @@ namespace Zote
 		Color(float r, float g, float b, float a);
 
 		static const Color grey;
+
+		static Color Normalize(const Color& color);
 	};
 }
 

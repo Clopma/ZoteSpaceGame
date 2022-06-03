@@ -8,5 +8,15 @@ namespace Zote
 	Color::Color(float r, float g, float b, float a)
 		: r(r), g(g), b(b), a(a) {}
 
-	const Color Color::grey(0.009f, 0.008f, 0.007f, 1.0f);
+	Color Color::Normalize(const Color& color)
+	{
+		Color c;
+		c.r = color.r / 255;
+		c.g = color.g / 255;
+		c.b = color.b / 255;
+		c.a = 1;
+		return c;
+	}
+
+	const Color Color::grey(108.0f, 122.0f, 137.0f, 1.0f);
 }

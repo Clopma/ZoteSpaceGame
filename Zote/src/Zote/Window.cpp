@@ -6,9 +6,9 @@ namespace Zote
 	const int Window::glMajorVersion = 3;
 
 	Window::Window()
-		: name("Default Zote Window"), width(800), height(600), color(Color::grey) {}
+		: name("Default Zote Window"), width(800), height(600), color(Color::Normalize(Color::grey)) {}
 
-	Window::Window(const std::string& name, int width, int height, const Color& color)
+	Window::Window(const std::string name, int width, int height, const Color color)
 		: name(name), width(width), height(height), color(color) {}
 
 	Window::~Window()
