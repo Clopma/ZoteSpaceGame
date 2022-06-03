@@ -14,6 +14,6 @@ namespace Zote
 
 	void Application::Run()
 	{
-		while (true);
+		
 	}
 }

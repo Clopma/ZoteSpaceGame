@@ -11,15 +11,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Zote\Maths\Color.h" />
     <ClInclude Include="src\Zote.h" />
     <ClInclude Include="src\Zote\Application.h" />
     <ClInclude Include="src\Zote\Core.h" />
     <ClInclude Include="src\Zote\EntryPoint.h" />
-    <ClInclude Include="Window.h" />
+    <ClInclude Include="src\Zote\Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Zote\Maths\Color.cpp" />
     <ClCompile Include="src\Zote\Application.cpp" />
-    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="src\Zote\Window.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -74,7 +76,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)dependencies\glfw\lib;$(SolutionDir)dependencies\glew\lib;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;glew32s.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -93,7 +95,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)dependencies\glfw\lib;$(SolutionDir)dependencies\glew\lib;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;glew32s.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
