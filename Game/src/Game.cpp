@@ -10,20 +10,44 @@ public:
 		: message(message), number(number) {}
 };
 
+struct Sender
+{
+	Zote::Event<Args> senderEvent;
+	void Fire() { senderEvent.Invoke(Args("Primer evento!!!", 3)); }
+	Sender() {}
+};
+
+struct Subscriber
+{
+	void OnGameEvent(Args args) { LOG(args.message) }
+	void OnGameEventPlus(Args args) { LOG(args.number) }
+
+	Subscriber() {}
+
+	Subscriber(Sender* sender)
+	{
+		Zote::Delegate<Args> func1;
+		SUBSCRIBE(func1.method, Subscriber, OnGameEvent, *this);
+		sender->senderEvent.AddListener(func1);
+
+		Zote::Delegate<Args> func2;
+		SUBSCRIBE(func2.method, Subscriber, OnGameEventPlus, *this);
+		sender->senderEvent.AddListener(func2);
+	}
+};
+
 class Game : public Zote::Application
 {
 	Zote::Window* window;
-	Zote::Event<Game, Args> gameEvent;
+	Sender* send;
+	Subscriber* sub;
 
 public:
-	
-	void OnGameEvent(Args args) const { LOG(args.message) }
-	void OnGameEventPlus(Args args) const { LOG(args.number) }
 
 	Game()
 	{
-		int funcIndex = gameEvent.ADD_LISTENER(Game, OnGameEvent);
-		gameEvent.ADD_LISTENER(Game, OnGameEventPlus);
+		send = new Sender();
+		sub = new Subscriber(send);
 		window = new Zote::Window();
 	}
 	~Game()
@@ -33,7 +57,7 @@ public:
 
 	void Run() override
 	{
-		gameEvent.Invoke(*this, Args("Primer evento!!!", 3));
+		send->Fire();
 		if (!window->Init())
 		{
 			LOG("Zote Game window failed!")

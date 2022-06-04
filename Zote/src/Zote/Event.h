@@ -1,47 +1,73 @@
 #pragma once
-#include "Core.h"
 #include <functional>
 #include <vector>
 
 namespace Zote
 {
-	#define ADD_LISTENER(Class, Func) AddListener(&Class::Func); 
+	#define SUBSCRIBE(DelegateMethod, Subscriber, Method, Instance) \
+		using std::placeholders::_1;\
+		DelegateMethod = std::bind(&Subscriber::Method, Instance, _1);
 
-	template<typename TClass, typename TArgs>
+	template<class TArgs>
+	class Delegate
+	{
+	public:
+		using Method = std::function<void(TArgs)>;
+		Method method = nullptr;
+
+		Delegate() {}
+
+		void Invoke(TArgs args)
+		{  
+			if (method == nullptr)
+				return;
+			method(args);
+		}
+	};
+
+	template<class TArgs>
 	class Event
 	{
-		using EventFunc = std::function<void(const TClass&, TArgs)>;
-	;	std::vector<EventFunc> functions;
+		std::vector<Delegate<TArgs>> subscribers;
 		int count;
 
 	public:
 
 		Event() : count(0) {}
-		~Event() { RemoveAllListeners(); }
-
-		int AddListener(EventFunc function)
+		Event(Event& other) = delete;
+		Event(Event&& other) = delete;
+		~Event()
 		{
+			RemoveAllListeners();
+		}
+
+		int AddListener(Delegate<TArgs> subscriber)
+		{
+			subscribers.push_back(subscriber);
 			count++;
-			functions.push_back(function);
 			return count - 1;
 		}
 
 		void RemoveListener(int index)
 		{
-			if (index < 0 || index >= count) return;
-			functions.erase(functions.begin() + index);
-		}
-		void RemoveAllListeners() 
-		{
-			if (functions.size() == 0) return;
-			functions.clear();
+			if (index < 0 || index >= count)
+				return;
+			subscribers.erase(subscribers.begin() + index);
 		}
 
-		void Invoke(const TClass& sender, TArgs args)
+		void RemoveAllListeners()
 		{
-			if (functions.size() == 0) return;
-			for (EventFunc function : functions)
-				function(sender, args);
+			if (subscribers.size() == 0)
+				return;
+			subscribers.clear();
+		}
+
+		void Invoke(TArgs args)
+		{
+			if (subscribers.size() == 0)
+				return;
+			for (Delegate<TArgs> subscriber : subscribers)
+				subscriber.Invoke(args);
 		}
 	};
 }
