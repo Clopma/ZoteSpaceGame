@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Zote\Event.h" />
     <ClInclude Include="src\Zote\Maths\Color.h" />
     <ClInclude Include="src\Zote.h" />
     <ClInclude Include="src\Zote\Application.h" />
