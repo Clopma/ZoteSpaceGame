@@ -5,12 +5,15 @@
 #include<glew.h>
 #include<glfw3.h>
 #include"Maths/Color.h"
+#include "Event.h"
 #include "Core.h"
 
 #define LOG(a) std::cout << a << std::endl;
 
 namespace Zote
 {
+	struct ZOTE_API OnRenderArgs {};
+
 	class ZOTE_API Window
 	{
 		const std::string name;
@@ -28,6 +31,8 @@ namespace Zote
 		void SetProperties();
 
 	public:
+		Event<OnRenderArgs> OnRender;
+
 		Window();
 		Window(const std::string name, int width, int height, const Color color);
 		~Window();

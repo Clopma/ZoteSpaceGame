@@ -4,23 +4,25 @@
 
 namespace Zote
 {
-	#define SUBSCRIBE(DelegateMethod, Subscriber, Method, Instance) \
-		using std::placeholders::_1;\
-		DelegateMethod = std::bind(&Subscriber::Method, Instance, _1);
+	#define DELEGATE(Args, Instance, Subscriber, Method)\
+		Zote::Delegate<Args>(Instance, &Subscriber::Method)
 
 	template<class TArgs>
 	class Delegate
 	{
-	public:
 		using Method = std::function<void(TArgs)>;
-		Method method = nullptr;
+		Method method;
 
-		Delegate() {}
+	public:
+		
+		template<class Subscriber>
+		Delegate(Subscriber subscriber, void (Subscriber::*function)(TArgs))
+		{
+			method = std::bind(function, subscriber, std::placeholders::_1);
+		}
 
 		void Invoke(TArgs args)
-		{  
-			if (method == nullptr)
-				return;
+		{
 			method(args);
 		}
 	};
@@ -71,4 +73,3 @@ namespace Zote
 		}
 	};
 }
-

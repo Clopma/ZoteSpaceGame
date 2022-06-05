@@ -26,13 +26,8 @@ struct Subscriber
 
 	Subscriber(Sender* sender)
 	{
-		Zote::Delegate<Args> func1;
-		SUBSCRIBE(func1.method, Subscriber, OnGameEvent, *this);
-		sender->senderEvent.AddListener(func1);
-
-		Zote::Delegate<Args> func2;
-		SUBSCRIBE(func2.method, Subscriber, OnGameEventPlus, *this);
-		sender->senderEvent.AddListener(func2);
+		sender->senderEvent.AddListener(DELEGATE(Args, *this, Subscriber, OnGameEvent));
+		sender->senderEvent.AddListener(DELEGATE(Args, *this, Subscriber, OnGameEventPlus));
 	}
 };
 
