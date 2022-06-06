@@ -11,18 +11,24 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Zote\ECS\Scene.h" />
+    <ClInclude Include="src\Zote\Rendering\Mesh.h" />
+    <ClInclude Include="src\Zote\Rendering\Shader.h" />
     <ClInclude Include="src\Zote\Event.h" />
     <ClInclude Include="src\Zote\Maths\Color.h" />
     <ClInclude Include="src\Zote.h" />
     <ClInclude Include="src\Zote\Application.h" />
     <ClInclude Include="src\Zote\Core.h" />
     <ClInclude Include="src\Zote\EntryPoint.h" />
-    <ClInclude Include="src\Zote\Window.h" />
+    <ClInclude Include="src\Zote\Rendering\Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Zote\ECS\Scene.cpp" />
+    <ClCompile Include="src\Zote\Rendering\Mesh.cpp" />
+    <ClCompile Include="src\Zote\Rendering\Shader.cpp" />
     <ClCompile Include="src\Zote\Maths\Color.cpp" />
     <ClCompile Include="src\Zote\Application.cpp" />
-    <ClCompile Include="src\Zote\Window.cpp" />
+    <ClCompile Include="src\Zote\Rendering\Window.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -71,7 +77,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>ZOTE_PLATFORM_WINDOWS;ZOTE_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\glfw\include;$(SolutionDir)submodules\glm;$(SolutionDir)dependencies\glew\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\glfw\include;$(SolutionDir)submodules\glm;$(SolutionDir)dependencies\glew\include;$(SolutionDir)dependencies\entt\include;$(SolutionDir)Zote\src\Zote</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -88,7 +95,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>ZOTE_PLATFORM_WINDOWS;ZOTE_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\glfw\include;$(SolutionDir)submodules\glm;$(SolutionDir)dependencies\glew\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\glfw\include;$(SolutionDir)submodules\glm;$(SolutionDir)dependencies\glew\include;$(SolutionDir)dependencies\entt\include;$(SolutionDir)Zote\src\Zote</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

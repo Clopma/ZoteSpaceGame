@@ -1,6 +1,7 @@
 #pragma once
 #include <functional>
 #include <vector>
+#include <memory>
 
 namespace Zote
 {
@@ -16,7 +17,7 @@ namespace Zote
 	public:
 		
 		template<class Subscriber>
-		Delegate(Subscriber subscriber, void (Subscriber::*function)(TArgs))
+		Delegate(Subscriber* subscriber, void (Subscriber::*function)(TArgs))
 		{
 			method = std::bind(function, subscriber, std::placeholders::_1);
 		}
@@ -30,7 +31,7 @@ namespace Zote
 	template<class TArgs>
 	class Event
 	{
-		std::vector<Delegate<TArgs>> subscribers;
+		std::vector<Delegate<TArgs>*> subscribers;
 		int count;
 
 	public:
@@ -43,7 +44,7 @@ namespace Zote
 			RemoveAllListeners();
 		}
 
-		int AddListener(Delegate<TArgs> subscriber)
+		int AddListener(Delegate<TArgs>* subscriber)
 		{
 			subscribers.push_back(subscriber);
 			count++;
@@ -68,8 +69,8 @@ namespace Zote
 		{
 			if (subscribers.size() == 0)
 				return;
-			for (Delegate<TArgs> subscriber : subscribers)
-				subscriber.Invoke(args);
+			for (Delegate<TArgs>* subscriber : subscribers)
+				subscriber->Invoke(args);
 		}
 	};
 }

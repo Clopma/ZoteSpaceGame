@@ -12,7 +12,10 @@
 
 namespace Zote
 {
-	struct ZOTE_API OnRenderArgs {};
+	struct ZOTE_API OnRenderArgs 
+	{
+		OnRenderArgs() {}
+	};
 
 	class ZOTE_API Window
 	{
