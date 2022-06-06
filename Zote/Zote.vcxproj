@@ -25,6 +25,7 @@
     <ClInclude Include="src\Zote\Rendering\Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Zote\Rendering\Renderer.cpp" />
     <ClCompile Include="src\Zote\ECS\Scene.cpp" />
     <ClCompile Include="src\Zote\Rendering\Mesh.cpp" />
     <ClCompile Include="src\Zote\Rendering\Shader.cpp" />

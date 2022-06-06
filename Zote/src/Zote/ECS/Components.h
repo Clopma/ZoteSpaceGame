@@ -10,7 +10,7 @@
 
 namespace Zote
 {
-	struct ZOTE_API Transform
+	struct ZOTE_API TransformComponent
 	{
 		using vec3 = glm::vec3;
 
@@ -18,44 +18,22 @@ namespace Zote
 		vec3 rotation;
 		vec3 scale;
 
-		Transform()
-			: position(0, 0, 0), rotation(0, 0, 0), scale(1, 1, 1), model(1.0f) 
+		TransformComponent()
+			: position(0, 0, 0), rotation(0, 0, 0), scale(1, 1, 1) 
 		{
 			LOG("Transform component created!");
 		}
-		Transform(const Transform& other) = default;
+		TransformComponent(const TransformComponent& other) = default;
 
-		~Transform() { LOG("Transform component destroyed!") }
-
-		void CalculateModel()
-		{
-			model = glm::mat4(1.0f);
-
-			//Rotation
-			if (rotation.x != 0)
-				model = glm::rotate(model, glm::radians(rotation.x), glm::vec3(1, 0, 0));
-			if (rotation.y != 0)
-				model = glm::rotate(model, glm::radians(rotation.y), glm::vec3(0, 1, 0));
-			if (rotation.z != 0)
-				model = glm::rotate(model, glm::radians(rotation.z), glm::vec3(0, 0, 1));
-
-			//Translation and scale
-			model = glm::translate(model, position);
-			model = glm::scale(model, scale);
-		}
-
-		float* GetModel() { return glm::value_ptr(model); }
-
-	private:
-		glm::mat4 model;
+		~TransformComponent() { LOG("Transform component destroyed!") }
 	};
 
-	struct ZOTE_API MeshRenderer
+	struct ZOTE_API MeshComponent
 	{
 		std::shared_ptr<Mesh> mesh;
 		std::shared_ptr<Shader> shader;
 
-		MeshRenderer()
+		MeshComponent()
 		{
 			float vertices[] = {
 				-1.0f, -1.0f, 0.0f,
@@ -73,62 +51,23 @@ namespace Zote
 			shader = std::make_shared<Shader>();
 		}
 
-		MeshRenderer(const MeshRenderer& other) = default;
+		MeshComponent(const MeshComponent& other) = default;
 	};
 
-	struct ZOTE_API Camera
+	struct ZOTE_API CameraComponent
 	{
-		float fov, near, far;
-		glm::vec3 worldUp;
+		using vec3 = glm::vec3;
+		float fov, near, far, yaw, pitch;
 
-		Camera()
-			: fov(45.f), near(0.1f), far(100.0f), yaw(-90), 
-			  pitch(0), worldUp(0, 1, 0)
-		{
-			projection = new glm::mat4(1.0f);
-			view = new glm::mat4(1.0f);
-;			right = new glm::vec3();
-			front = new glm::vec3();
-			up = new glm::vec3();
-		}
+		vec3 right;
+		vec3 up;
+		vec3 front;
+		vec3 worldUp;
 
-		Camera(const Camera& camera) = default;
+		CameraComponent() :
+			fov(45.f), near(0.1f), far(100.0f), yaw(-90), pitch(0),
+			right(0, 0, 0), up(0, 0, 0), front(0, 0, 0), worldUp(0, 1, 0) {}
 
-		void CalculateProjection(float windowAspect) { *projection = glm::perspective(fov, windowAspect, near, far); }
-
-		void CalculateView(const Transform& transform) { *view = glm::lookAt(transform.position, transform.position + *front, *up); }
-
-		float* GetProjection() { return glm::value_ptr(*projection); }
-		float* GetView() { return glm::value_ptr(*view); }
-
-		void UpdateAxis()
-		{
-			front->x = glm::cos(glm::radians(yaw)) * glm::cos(glm::radians(pitch));
-			front->y = glm::sin(glm::radians(pitch));
-			front->z = glm::sin(glm::radians(yaw)) * glm::cos(glm::radians(pitch));
-			*front = glm::normalize(*front);
-
-			*right = glm::normalize(glm::cross(*front, worldUp));
-			*up = glm::normalize(glm::cross(*right, *front));
-		}
-
-		~Camera() 
-		{
-			delete right;
-			delete up;
-			delete front;
-
-			delete projection;
-			delete view;
-		}
-
-	private:
-		glm::vec3* right;
-		glm::vec3* up;
-		glm::vec3* front;
-		float yaw, pitch;
-
-		glm::mat4* projection;
-		glm::mat4* view;
+		CameraComponent(const CameraComponent& camera) = default;
 	};
 }

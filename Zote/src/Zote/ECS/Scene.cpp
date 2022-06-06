@@ -4,26 +4,22 @@ namespace Zote
 {
 	Scene::Scene(Window& window)
 	{
-		mainCamTransform = new Transform();
-		mainCam = new Camera();
-
 		//Main Camera setup
 		entt::entity mainCamEntity = registry.create();
 
-		Transform& tref = registry.emplace<Transform>(mainCamEntity);
-		Camera& cref = registry.emplace<Camera>(mainCamEntity);
+		TransformComponent& tref = registry.emplace<TransformComponent>(mainCamEntity);
+		CameraComponent& cref = registry.emplace<CameraComponent>(mainCamEntity);
 
-		*mainCamTransform = tref;
-		*mainCam = cref;
+		mainCam_Camera = std::make_shared<CameraComponent>(cref);
+		mainCam_Transform = std::make_shared<TransformComponent>(tref);
 
-		Renderer::currentCamera = mainCam;
-		Renderer::currentCameraTransform = mainCamTransform;
+		renderer = Renderer(mainCam_Camera, mainCam_Transform);
 
 		//Test triangle setup
 		entt::entity testTriangle = registry.create();
-		Transform& t = registry.emplace<Transform>(testTriangle);
+		TransformComponent& t = registry.emplace<TransformComponent>(testTriangle);
 		//t.position.z = 0.0f;
-		MeshRenderer& meshRenderer = registry.emplace<MeshRenderer>(testTriangle);
+		MeshComponent& meshRenderer = registry.emplace<MeshComponent>(testTriangle);
 		
 		//Suscribe to DrawMesh to WindowUpdate
 		window.OnRender.AddListener(new Zote::Delegate<OnRenderArgs>(this, &Scene::RenderEntities));
@@ -31,14 +27,14 @@ namespace Zote
 
 	void Scene::RenderEntities(OnRenderArgs args)
 	{
-		auto group = registry.group<Transform>(entt::get<MeshRenderer>);
+		auto group = registry.group<TransformComponent>(entt::get<MeshComponent>);
 		//auto view = registry.view<MeshRenderer>();
 
 		for (auto entity : group)
 		{
-			MeshRenderer& mesh = group.get<MeshRenderer>(entity);
-			Transform& transform = group.get<Transform>(entity);
-			Renderer::DrawMesh(mesh, transform, args.aspect);
+			MeshComponent& mesh = group.get<MeshComponent>(entity);
+			TransformComponent& transform = group.get<TransformComponent>(entity);
+			renderer.DrawMesh(mesh, transform, args.aspect);
 		}		
 	}
 }

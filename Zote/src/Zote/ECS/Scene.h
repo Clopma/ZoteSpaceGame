@@ -10,7 +10,6 @@ namespace Zote
 {
 	class ZOTE_API Scene
 	{
-
 	public:
 		Scene() {}
 		Scene(Window& window);
@@ -19,9 +18,11 @@ namespace Zote
 		Scene(const Scene& other) {};
 	
 	private:
+		Renderer renderer;
 		entt::registry registry;
-		Camera* mainCam;
-		Transform* mainCamTransform;
+		
+		std::shared_ptr<CameraComponent> mainCam_Camera;
+		std::shared_ptr<TransformComponent> mainCam_Transform;
 	};
 }
 

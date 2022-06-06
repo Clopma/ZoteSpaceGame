@@ -1,41 +1,42 @@
 #pragma once
 #include "ECS/Components.h"
+#include <memory>
+#include "glm/glm.hpp"
+#include <glm/gtc/type_ptr.hpp>
 
 namespace Zote
 {
-	struct ZOTE_API Renderer
+	class ZOTE_API Renderer
 	{
-		inline static Camera* currentCamera;
-		inline static Transform* currentCameraTransform;
+		using mat4 = glm::mat4;
+		using vec3 = glm::vec3;
 
-		static void DrawMesh(MeshRenderer& meshRenderer, Transform& transform, float windowAspect)
-		{
-			if (currentCamera == nullptr || currentCameraTransform == nullptr) return;
+		std::shared_ptr<CameraComponent> mainCam_Camera;
+		std::shared_ptr<TransformComponent> mainCam_Transform;
 
-			meshRenderer.shader->Use();
+		mat4 model;
+		mat4 view;
+		mat4 projection;		
 
-			currentCamera->UpdateAxis();
-			
-			//Projection matrix
-			currentCamera->CalculateProjection(windowAspect);
-			int projectionLocation = meshRenderer.shader->GetProjectionLocation();
-			meshRenderer.shader->SetUnfiformMat4(projectionLocation, currentCamera->GetProjection());
+		void CalculateModel(TransformComponent& t);
 
-			//View matrix
-			currentCamera->CalculateView(*currentCameraTransform);
-			int viewLocation = meshRenderer.shader->GetViewLocation();
-			meshRenderer.shader->SetUnfiformMat4(viewLocation, currentCamera->GetView());
+		void UpdateCameraAxis();
 
-			//Model matrix
-			transform.CalculateModel();
-			int modelLocation = meshRenderer.shader->GetModelLocation();
-			meshRenderer.shader->SetUnfiformMat4(modelLocation, transform.GetModel());
+		void CalculateProjection(float aspectRatio);
 
-			meshRenderer.mesh->Render();
-			meshRenderer.shader->Unbind();
+		void CalculateView();
 
-			transform.position.y += 0.005f;
-			LOG(transform.position.y);
-		}
+		float* GetProjection() { return glm::value_ptr(projection); }
+		float* GetView() { return glm::value_ptr(view); }
+		float* GetModel() { return glm::value_ptr(model); }
+
+	public:
+
+		Renderer() {}
+
+		Renderer(std::shared_ptr<CameraComponent> mainCam_Camera,
+			std::shared_ptr<TransformComponent> mainCam_Transform);
+
+		void DrawMesh(MeshComponent& meshRenderer, TransformComponent& transform, float aspectRatio);
 	};
 }
