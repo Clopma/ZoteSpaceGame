@@ -20,6 +20,8 @@ namespace Zote
 	
 	private:
 		entt::registry registry;
+		Camera* mainCam;
+		Transform* mainCamTransform;
 	};
 }
 

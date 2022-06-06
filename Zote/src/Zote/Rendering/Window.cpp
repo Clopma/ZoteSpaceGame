@@ -71,6 +71,10 @@ namespace Zote
 			return false;
 		}
 
+		glEnable(GL_DEBUG_OUTPUT);
+		glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+		glDebugMessageCallback(OnDebugMessage, nullptr);
+
 		glEnable(GL_DEPTH_TEST);
 		glViewport(0, 0, bufferWidth, bufferHeight);
 		glfwSetWindowUserPointer(glfwWindow, this);
@@ -97,5 +101,9 @@ namespace Zote
 
 			glfwSwapBuffers(glfwWindow);
 		}
+	}
+	void Window::OnDebugMessage(GLenum source, GLenum type, unsigned int id, GLenum severity, GLsizei length, const char* message, const void* userParam)
+	{
+		std::cout << message << std::endl;
 	}
 }

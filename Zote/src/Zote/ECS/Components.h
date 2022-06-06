@@ -6,6 +6,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "Rendering/Window.h"
 #include <glm/gtc/type_ptr.hpp>
+#include <memory>
 
 namespace Zote
 {
@@ -18,8 +19,13 @@ namespace Zote
 		vec3 scale;
 
 		Transform()
-			: position(0, 0, 0), rotation(0, 0, 0), scale(1, 1, 1), model(1.0f) {}
+			: position(0, 0, 0), rotation(0, 0, 0), scale(1, 1, 1), model(1.0f) 
+		{
+			LOG("Transform component created!");
+		}
 		Transform(const Transform& other) = default;
+
+		~Transform() { LOG("Transform component destroyed!") }
 
 		void CalculateModel()
 		{
@@ -46,8 +52,8 @@ namespace Zote
 
 	struct ZOTE_API MeshRenderer
 	{
-		Mesh mesh;
-		Shader shader;
+		std::shared_ptr<Mesh> mesh;
+		std::shared_ptr<Shader> shader;
 
 		MeshRenderer()
 		{
@@ -63,8 +69,10 @@ namespace Zote
 					2, 3, 0,
 					0, 1, 2
 			};
-			mesh = Mesh(vertices, indices, 12, 12);
+			mesh = std::make_shared<Mesh>(vertices, indices, 12, 12);
+			shader = std::make_shared<Shader>();
 		}
+
 		MeshRenderer(const MeshRenderer& other) = default;
 	};
 
@@ -75,34 +83,52 @@ namespace Zote
 
 		Camera()
 			: fov(45.f), near(0.1f), far(100.0f), yaw(-90), 
-			  pitch(0), worldUp(0, 1, 0),right(0, 0, 0), up(0, 0, 0), 
-			  front(0, 0, 0), projection(1.0f), view(1.0f) {}
+			  pitch(0), worldUp(0, 1, 0)
+		{
+			projection = new glm::mat4(1.0f);
+			view = new glm::mat4(1.0f);
+;			right = new glm::vec3();
+			front = new glm::vec3();
+			up = new glm::vec3();
+		}
 
 		Camera(const Camera& camera) = default;
 
-		void CalculateProjection(float windowAspect) { projection = glm::mat4(1.0f); projection = glm::perspective(fov, windowAspect, near, far); }
+		void CalculateProjection(float windowAspect) { *projection = glm::perspective(fov, windowAspect, near, far); }
 
-		void CalculateView(const Transform& transform) { view = glm::mat4(1.0f); view = glm::lookAt(transform.position, transform.position + front, up); }
+		void CalculateView(const Transform& transform) { *view = glm::lookAt(transform.position, transform.position + *front, *up); }
 
-		float* GetProjection() { return glm::value_ptr(projection); }
-		float* GetView() { return glm::value_ptr(view); }
+		float* GetProjection() { return glm::value_ptr(*projection); }
+		float* GetView() { return glm::value_ptr(*view); }
 
 		void UpdateAxis()
 		{
-			front.x = glm::cos(glm::radians(yaw)) * glm::cos(glm::radians(pitch));
-			front.y = glm::sin(glm::radians(pitch));
-			front.z = glm::sin(glm::radians(yaw)) * glm::cos(glm::radians(pitch));
-			front = glm::normalize(front);
+			front->x = glm::cos(glm::radians(yaw)) * glm::cos(glm::radians(pitch));
+			front->y = glm::sin(glm::radians(pitch));
+			front->z = glm::sin(glm::radians(yaw)) * glm::cos(glm::radians(pitch));
+			*front = glm::normalize(*front);
 
-			right = glm::normalize(glm::cross(front, worldUp));
-			up = normalize(cross(right, front));
+			*right = glm::normalize(glm::cross(*front, worldUp));
+			*up = glm::normalize(glm::cross(*right, *front));
+		}
+
+		~Camera() 
+		{
+			delete right;
+			delete up;
+			delete front;
+
+			delete projection;
+			delete view;
 		}
 
 	private:
-		glm::vec3 right, up, front;
+		glm::vec3* right;
+		glm::vec3* up;
+		glm::vec3* front;
 		float yaw, pitch;
 
-		glm::mat4 projection;
-		glm::mat4 view;
+		glm::mat4* projection;
+		glm::mat4* view;
 	};
 }

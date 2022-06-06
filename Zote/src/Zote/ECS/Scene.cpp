@@ -4,20 +4,26 @@ namespace Zote
 {
 	Scene::Scene(Window& window)
 	{
+		mainCamTransform = new Transform();
+		mainCam = new Camera();
+
 		//Main Camera setup
 		entt::entity mainCamEntity = registry.create();
-		auto camT = registry.emplace<Transform>(mainCamEntity);
-		Camera& mainCam = registry.emplace<Camera>(mainCamEntity);
 
-		//Provide main camera to the renderer
-		Renderer::currentCamera = &mainCam;
-		Renderer::currentCameraTransform = &camT;
+		Transform& tref = registry.emplace<Transform>(mainCamEntity);
+		Camera& cref = registry.emplace<Camera>(mainCamEntity);
+
+		*mainCamTransform = tref;
+		*mainCam = cref;
+
+		Renderer::currentCamera = mainCam;
+		Renderer::currentCameraTransform = mainCamTransform;
 
 		//Test triangle setup
 		entt::entity testTriangle = registry.create();
 		Transform& t = registry.emplace<Transform>(testTriangle);
-		t.position.z = 2.5f;
-		registry.emplace<MeshRenderer>(testTriangle);
+		//t.position.z = 0.0f;
+		MeshRenderer& meshRenderer = registry.emplace<MeshRenderer>(testTriangle);
 		
 		//Suscribe to DrawMesh to WindowUpdate
 		window.OnRender.AddListener(new Zote::Delegate<OnRenderArgs>(this, &Scene::RenderEntities));
@@ -30,8 +36,8 @@ namespace Zote
 
 		for (auto entity : group)
 		{
-			auto mesh = group.get<MeshRenderer>(entity);
-			auto transform = group.get<Transform>(entity);
+			MeshRenderer& mesh = group.get<MeshRenderer>(entity);
+			Transform& transform = group.get<Transform>(entity);
 			Renderer::DrawMesh(mesh, transform, args.aspect);
 		}		
 	}

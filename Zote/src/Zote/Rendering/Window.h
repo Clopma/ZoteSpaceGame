@@ -47,6 +47,9 @@ namespace Zote
 		int GetBufferWidth() const { return bufferWidth; }
 		int GetBufferHeight() const { return bufferHeight; }
 		int GetAspect() const { return bufferWidth / bufferHeight; }
+
+		static void APIENTRY OnDebugMessage(GLenum source, GLenum type, unsigned int id, GLenum severity,
+			GLsizei length, const char* message, const void* userParam);
 	};
 }
 
