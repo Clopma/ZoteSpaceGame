@@ -102,6 +102,10 @@ namespace Zote
 		
 		glDeleteShader(vertex);
 		glDeleteShader(fragment);
+
+		modelLocation = GetUniform(modelUniformName);
+		viewLocation = GetUniform(viewUniformName);
+		projectionLocation = GetUniform(projectionUniformName);
 	}
 	void Shader::Create(c_str vertexLocation, c_str fragmentLocation)
 	{
@@ -110,12 +114,12 @@ namespace Zote
 		LinkAndValidate(vertexString.c_str(), fragmentString.c_str());
 	}
 	Shader::Shader(c_str vertexLocation, c_str fragmentLocation)
-		: shaderID(0)
+		: shaderID(0), modelLocation(0), viewLocation(0), projectionLocation(0)
 	{
 		Create(vertexLocation, fragmentLocation);
 	}
 	Shader::Shader()
-		: shaderID(0)
+		: shaderID(0), modelLocation(0), viewLocation(0), projectionLocation(0)
 	{
 		Create(defaultVertexLocation, defaultFragmentLocation);
 	}
@@ -127,10 +131,17 @@ namespace Zote
 	{
 		glUseProgram(shaderID);
 	}
+	void Shader::Unbind()
+	{
+		glUseProgram(0);
+	}
 	void Shader::Clear()
 	{
 		if (shaderID == 0) return;
 		glDeleteProgram(shaderID);
 		shaderID = 0;
+		modelLocation = 0;
+		viewLocation = 0;
+		projectionLocation = 0;
 	}
 }

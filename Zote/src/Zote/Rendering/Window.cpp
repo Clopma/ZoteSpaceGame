@@ -1,5 +1,9 @@
 #include "Window.h"
 
+#include "Rendering/Mesh.h"
+#include "Rendering/Shader.h"
+#include "ECS/Components.h"
+
 namespace Zote
 {
 	const int Window::glMinorVersion = 3;
@@ -89,7 +93,7 @@ namespace Zote
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			//DRAW STUFF
-			OnRender.Invoke(OnRenderArgs());
+			OnRender.Invoke(OnRenderArgs(GetAspect()));
 
 			glfwSwapBuffers(glfwWindow);
 		}

@@ -14,7 +14,8 @@ namespace Zote
 {
 	struct ZOTE_API OnRenderArgs 
 	{
-		OnRenderArgs() {}
+		float aspect;
+		OnRenderArgs(float aspect) : aspect(aspect) {}
 	};
 
 	class ZOTE_API Window
@@ -45,6 +46,7 @@ namespace Zote
 
 		int GetBufferWidth() const { return bufferWidth; }
 		int GetBufferHeight() const { return bufferHeight; }
+		int GetAspect() const { return bufferWidth / bufferHeight; }
 	};
 }
 

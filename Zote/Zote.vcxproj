@@ -11,8 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Zote\ECS\Components.h" />
     <ClInclude Include="src\Zote\ECS\Scene.h" />
     <ClInclude Include="src\Zote\Rendering\Mesh.h" />
+    <ClInclude Include="src\Zote\Rendering\Renderer.h" />
     <ClInclude Include="src\Zote\Rendering\Shader.h" />
     <ClInclude Include="src\Zote\Event.h" />
     <ClInclude Include="src\Zote\Maths\Color.h" />
