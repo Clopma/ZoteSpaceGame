@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include "Entity.h"
 
 namespace Zote
 {
@@ -16,11 +17,13 @@ namespace Zote
 		renderer = Renderer(mainCam_Camera, mainCam_Transform);
 
 		//Test triangle setup
-		entt::entity testTriangle = registry.create();
-		TransformComponent& t = registry.emplace<TransformComponent>(testTriangle);
+		Entity testTriangle = CreateEntity();
+		
+		MeshComponent& m = testTriangle.AddComponent<MeshComponent>();
+		TransformComponent& t = testTriangle.GetTransform();
+
 		t.position.z = -2.5f;
 		t.position.y = 0.5f;
-		MeshComponent& meshRenderer = registry.emplace<MeshComponent>(testTriangle);
 		
 		//Suscribe to DrawMesh to WindowUpdate
 		window.OnRender.AddListener(new Zote::Delegate<OnRenderArgs>(this, &Scene::RenderEntities));
@@ -37,5 +40,9 @@ namespace Zote
 			TransformComponent& transform = group.get<TransformComponent>(entity);
 			renderer.DrawMesh(mesh, transform, args.aspect);
 		}		
+	}
+	Entity Scene::CreateEntity()
+	{
+		return { registry.create(), this };
 	}
 }

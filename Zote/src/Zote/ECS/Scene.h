@@ -1,4 +1,5 @@
 #pragma once
+
 #include <entt.hpp>
 #include "Core.h"
 #include "Components.h"
@@ -8,15 +9,21 @@
 
 namespace Zote
 {
+	class Entity;
+
 	class ZOTE_API Scene
 	{
+		friend class Entity;
+
 	public:
 		Scene() {}
 		Scene(Window& window);
 		void RenderEntities(OnRenderArgs args);
 
 		Scene(const Scene& other) {};
-	
+
+		Entity CreateEntity();
+
 	private:
 		Renderer renderer;
 		entt::registry registry;
@@ -25,4 +32,3 @@ namespace Zote
 		std::shared_ptr<TransformComponent> mainCam_Transform;
 	};
 }
-
