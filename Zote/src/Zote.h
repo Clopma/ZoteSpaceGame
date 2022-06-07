@@ -12,5 +12,6 @@
 #include "Zote/Rendering/Mesh.h"
 
 #include "Zote/ECS/Scene.h"
+#include "Zote/ECS/Entity.h"
 
 #define LOG(a) std::cout << a << std::endl;

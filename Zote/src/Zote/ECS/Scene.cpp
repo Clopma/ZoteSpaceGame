@@ -15,15 +15,6 @@ namespace Zote
 		mainCam_Transform = std::make_shared<TransformComponent>(tref);
 
 		renderer = Renderer(mainCam_Camera, mainCam_Transform);
-
-		//Test triangle setup
-		Entity testTriangle = CreateEntity();
-		
-		MeshComponent& m = testTriangle.AddComponent<MeshComponent>();
-		TransformComponent& t = testTriangle.GetTransform();
-
-		t.position.z = -2.5f;
-		t.position.y = 0.5f;
 		
 		//Suscribe to DrawMesh to WindowUpdate
 		window.OnRender.AddListener(new Zote::Delegate<OnRenderArgs>(this, &Scene::RenderEntities));

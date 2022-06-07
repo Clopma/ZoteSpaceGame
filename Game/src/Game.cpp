@@ -28,6 +28,15 @@ public:
 		}
 
 		scene = new Scene(*window);
+
+		Entity testTriangle = scene->CreateEntity();
+
+		MeshComponent& m = testTriangle.AddComponent<MeshComponent>();
+		TransformComponent& t = testTriangle.GetTransform();
+
+		t.position.z = -2.5f;
+		t.position.y = 0.5f;
+
 		window->StartLoop();
 	}
 };
