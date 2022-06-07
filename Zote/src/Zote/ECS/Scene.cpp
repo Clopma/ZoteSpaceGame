@@ -5,16 +5,11 @@ namespace Zote
 {
 	Scene::Scene(Window& window)
 	{
-		//Main Camera setup
-		entt::entity mainCamEntity = registry.create();
+		mainCamera = new Entity();
+		*mainCamera = CreateEntity();
+		mainCamera->AddComponent<CameraComponent>();
 
-		TransformComponent& tref = registry.emplace<TransformComponent>(mainCamEntity);
-		CameraComponent& cref = registry.emplace<CameraComponent>(mainCamEntity);
-
-		mainCam_Camera = std::make_shared<CameraComponent>(cref);
-		mainCam_Transform = std::make_shared<TransformComponent>(tref);
-
-		renderer = Renderer(mainCam_Camera, mainCam_Transform);
+		renderer = new Renderer(mainCamera->GetTransform(), mainCamera->GetComponent<CameraComponent>());
 		
 		//Suscribe to DrawMesh to WindowUpdate
 		window.OnRender.AddListener(new Zote::Delegate<OnRenderArgs>(this, &Scene::RenderEntities));
@@ -29,11 +24,16 @@ namespace Zote
 		{
 			MeshComponent& mesh = group.get<MeshComponent>(entity);
 			TransformComponent& transform = group.get<TransformComponent>(entity);
-			renderer.DrawMesh(mesh, transform, args.aspect);
+			renderer->DrawMesh(mesh, transform, args.aspect);
 		}		
 	}
 	Entity Scene::CreateEntity()
 	{
 		return { registry.create(), this };
+	}
+	Scene::~Scene()
+	{
+		delete renderer;
+		delete mainCamera;
 	}
 }

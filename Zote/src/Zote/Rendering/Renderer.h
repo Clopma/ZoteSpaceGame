@@ -11,8 +11,8 @@ namespace Zote
 		using mat4 = glm::mat4;
 		using vec3 = glm::vec3;
 
-		std::shared_ptr<CameraComponent> mainCam_Camera;
-		std::shared_ptr<TransformComponent> mainCam_Transform;
+		CameraComponent* mainCam_Camera;
+		TransformComponent* mainCam_Transform;
 
 		mat4 model;
 		mat4 view;
@@ -34,9 +34,10 @@ namespace Zote
 
 		Renderer() {}
 
-		Renderer(std::shared_ptr<CameraComponent> mainCam_Camera,
-			std::shared_ptr<TransformComponent> mainCam_Transform);
+		Renderer(TransformComponent& cam_transform, CameraComponent& cam_Camera);
 
 		void DrawMesh(MeshComponent& meshRenderer, TransformComponent& transform, float aspectRatio);
+
+		~Renderer();
 	};
 }

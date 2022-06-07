@@ -1,7 +1,14 @@
 #include "Renderer.h"
 
-Zote::Renderer::Renderer(std::shared_ptr<CameraComponent> mainCam_Camera, std::shared_ptr<TransformComponent> mainCam_Transform)
-	: mainCam_Camera(mainCam_Camera), mainCam_Transform(mainCam_Transform), model(1.0f), view(1.0f), projection(1.0f) {}
+Zote::Renderer::Renderer(TransformComponent& cam_transform, CameraComponent& cam_Camera)
+	: model(1.0f), view(1.0f), projection(1.0f) 
+{
+	mainCam_Camera = new CameraComponent();
+	mainCam_Transform = new TransformComponent();
+
+	*mainCam_Camera = cam_Camera;
+	*mainCam_Transform = cam_transform;
+}
 
 void Zote::Renderer::CalculateModel(TransformComponent& t)
 {
@@ -64,4 +71,10 @@ void Zote::Renderer::DrawMesh(MeshComponent& meshRenderer, TransformComponent& t
 
 	meshRenderer.mesh->Render();
 	meshRenderer.shader->Unbind();
+}
+
+Zote::Renderer::~Renderer()
+{
+	delete mainCam_Camera;
+	delete mainCam_Transform;
 }

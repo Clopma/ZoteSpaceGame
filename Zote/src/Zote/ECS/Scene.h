@@ -23,12 +23,11 @@ namespace Zote
 		Scene(const Scene& other) {};
 
 		Entity CreateEntity();
+		~Scene();
 
 	private:
-		Renderer renderer;
+		Renderer* renderer;
 		entt::registry registry;
-		
-		std::shared_ptr<CameraComponent> mainCam_Camera;
-		std::shared_ptr<TransformComponent> mainCam_Transform;
+		Entity* mainCamera;
 	};
 }

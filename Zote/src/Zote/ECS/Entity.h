@@ -11,7 +11,7 @@ namespace Zote
 		TransformComponent* transform;
 
 	public:
-
+		Entity() {}
 		Entity(entt::entity id, Scene* scene);
 		Entity(const Entity& other) = default;
 
