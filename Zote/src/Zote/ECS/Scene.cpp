@@ -18,7 +18,8 @@ namespace Zote
 		//Test triangle setup
 		entt::entity testTriangle = registry.create();
 		TransformComponent& t = registry.emplace<TransformComponent>(testTriangle);
-		//t.position.z = 0.0f;
+		t.position.z = -2.5f;
+		t.position.y = 0.5f;
 		MeshComponent& meshRenderer = registry.emplace<MeshComponent>(testTriangle);
 		
 		//Suscribe to DrawMesh to WindowUpdate

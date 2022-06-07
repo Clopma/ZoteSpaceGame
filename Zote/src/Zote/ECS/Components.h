@@ -19,13 +19,9 @@ namespace Zote
 		vec3 scale;
 
 		TransformComponent()
-			: position(0, 0, 0), rotation(0, 0, 0), scale(1, 1, 1) 
-		{
-			LOG("Transform component created!");
-		}
-		TransformComponent(const TransformComponent& other) = default;
+			: position(0, 0, 0), rotation(0, 0, 0), scale(1, 1, 1) {}
 
-		~TransformComponent() { LOG("Transform component destroyed!") }
+		TransformComponent(const TransformComponent& other) = default;
 	};
 
 	struct ZOTE_API MeshComponent

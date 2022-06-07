@@ -5,6 +5,7 @@ Zote::Renderer::Renderer(std::shared_ptr<CameraComponent> mainCam_Camera, std::s
 
 void Zote::Renderer::CalculateModel(TransformComponent& t)
 {
+	model = mat4(1.0f);
 	if (t.rotation.x != 0)
 		model = glm::rotate(model, glm::radians(t.rotation.x), glm::vec3(1, 0, 0));
 	if (t.rotation.y != 0)
@@ -30,11 +31,13 @@ void Zote::Renderer::UpdateCameraAxis()
 
 void Zote::Renderer::CalculateProjection(float aspectRatio)
 {
+	projection = mat4(1.0f);
 	projection = glm::perspective(mainCam_Camera->fov, aspectRatio, mainCam_Camera->near, mainCam_Camera->far);
 }
 
 void Zote::Renderer::CalculateView()
 {
+	view = mat4(1.0f);
 	view = glm::lookAt(mainCam_Transform->position, mainCam_Transform->position + mainCam_Camera->front, mainCam_Camera->up);
 }
 
@@ -61,7 +64,4 @@ void Zote::Renderer::DrawMesh(MeshComponent& meshRenderer, TransformComponent& t
 
 	meshRenderer.mesh->Render();
 	meshRenderer.shader->Unbind();
-
-	transform.position.y += 0.000005f;
-	LOG(transform.position.y);
 }
