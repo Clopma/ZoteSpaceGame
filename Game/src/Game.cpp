@@ -7,13 +7,10 @@ class MoveTriangleScript : public ScriptComponent
 	float speed = 5;
 	TransformComponent* transform;
 
-	/*MoveTriangleScript()
-		: ScriptComponent(entity) {}*/
-
 	virtual void Start() override
 	{
 		printf("Started Triangle");
-		*transform = entity->GetTransform();
+		*transform = GetEntity()->GetTransform();
 	}
 
 	virtual void Update(float deltaTime) override
@@ -57,7 +54,7 @@ public:
 		t.position.z = -2.5f;
 		t.position.y = 0.5f;
 
-		//testTriangle.AddComponent<MoveTriangleScript>(testTriangle);
+		testTriangle.AddComponent<MoveTriangleScript>();
 
 		window->StartLoop();
 	}

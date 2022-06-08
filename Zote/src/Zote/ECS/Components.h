@@ -14,7 +14,14 @@ namespace Zote
 
 	struct ZOTE_API BaseComponent
 	{
+		friend class Entity;
+
 		bool enabled = true;
+
+		Entity* GetEntity() { return entity; }
+
+	private:
+		Entity* entity;
 	};
 
 	struct ZOTE_API TransformComponent : public BaseComponent
@@ -78,9 +85,7 @@ namespace Zote
 	{
 		friend class Scene;
 
-		Entity* entity;
-
-		ScriptComponent(Entity* entity) : entity(entity) {}
+		ScriptComponent() {}
 
 		ScriptComponent(const ScriptComponent& other) = default;
 
