@@ -18,7 +18,7 @@ namespace Zote
 	public:
 		Scene() {}
 		Scene(Window& window);
-		void RenderEntities(OnRenderArgs args);
+		void OnRenderFrame(OnRenderFrameArgs args);
 
 		Scene(const Scene& other) {};
 
@@ -26,8 +26,8 @@ namespace Zote
 		~Scene();
 
 	private:
-		Renderer* renderer;
+		Renderer* renderer = nullptr;
 		entt::registry registry;
-		Entity* mainCamera;
+		Entity* mainCamera = nullptr;
 	};
 }

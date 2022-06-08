@@ -12,10 +12,12 @@
 
 namespace Zote
 {
-	struct ZOTE_API OnRenderArgs 
+	struct ZOTE_API OnRenderFrameArgs 
 	{
 		float aspect;
-		OnRenderArgs(float aspect) : aspect(aspect) {}
+		float deltaTime;
+		OnRenderFrameArgs(float aspect, float deltaTime) 
+			: aspect(aspect), deltaTime(deltaTime) {}
 	};
 
 	class ZOTE_API Window
@@ -28,14 +30,17 @@ namespace Zote
 		int bufferWidth = 0;
 		int bufferHeight = 0;
 		bool initialized = false;
+		float deltaTime = 0;
+		float lastTime = 0;
 
 		static const int glMinorVersion;
 		static const int glMajorVersion;
 
 		void SetProperties();
+		void CalculateDeltaTime();
 
 	public:
-		Event<OnRenderArgs> OnRender;
+		Event<OnRenderFrameArgs> OnRenderFrame;
 
 		Window();
 		Window(const std::string name, int width, int height, const Color color);
@@ -46,7 +51,7 @@ namespace Zote
 
 		int GetBufferWidth() const { return bufferWidth; }
 		int GetBufferHeight() const { return bufferHeight; }
-		int GetAspect() const { return bufferWidth / bufferHeight; }
+		float GetAspect() const { return bufferWidth / bufferHeight; }
 
 		static void APIENTRY OnDebugMessage(GLenum source, GLenum type, unsigned int id, GLenum severity,
 			GLsizei length, const char* message, const void* userParam);

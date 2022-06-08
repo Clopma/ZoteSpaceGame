@@ -6,9 +6,9 @@ namespace Zote
 {
 	class Entity
 	{
-		Scene* scene;
-		entt::entity id;
-		TransformComponent* transform;
+		Scene* scene = nullptr;
+		entt::entity id{0};
+		TransformComponent* transform = nullptr;
 
 	public:
 		Entity() {}
@@ -23,10 +23,10 @@ namespace Zote
 			return scene->registry.valid<TComponent>(id);
 		}
 
-		template<typename TComponent>
-		TComponent& AddComponent()
+		template<typename TComponent, typename... Args>
+		TComponent& AddComponent(Args&&... args)
 		{
-			return scene->registry.emplace<TComponent>(id);
+			return scene->registry.emplace<TComponent>(id, std::forward<Args>(args)...);
 		}
 
 		template<typename TComponent>

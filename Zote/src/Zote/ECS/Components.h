@@ -10,7 +10,14 @@
 
 namespace Zote
 {
-	struct ZOTE_API TransformComponent
+	class Entity;
+
+	struct ZOTE_API BaseComponent
+	{
+		bool enabled = true;
+	};
+
+	struct ZOTE_API TransformComponent : public BaseComponent
 	{
 		using vec3 = glm::vec3;
 
@@ -19,12 +26,12 @@ namespace Zote
 		vec3 scale;
 
 		TransformComponent()
-			: position(0, 0, 0), rotation(0, 0, 0), scale(1, 1, 1) {}
+			: position(0, 0, 0), rotation(0, 0, 0), scale(1, 1, 1)  {}
 
 		TransformComponent(const TransformComponent& other) = default;
 	};
 
-	struct ZOTE_API MeshComponent
+	struct ZOTE_API MeshComponent : public BaseComponent
 	{
 		std::shared_ptr<Mesh> mesh;
 		std::shared_ptr<Shader> shader;
@@ -50,7 +57,7 @@ namespace Zote
 		MeshComponent(const MeshComponent& other) = default;
 	};
 
-	struct ZOTE_API CameraComponent
+	struct ZOTE_API CameraComponent : public BaseComponent
 	{
 		using vec3 = glm::vec3;
 		float fov, near, far, yaw, pitch;
@@ -64,6 +71,23 @@ namespace Zote
 			fov(45.f), near(0.1f), far(100.0f), yaw(-90), pitch(0),
 			right(0, 0, 0), up(0, 0, 0), front(0, 0, 0), worldUp(0, 1, 0) {}
 
-		CameraComponent(const CameraComponent& camera) = default;
+		CameraComponent(const CameraComponent& other) = default;
+	};
+
+	struct ZOTE_API ScriptComponent : public BaseComponent
+	{
+		friend class Scene;
+
+		Entity* entity;
+
+		ScriptComponent(Entity* entity) : entity(entity) {}
+
+		ScriptComponent(const ScriptComponent& other) = default;
+
+		virtual void Start() {}
+		virtual void Update(float deltaTime) {}
+
+	private:
+		bool started = false;
 	};
 }

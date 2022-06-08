@@ -10,22 +10,34 @@ namespace Zote
 		mainCamera->AddComponent<CameraComponent>();
 
 		renderer = new Renderer(mainCamera->GetTransform(), mainCamera->GetComponent<CameraComponent>());
-		
+
 		//Suscribe to DrawMesh to WindowUpdate
-		window.OnRender.AddListener(new Zote::Delegate<OnRenderArgs>(this, &Scene::RenderEntities));
+		window.OnRenderFrame.AddListener(new Zote::Delegate<OnRenderFrameArgs>(this, &Scene::OnRenderFrame));
 	}
 
-	void Scene::RenderEntities(OnRenderArgs args)
+	void Scene::OnRenderFrame(OnRenderFrameArgs args)
 	{
 		auto group = registry.group<TransformComponent>(entt::get<MeshComponent>);
-		//auto view = registry.view<MeshRenderer>();
-
 		for (auto entity : group)
 		{
 			MeshComponent& mesh = group.get<MeshComponent>(entity);
 			TransformComponent& transform = group.get<TransformComponent>(entity);
 			renderer->DrawMesh(mesh, transform, args.aspect);
-		}		
+		}
+
+		auto view = registry.view<ScriptComponent>();
+		for (auto entity : view)
+		{
+			ScriptComponent& script = view.get<ScriptComponent>(entity);
+
+			if (!script.started)
+			{
+				script.Start();
+				script.started = false;
+			}
+
+			script.Update(args.deltaTime);
+		}
 	}
 	Entity Scene::CreateEntity()
 	{

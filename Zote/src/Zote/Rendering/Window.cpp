@@ -32,6 +32,13 @@ namespace Zote
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, true);
 	}
 
+	void Window::CalculateDeltaTime()
+	{
+		float currentTime = glfwGetTime();
+		deltaTime = currentTime - lastTime;
+		lastTime = currentTime;
+	}
+
 	bool Window::Init()
 	{
 		if (!glfwInit())
@@ -96,8 +103,10 @@ namespace Zote
 			glClearColor(color.r, color.g, color.b, color.a);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+			CalculateDeltaTime();
+
 			//DRAW STUFF
-			OnRender.Invoke(OnRenderArgs(GetAspect()));
+			OnRenderFrame.Invoke({ GetAspect(), deltaTime });
 
 			glfwSwapBuffers(glfwWindow);
 		}

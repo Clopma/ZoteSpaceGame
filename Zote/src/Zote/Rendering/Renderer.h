@@ -11,12 +11,12 @@ namespace Zote
 		using mat4 = glm::mat4;
 		using vec3 = glm::vec3;
 
-		CameraComponent* mainCam_Camera;
-		TransformComponent* mainCam_Transform;
+		CameraComponent* mainCam_Camera = nullptr;
+		TransformComponent* mainCam_Transform = nullptr;
 
-		mat4 model;
-		mat4 view;
-		mat4 projection;		
+		mat4 model = mat4(1.0);
+		mat4 view = mat4(1.0);
+		mat4 projection = mat4(1.0);
 
 		void CalculateModel(TransformComponent& t);
 
