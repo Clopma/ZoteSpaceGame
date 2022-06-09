@@ -28,17 +28,27 @@ namespace Zote
 		auto view = registry.view<ScriptComponent>();
 		for (auto entity : view)
 		{
-			ScriptComponent& script = view.get<ScriptComponent>(entity);
+			ScriptComponent& scriptComponent = view.get<ScriptComponent>(entity);
+			
+			if (!scriptComponent.enabled) 
+				return;
 
-			if (!script.started)
+			for (auto script : scriptComponent.scripts)
 			{
-				script.Start();
-				script.started = false;
-			}
+				if ((!script->enabled))
+					continue;
 
-			script.Update(args.deltaTime);
+				if (!script->started)
+				{
+					script->Start();
+					script->started = true;
+				}
+
+				script->Update(args.deltaTime);
+			}
 		}
 	}
+
 	Entity Scene::CreateEntity()
 	{
 		return { registry.create(), this };

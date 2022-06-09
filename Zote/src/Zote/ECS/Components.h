@@ -81,6 +81,27 @@ namespace Zote
 		CameraComponent(const CameraComponent& other) = default;
 	};
 
+	struct ZOTE_API Script
+	{
+		friend class Scene;
+		friend class ScriptComponent;
+
+		bool enabled = true;
+
+		Entity* GetEntity() { return entity; }
+
+		Script() {}
+
+		Script(const Script& other) = default;
+
+		virtual void Start() {}
+		virtual void Update(float deltaTime) {}
+
+	private:
+		Entity* entity = nullptr;
+		bool started = false;
+	};
+
 	struct ZOTE_API ScriptComponent : public BaseComponent
 	{
 		friend class Scene;
@@ -89,10 +110,24 @@ namespace Zote
 
 		ScriptComponent(const ScriptComponent& other) = default;
 
-		virtual void Start() {}
-		virtual void Update(float deltaTime) {}
+		int AddScript(Script* script)
+		{
+			script->entity = GetEntity();
+			scripts.push_back(script);
+			count++;
+			return count - 1;
+		}
+
+		void RemoveScript(int index)
+		{
+			if (index < 0 || index >= count)
+				return;
+			scripts.erase(scripts.begin() + index);
+		}
 
 	private:
 		bool started = false;
+		std::vector<Script*> scripts;
+		int count = 0;
 	};
 }

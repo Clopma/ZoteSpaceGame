@@ -2,20 +2,18 @@
 
 using namespace Zote;
 
-class MoveTriangleScript : public ScriptComponent
+class MoveTriangleScript : public Script
 {
 	float speed = 5;
-	TransformComponent* transform;
 
 	virtual void Start() override
 	{
 		printf("Started Triangle");
-		*transform = GetEntity()->GetTransform();
 	}
 
 	virtual void Update(float deltaTime) override
 	{
-		transform->position.x += speed * deltaTime;
+		GetEntity()->GetTransform().position.x += speed;
 	}
 };
 
@@ -54,7 +52,9 @@ public:
 		t.position.z = -2.5f;
 		t.position.y = 0.5f;
 
-		testTriangle.AddComponent<MoveTriangleScript>();
+		ScriptComponent& s = testTriangle.AddComponent<ScriptComponent>();
+		MoveTriangleScript script;
+		s.AddScript(&script);
 
 		window->StartLoop();
 	}
