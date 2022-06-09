@@ -4,7 +4,7 @@ using namespace Zote;
 
 class MoveTriangleScript : public Script
 {
-	float speed = 5;
+	float speed = 0.5f;
 
 	virtual void Start() override
 	{
@@ -13,7 +13,8 @@ class MoveTriangleScript : public Script
 
 	virtual void Update(float deltaTime) override
 	{
-		GetEntity()->GetTransform().position.x += speed;
+		GetEntity()->GetComponent<TransformComponent>().position.x += speed * deltaTime;
+		LOG(GetEntity()->GetTransform().position.x);
 	}
 };
 
