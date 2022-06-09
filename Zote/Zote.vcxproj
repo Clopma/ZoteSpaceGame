@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ZoteApplication.h" />
     <ClInclude Include="src\Zote\MouseButtonCodes.h" />
     <ClInclude Include="src\Zote\KeyCodes.h" />
     <ClInclude Include="src\Zote\Input.h" />
@@ -22,7 +23,7 @@
     <ClInclude Include="src\Zote\Rendering\Shader.h" />
     <ClInclude Include="src\Zote\Event.h" />
     <ClInclude Include="src\Zote\Maths\Color.h" />
-    <ClInclude Include="src\Zote.h" />
+    <ClInclude Include="src\ZoteCommon.h" />
     <ClInclude Include="src\Zote\Application.h" />
     <ClInclude Include="src\Zote\Core.h" />
     <ClInclude Include="src\Zote\EntryPoint.h" />
