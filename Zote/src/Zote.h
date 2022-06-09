@@ -14,4 +14,8 @@
 #include "Zote/ECS/Scene.h"
 #include "Zote/ECS/Entity.h"
 
+#include "Zote/Input.h"
+#include "Zote/KeyCodes.h"
+#include "Zote/MouseButtonCodes.h"
+
 #define LOG(a) std::cout << a << std::endl;

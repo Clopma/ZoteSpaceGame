@@ -3,6 +3,7 @@
 #include "Rendering/Mesh.h"
 #include "Rendering/Shader.h"
 #include "ECS/Components.h"
+#include "Input.h"
 
 namespace Zote
 {
@@ -64,6 +65,7 @@ namespace Zote
 		glfwMakeContextCurrent(glfwWindow);
 
 		//INPUT ASSIGNEMENT
+		Input::Init(glfwWindow);
 
 		//Cursor settings
 		//glfwSetInputMode(glfwWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);

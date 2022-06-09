@@ -16,7 +16,19 @@ class MoveTriangleScript : public Script
 
 	virtual void Update(float deltaTime) override
 	{
-		transform->position.x += speed * deltaTime;
+		float dir;
+
+		bool aPressed = Input::GetKeyPressed(ZOTE_KEY_A);
+		bool dPressed = Input::GetKeyPressed(ZOTE_KEY_D);
+
+		if (aPressed)
+			dir = -1;
+		if (dPressed)
+			dir = 1;
+		if (aPressed && dPressed || !aPressed && !dPressed)
+			dir = 0;
+
+		transform->position.x += dir * speed * deltaTime;
 	}
 };
 
