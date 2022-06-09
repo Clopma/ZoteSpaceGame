@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ZoteApplication.h" />
+    <ClInclude Include="src\Zote\Maths\GlmCommon.h" />
     <ClInclude Include="src\Zote\MouseButtonCodes.h" />
     <ClInclude Include="src\Zote\KeyCodes.h" />
     <ClInclude Include="src\Zote\Input.h" />

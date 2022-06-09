@@ -14,4 +14,6 @@
 #include "Zote/KeyCodes.h"
 #include "Zote/MouseButtonCodes.h"
 
+#include "Zote/Maths/GlmCommon.h"
+
 #define LOG(a) std::cout << a << std::endl;

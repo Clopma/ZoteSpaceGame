@@ -1,16 +1,13 @@
 #pragma once
 #include "ECS/Components.h"
 #include <memory>
-#include "glm/glm.hpp"
+#include "Maths/GlmCommon.h"
 #include <glm/gtc/type_ptr.hpp>
 
 namespace Zote
 {
 	class ZOTE_API Renderer
 	{
-		using mat4 = glm::mat4;
-		using vec3 = glm::vec3;
-
 		CameraComponent* mainCam_Camera = nullptr;
 		TransformComponent* mainCam_Transform = nullptr;
 

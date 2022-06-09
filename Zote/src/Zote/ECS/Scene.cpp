@@ -13,7 +13,7 @@ namespace Zote
 		renderer = new Renderer(mainCamera->GetTransform(), mainCamera->GetComponent<CameraComponent>());
 
 		//Suscribe to DrawMesh to WindowUpdate
-		window.OnRenderFrame.AddListener(new Zote::Delegate<OnRenderFrameArgs>(this, &Scene::OnRenderFrame));
+		window.OnRenderFrame.AddListener(new Delegate<OnRenderFrameArgs>(this, &Scene::OnRenderFrame));
 	}
 
 	void Scene::OnRenderFrame(OnRenderFrameArgs args)

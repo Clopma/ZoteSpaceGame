@@ -27,7 +27,7 @@ namespace Zote
 	{
 		double x, y;
 		glfwGetCursorPos(m_window, &x, &y);
-		return glm::vec2((float)x, (float)y);
-		return glm::vec2();
+		return vec2((float)x, (float)y);
+		return vec2();
 	}
 }
