@@ -125,6 +125,11 @@ namespace Zote
 			scripts.erase(scripts.begin() + index);
 		}
 
+		~ScriptComponent()
+		{
+			scripts.clear();
+		}
+
 	private:
 		bool started = false;
 		std::vector<Script*> scripts;
