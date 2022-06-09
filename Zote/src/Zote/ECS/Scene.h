@@ -29,5 +29,6 @@ namespace Zote
 		Renderer* renderer = nullptr;
 		entt::registry registry;
 		Entity* mainCamera = nullptr;
+		glm::vec3 defaultCameraPos = { 0.0f, 0.0f, 2.5f };
 	};
 }

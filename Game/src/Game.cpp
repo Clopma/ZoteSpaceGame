@@ -63,15 +63,10 @@ public:
 
 		MeshComponent& m = testTriangle.AddComponent<MeshComponent>();
 		TransformComponent& t = testTriangle.GetTransform();
-
-		t.position.z = -2.5f;
-		t.position.y = 0.5f;
-
 		ScriptComponent& s = testTriangle.AddComponent<ScriptComponent>();
 		MoveTriangleScript script;
+		
 		s.AddScript(&script);
-		s.GetEntity()->GetTransform().position.y -= 0.5f;
-
 		window->StartLoop();
 	}
 };
