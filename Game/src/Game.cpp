@@ -19,6 +19,7 @@ public:
 		delete scene;
 		delete window;
 	}
+
 	void Run() override
 	{
 		if (!window->Init())
@@ -36,12 +37,9 @@ public:
 
 		Entity testTriangle = scene->CreateEntity();
 
-		MeshComponent& m = testTriangle.AddComponent<MeshComponent>();
-		TransformComponent& t = testTriangle.GetTransform();
-		ScriptComponent& s = testTriangle.AddComponent<ScriptComponent>();
-		MoveTriangleScript script;
-
-		s.AddScript(&script);
+		testTriangle.AddComponent<MeshComponent>();
+		auto& testTriangle_scripts = testTriangle.AddComponent<ScriptComponent>();
+		testTriangle_scripts.AddScript(new MoveTriangleScript());
 
 		window->StartLoop();
 	}

@@ -122,11 +122,14 @@ namespace Zote
 		{
 			if (index < 0 || index >= count)
 				return;
+			delete scripts[index];
 			scripts.erase(scripts.begin() + index);
 		}
 
 		~ScriptComponent()
 		{
+			for (auto script : scripts)
+				delete script;
 			scripts.clear();
 		}
 
