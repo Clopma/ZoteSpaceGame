@@ -20,5 +20,5 @@ void MoveTriangleScript::Update(float deltaTime)
 	else if (dPressed)
 		dir = 1;
 
-	transform->position.x += dir * speed * deltaTime;
+	//transform->position.x += dir * speed * deltaTime;
 }

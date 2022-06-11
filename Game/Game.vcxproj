@@ -93,7 +93,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\MoveTriangle.cpp" />
+    <ClCompile Include="src\Scripts\MoveCamera.cpp" />
+    <ClCompile Include="src\Scripts\MoveTriangle.cpp" />
     <ClCompile Include="src\Game.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -101,7 +102,8 @@
     <None Include="Shaders\shader.vert" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\MoveTriangle.h" />
+    <ClInclude Include="src\Scripts\MoveCamera.h" />
+    <ClInclude Include="src\Scripts\MoveTriangle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

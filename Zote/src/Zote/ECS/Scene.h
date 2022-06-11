@@ -5,11 +5,11 @@
 #include "Components.h"
 #include "Rendering/Window.h"
 #include "Event.h"
-#include "Rendering/Renderer.h"
 
 namespace Zote
 {
 	class Entity;
+	class Renderer;
 
 	class ZOTE_API Scene
 	{
@@ -19,6 +19,8 @@ namespace Zote
 		Scene() {}
 		Scene(Window& window);
 		void OnRenderFrame(OnRenderFrameArgs args);
+		
+		Entity& GetMainCamera() { return *mainCamera; }
 
 		Scene(const Scene& other) {};
 

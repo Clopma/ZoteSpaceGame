@@ -1,5 +1,6 @@
 #include <ZoteApplication.h>
-#include "MoveTriangle.h"
+#include "Scripts/MoveTriangle.h"
+#include "Scripts/MoveCamera.h"
 
 using namespace Zote;
 
@@ -38,8 +39,12 @@ public:
 		Entity testTriangle = scene->CreateEntity();
 
 		testTriangle.AddComponent<MeshComponent>();
+
 		auto& testTriangle_scripts = testTriangle.AddComponent<ScriptComponent>();
 		testTriangle_scripts.AddScript(new MoveTriangleScript());
+
+		auto& mainCamera_scripts = scene->GetMainCamera().AddComponent<ScriptComponent>();
+		mainCamera_scripts.AddScript(new MoveCamera());
 
 		window->StartLoop();
 	}

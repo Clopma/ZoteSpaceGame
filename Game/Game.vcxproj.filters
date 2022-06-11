@@ -18,7 +18,10 @@
     <ClCompile Include="src\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\MoveTriangle.cpp">
+    <ClCompile Include="src\Scripts\MoveTriangle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scripts\MoveCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -27,7 +30,10 @@
     <None Include="Shaders\shader.vert" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\MoveTriangle.h">
+    <ClInclude Include="src\Scripts\MoveTriangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scripts\MoveCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

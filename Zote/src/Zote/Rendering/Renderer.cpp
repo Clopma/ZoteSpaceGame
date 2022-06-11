@@ -1,14 +1,7 @@
 #include "Renderer.h"
 
-Zote::Renderer::Renderer(TransformComponent& cam_transform, CameraComponent& cam_Camera)
-	: model(1.0f), view(1.0f), projection(1.0f) 
-{
-	mainCam_Camera = new CameraComponent();
-	mainCam_Transform = new TransformComponent();
-
-	*mainCam_Camera = cam_Camera;
-	*mainCam_Transform = cam_transform;
-}
+Zote::Renderer::Renderer(Entity* mainCamera)
+	: mainCamera(mainCamera), model(1.0f), view(1.0f), projection(1.0f) {}
 
 void Zote::Renderer::CalculateModel(TransformComponent& t)
 {
@@ -27,25 +20,32 @@ void Zote::Renderer::CalculateModel(TransformComponent& t)
 
 void Zote::Renderer::UpdateCameraAxis()
 {
-	mainCam_Camera->front.x = glm::cos(glm::radians(mainCam_Camera->yaw)) * glm::cos(glm::radians(mainCam_Camera->pitch));
-	mainCam_Camera->front.y = glm::sin(glm::radians(mainCam_Camera->pitch));
-	mainCam_Camera->front.z = glm::sin(glm::radians(mainCam_Camera->yaw)) * glm::cos(glm::radians(mainCam_Camera->pitch));
-	mainCam_Camera->front = glm::normalize(mainCam_Camera->front);
+	CameraComponent& camera = mainCamera->GetComponent<CameraComponent>();
 
-	mainCam_Camera->right = glm::normalize(glm::cross(mainCam_Camera->front, mainCam_Camera->worldUp));
-	mainCam_Camera->up = glm::normalize(glm::cross(mainCam_Camera->right, mainCam_Camera->front));
+	camera.front.x = glm::cos(glm::radians(camera.yaw)) * glm::cos(glm::radians(camera.pitch));
+	camera.front.y = glm::sin(glm::radians(camera.pitch));
+	camera.front.z = glm::sin(glm::radians(camera.yaw)) * glm::cos(glm::radians(camera.pitch));
+	camera.front = glm::normalize(camera.front);
+
+	camera.right = glm::normalize(glm::cross(camera.front, camera.worldUp));
+	camera.up = glm::normalize(glm::cross(camera.right, camera.front));
 }
 
 void Zote::Renderer::CalculateProjection(float aspectRatio)
 {
+	CameraComponent& camera = mainCamera->GetComponent<CameraComponent>();
+
 	projection = mat4(1.0f);
-	projection = glm::perspective(mainCam_Camera->fov, aspectRatio, mainCam_Camera->near, mainCam_Camera->far);
+	projection = glm::perspective(camera.fov, aspectRatio, camera.near, camera.far);
 }
 
 void Zote::Renderer::CalculateView()
 {
+	CameraComponent& camera = mainCamera->GetComponent<CameraComponent>();
+	TransformComponent& cameraTransform = mainCamera->GetComponent<TransformComponent>();
+
 	view = mat4(1.0f);
-	view = glm::lookAt(mainCam_Transform->position, mainCam_Transform->position + mainCam_Camera->front, mainCam_Camera->up);
+	view = glm::lookAt(cameraTransform.position, cameraTransform.position + camera.front, camera.up);
 }
 
 void Zote::Renderer::DrawMesh(MeshComponent& meshRenderer, TransformComponent& transform, float aspectRatio)
@@ -71,10 +71,4 @@ void Zote::Renderer::DrawMesh(MeshComponent& meshRenderer, TransformComponent& t
 
 	meshRenderer.mesh->Render();
 	meshRenderer.shader->Unbind();
-}
-
-Zote::Renderer::~Renderer()
-{
-	delete mainCam_Camera;
-	delete mainCam_Transform;
 }

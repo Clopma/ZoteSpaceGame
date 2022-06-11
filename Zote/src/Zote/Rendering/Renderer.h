@@ -1,15 +1,17 @@
 #pragma once
+
 #include "ECS/Components.h"
 #include <memory>
 #include "Maths/GlmCommon.h"
 #include <glm/gtc/type_ptr.hpp>
 
+#include "ECS/Entity.h"
+
 namespace Zote
 {
 	class ZOTE_API Renderer
 	{
-		CameraComponent* mainCam_Camera = nullptr;
-		TransformComponent* mainCam_Transform = nullptr;
+		Entity* mainCamera = nullptr;
 
 		mat4 model = mat4(1.0);
 		mat4 view = mat4(1.0);
@@ -31,10 +33,8 @@ namespace Zote
 
 		Renderer() {}
 
-		Renderer(TransformComponent& cam_transform, CameraComponent& cam_Camera);
+		Renderer(Entity* mainCamera);
 
 		void DrawMesh(MeshComponent& meshRenderer, TransformComponent& transform, float aspectRatio);
-
-		~Renderer();
 	};
 }

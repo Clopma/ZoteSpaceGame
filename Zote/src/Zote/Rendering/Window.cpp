@@ -68,7 +68,7 @@ namespace Zote
 		Input::Init(glfwWindow);
 
 		//Cursor settings
-		//glfwSetInputMode(glfwWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		glfwSetInputMode(glfwWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 		glewExperimental = true;
 

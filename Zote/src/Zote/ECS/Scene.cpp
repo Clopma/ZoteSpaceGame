@@ -1,5 +1,6 @@
 #include "Scene.h"
 #include "Entity.h"
+#include "Rendering/Renderer.h"
 
 namespace Zote
 {
@@ -9,8 +10,8 @@ namespace Zote
 		*mainCamera = CreateEntity();
 		mainCamera->AddComponent<CameraComponent>();
 		mainCamera->GetTransform().position = defaultCameraPos;
-
-		renderer = new Renderer(mainCamera->GetTransform(), mainCamera->GetComponent<CameraComponent>());
+		
+		renderer = new Renderer(mainCamera);
 
 		//Suscribe to DrawMesh to WindowUpdate
 		window.OnRenderFrame.AddListener(new Delegate<OnRenderFrameArgs>(this, &Scene::OnRenderFrame));
