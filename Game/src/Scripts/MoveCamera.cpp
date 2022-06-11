@@ -23,11 +23,11 @@ void MoveCamera::LocateCamera(float deltaTime)
 		moveDir.x = 1;
 
 	if (Input::GetKeyPressed(ZOTE_KEY_S))
-		moveDir.z = 1;
-	else if (Input::GetKeyPressed(ZOTE_KEY_W))
 		moveDir.z = -1;
+	else if (Input::GetKeyPressed(ZOTE_KEY_W))
+		moveDir.z = 1;
 
-	transform->position += moveDir * cameraMoveSpeed * deltaTime;
+	transform->position += camera->front * cameraMoveSpeed * deltaTime;
 }
 
 void MoveCamera::RotateCamera(float deltaTime)
@@ -35,8 +35,8 @@ void MoveCamera::RotateCamera(float deltaTime)
 	mouseDelta = lastMousePos - Input::GetMousePosition();
 	lastMousePos = Input::GetMousePosition();
 
-	camera->yaw += mouseDelta.x * -cameraTurnSpeed * deltaTime;
-	camera->pitch += mouseDelta.y * cameraTurnSpeed * deltaTime;
+	transform->rotation.y += mouseDelta.x * -cameraTurnSpeed * deltaTime;
+	transform->rotation.x += mouseDelta.y * cameraTurnSpeed * deltaTime;
 
-	camera->pitch = std::clamp(camera->pitch, minPitchAngle, maxPitchAngle);
+	transform->rotation.x = std::clamp(transform->rotation.x, minPitchAngle, maxPitchAngle);
 }

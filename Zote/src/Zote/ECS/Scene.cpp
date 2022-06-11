@@ -9,8 +9,12 @@ namespace Zote
 		mainCamera = new Entity();
 		*mainCamera = CreateEntity();
 		mainCamera->AddComponent<CameraComponent>();
-		mainCamera->GetComponent<TransformComponent>().position = defaultCameraPos;
 		
+		TransformComponent& mainCam_t = mainCamera->GetComponent<TransformComponent>();
+
+		mainCam_t.position = defaultCameraPos;
+		mainCam_t.rotation = defaultCameraRot;
+
 		renderer = new Renderer(mainCamera);
 
 		//Suscribe to DrawMesh to WindowUpdate

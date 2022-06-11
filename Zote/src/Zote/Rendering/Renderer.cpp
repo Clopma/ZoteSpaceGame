@@ -21,12 +21,13 @@ void Zote::Renderer::CalculateModel(TransformComponent& t)
 void Zote::Renderer::UpdateCameraAxis()
 {
 	CameraComponent& camera = mainCamera->GetComponent<CameraComponent>();
+	vec3 cameraRot = mainCamera->GetComponent<TransformComponent>().rotation;
 
-	camera.front.x = glm::cos(glm::radians(camera.yaw)) * glm::cos(glm::radians(camera.pitch));
-	camera.front.y = glm::sin(glm::radians(camera.pitch));
-	camera.front.z = glm::sin(glm::radians(camera.yaw)) * glm::cos(glm::radians(camera.pitch));
+	camera.front.x = glm::cos(glm::radians(cameraRot.y)) * glm::cos(glm::radians(cameraRot.x));
+	camera.front.y = glm::sin(glm::radians(cameraRot.x));
+	camera.front.z = glm::sin(glm::radians(cameraRot.y)) * glm::cos(glm::radians(cameraRot.x));
+
 	camera.front = glm::normalize(camera.front);
-
 	camera.right = glm::normalize(glm::cross(camera.front, camera.worldUp));
 	camera.up = glm::normalize(glm::cross(camera.right, camera.front));
 }
@@ -45,7 +46,10 @@ void Zote::Renderer::CalculateView()
 	TransformComponent& cameraTransform = mainCamera->GetComponent<TransformComponent>();
 
 	view = mat4(1.0f);
-	view = glm::lookAt(cameraTransform.position, cameraTransform.position + camera.front, camera.up);
+
+	vec3 zInvertedPos = { cameraTransform.position.x, cameraTransform.position.y, -cameraTransform.position.z };
+
+	view = glm::lookAt(zInvertedPos, zInvertedPos + camera.front, camera.up);
 }
 
 void Zote::Renderer::DrawMesh(MeshComponent& meshRenderer, TransformComponent& transform, float aspectRatio)

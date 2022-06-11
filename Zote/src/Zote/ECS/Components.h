@@ -67,7 +67,7 @@ namespace Zote
 	struct ZOTE_API CameraComponent : public BaseComponent
 	{
 		using vec3 = glm::vec3;
-		float fov, near, far, yaw, pitch;
+		float fov, near, far;
 
 		vec3 right;
 		vec3 up;
@@ -75,7 +75,7 @@ namespace Zote
 		vec3 worldUp;
 
 		CameraComponent() :
-			fov(45.f), near(0.1f), far(100.0f), yaw(-90), pitch(0),
+			fov(45.f), near(0.1f), far(100.0f),
 			right(0, 0, 0), up(0, 0, 0), front(0, 0, 0), worldUp(0, 1, 0) {}
 
 		CameraComponent(const CameraComponent& other) = default;
