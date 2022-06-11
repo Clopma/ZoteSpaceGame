@@ -9,7 +9,7 @@ namespace Zote
 		mainCamera = new Entity();
 		*mainCamera = CreateEntity();
 		mainCamera->AddComponent<CameraComponent>();
-		mainCamera->GetTransform().position = defaultCameraPos;
+		mainCamera->GetComponent<TransformComponent>().position = defaultCameraPos;
 		
 		renderer = new Renderer(mainCamera);
 

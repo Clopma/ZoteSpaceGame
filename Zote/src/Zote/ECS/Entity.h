@@ -8,14 +8,11 @@ namespace Zote
 	{
 		Scene* scene = nullptr;
 		entt::entity id{0};
-		TransformComponent* transform = nullptr;
 
 	public:
 		Entity() {}
 		Entity(entt::entity id, Scene* scene);
 		Entity(const Entity& other) = default;
-
-		TransformComponent& GetTransform() { return *transform; }
 
 		template<typename TComponent>
 		bool HasComponent()
