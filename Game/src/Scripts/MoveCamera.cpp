@@ -11,23 +11,25 @@ void MoveCamera::Update(float deltaTime)
 {
 	LocateCamera(deltaTime);
 	RotateCamera(deltaTime);
+
+	LOG("CameraPosition: " << transform->position.x << ", " << transform->position.y << ", " << transform->position.z);
 }
 
 void MoveCamera::LocateCamera(float deltaTime)
 {
 	vec3 moveDir = {0, 0, 0};
 
-	if (Input::GetKeyPressed(ZOTE_KEY_A))
-		moveDir.x = -1;
-	else if (Input::GetKeyPressed(ZOTE_KEY_D))
-		moveDir.x = 1;
+	if (Input::GetKeyPressed(ZOTE_KEY_W))
+			transform->position += camera->front * cameraMoveSpeed * deltaTime;
 
 	if (Input::GetKeyPressed(ZOTE_KEY_S))
-		moveDir.z = -1;
-	else if (Input::GetKeyPressed(ZOTE_KEY_W))
-		moveDir.z = 1;
+		transform->position += -camera->front * cameraMoveSpeed * deltaTime;
 
-	transform->position += camera->front * cameraMoveSpeed * deltaTime;
+	if (Input::GetKeyPressed(ZOTE_KEY_D))
+		transform->position += camera->right * cameraMoveSpeed * deltaTime;
+
+	if (Input::GetKeyPressed(ZOTE_KEY_A))
+		transform->position += -camera->right * cameraMoveSpeed * deltaTime;
 }
 
 void MoveCamera::RotateCamera(float deltaTime)

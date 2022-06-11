@@ -12,13 +12,13 @@ void MoveTriangleScript::Update(float deltaTime)
 {
 	float dir = 0;
 
-	bool aPressed = Input::GetKeyPressed(ZOTE_KEY_A);
-	bool dPressed = Input::GetKeyPressed(ZOTE_KEY_D);
+	bool aPressed = Input::GetKeyPressed(ZOTE_KEY_J);
+	bool dPressed = Input::GetKeyPressed(ZOTE_KEY_L);
 
 	if (aPressed)
 		dir = -1;
 	else if (dPressed)
 		dir = 1;
 
-	//transform->position.x += dir * speed * deltaTime;
+	transform->position.x += dir * speed * deltaTime;
 }

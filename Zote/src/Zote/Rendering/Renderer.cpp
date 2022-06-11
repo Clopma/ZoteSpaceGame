@@ -47,9 +47,7 @@ void Zote::Renderer::CalculateView()
 
 	view = mat4(1.0f);
 
-	vec3 zInvertedPos = { cameraTransform.position.x, cameraTransform.position.y, -cameraTransform.position.z };
-
-	view = glm::lookAt(zInvertedPos, zInvertedPos + camera.front, camera.up);
+	view = glm::lookAt(cameraTransform.position, cameraTransform.position + camera.front, camera.up);
 }
 
 void Zote::Renderer::DrawMesh(MeshComponent& meshRenderer, TransformComponent& transform, float aspectRatio)
