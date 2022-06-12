@@ -8,6 +8,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <memory>
 
+#include "Rendering/Texture.h"
+
 namespace Zote
 {
 	class Entity;
@@ -42,14 +44,16 @@ namespace Zote
 	{
 		std::shared_ptr<Mesh> mesh;
 		std::shared_ptr<Shader> shader;
+		std::shared_ptr<Texture> texture;
 
 		MeshComponent()
 		{
 			float vertices[] = {
-				-1.0f, -1.0f, 0.0f,
-				 0.0f, -1.0f, 1.0f,
-				 1.0f, -1.0f, 0.0f,
-				 0.0f,  1.0f, 0.0f
+				//x     y      z     u     v
+				-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
+				 0.0f, -1.0f, 1.0f, 0.5f, 0.0f,
+				 1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+				 0.0f,  1.0f, 0.0f, 0.5f, 1.0f
 			};
 			unsigned int indices[] = {
 					0, 3, 1,
@@ -57,8 +61,10 @@ namespace Zote
 					2, 3, 0,
 					0, 1, 2
 			};
-			mesh = std::make_shared<Mesh>(vertices, indices, 12, 12);
+			mesh = std::make_shared<Mesh>(vertices, indices, 20, 20);
 			shader = std::make_shared<Shader>();
+			texture = std::make_shared<Texture>("Textures/brick.png");
+			texture->Load();
 		}
 
 		MeshComponent(const MeshComponent& other) = default;

@@ -71,6 +71,7 @@ void Zote::Renderer::DrawMesh(MeshComponent& meshRenderer, TransformComponent& t
 	int modelLocation = meshRenderer.shader->GetModelLocation();
 	meshRenderer.shader->SetUnfiformMat4(modelLocation, GetModel());
 
+	meshRenderer.texture->Use();
 	meshRenderer.mesh->Render();
 	meshRenderer.shader->Unbind();
 }

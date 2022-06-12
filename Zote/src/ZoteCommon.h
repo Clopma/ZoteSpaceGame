@@ -7,6 +7,8 @@
 #include "Zote/Rendering/Shader.h"
 #include "Zote/Rendering/Mesh.h"
 
+#include "Zote/Rendering/Texture.h"
+
 #include "Zote/ECS/Scene.h"
 #include "Zote/ECS/Entity.h"
 

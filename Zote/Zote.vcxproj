@@ -29,6 +29,7 @@
     <ClInclude Include="src\Zote\Core.h" />
     <ClInclude Include="src\Zote\EntryPoint.h" />
     <ClInclude Include="src\Zote\Rendering\Window.h" />
+    <ClInclude Include="src\Zote\Rendering\Texture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Zote\Input.cpp" />
@@ -39,7 +40,9 @@
     <ClCompile Include="src\Zote\Rendering\Shader.cpp" />
     <ClCompile Include="src\Zote\Maths\Color.cpp" />
     <ClCompile Include="src\Zote\Application.cpp" />
+    <ClCompile Include="src\Zote\Rendering\stb_image.cpp" />
     <ClCompile Include="src\Zote\Rendering\Window.cpp" />
+    <ClCompile Include="src\Zote\Rendering\Texture.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -88,7 +91,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>ZOTE_PLATFORM_WINDOWS;ZOTE_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\glfw\include;$(SolutionDir)submodules\glm;$(SolutionDir)dependencies\glew\include;$(SolutionDir)dependencies\entt\include;$(SolutionDir)Zote\src\Zote</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\glfw\include;$(SolutionDir)submodules\glm;$(SolutionDir)dependencies\glew\include;$(SolutionDir)dependencies\entt\include;$(SolutionDir)Zote\src\Zote;$(SolutionDir)dependencies\stb_image\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -106,7 +109,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>ZOTE_PLATFORM_WINDOWS;ZOTE_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\glfw\include;$(SolutionDir)submodules\glm;$(SolutionDir)dependencies\glew\include;$(SolutionDir)dependencies\entt\include;$(SolutionDir)Zote\src\Zote</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\glfw\include;$(SolutionDir)submodules\glm;$(SolutionDir)dependencies\glew\include;$(SolutionDir)dependencies\entt\include;$(SolutionDir)Zote\src\Zote;$(SolutionDir)dependencies\stb_image\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
