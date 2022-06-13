@@ -61,7 +61,7 @@ namespace Zote
 					2, 3, 0,
 					0, 1, 2
 			};
-			mesh = std::make_shared<Mesh>(vertices, indices, 20, 20);
+			mesh = std::make_shared<Mesh>(vertices, indices, 20, 12);
 			shader = std::make_shared<Shader>();
 			texture = std::make_shared<Texture>("Textures/brick.png");
 			texture->Load();

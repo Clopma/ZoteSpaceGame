@@ -28,8 +28,9 @@ namespace Zote
 
 		if (0 == bitDepth || 4 < bitDepth) { throw std::runtime_error("invalid depth"); }
 		GLenum const fmt[] = { GL_RED, GL_RG, GL_RGB, GL_RGBA };
+		GLenum const intFmt[] = {GL_R32F, GL_RG32F, GL_RGB32F, GL_RGBA32F};
 		glTexImage2D(
-			GL_TEXTURE_2D, 0, fmt[bitDepth - 1],
+			GL_TEXTURE_2D, 0, intFmt[bitDepth - 1],
 			width, height, 0,
 			fmt[bitDepth - 1], GL_UNSIGNED_BYTE, textureData);
 
