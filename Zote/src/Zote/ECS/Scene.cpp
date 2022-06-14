@@ -23,7 +23,6 @@ namespace Zote
 
 	void Scene::OnRenderFrame(OnRenderFrameArgs args)
 	{
-		HandleTransforms();
 		DrawMeshes(args);
 		HandleScripts(args);
 	}
@@ -36,19 +35,6 @@ namespace Zote
 	{
 		delete renderer;
 		delete mainCamera;
-	}
-	void Scene::HandleTransforms()
-	{
-		CameraComponent& camera = mainCamera->GetComponent<CameraComponent>();
-		auto view = registry.view<TransformComponent>();
-
-		for (auto entity : view)
-		{
-			TransformComponent& transform = view.get<TransformComponent>(entity);
-
-			transform.forward = glm::cross(transform.rotation, { 0, 0, 1 });
-			transform.forward = glm::normalize(transform.forward);
-		}
 	}
 	void Scene::DrawMeshes(OnRenderFrameArgs args)
 	{

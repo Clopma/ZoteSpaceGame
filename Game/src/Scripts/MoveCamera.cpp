@@ -3,7 +3,6 @@
 void MoveCamera::Start()
 {
 	transform = &GetEntity()->GetComponent<TransformComponent>();
-	camera = &GetEntity()->GetComponent<CameraComponent>();
 	lastMousePos = Input::GetMousePosition();
 }
 
@@ -20,16 +19,16 @@ void MoveCamera::LocateCamera(float deltaTime)
 	vec3 moveDir = {0, 0, 0};
 
 	if (Input::GetKeyPressed(ZOTE_KEY_W))
-			transform->position += camera->front * cameraMoveSpeed * deltaTime;
+			transform->position += transform->GetForward() * cameraMoveSpeed * deltaTime;
 
 	if (Input::GetKeyPressed(ZOTE_KEY_S))
-		transform->position += -camera->front * cameraMoveSpeed * deltaTime;
+		transform->position += -transform->GetForward() * cameraMoveSpeed * deltaTime;
 
 	if (Input::GetKeyPressed(ZOTE_KEY_D))
-		transform->position += camera->right * cameraMoveSpeed * deltaTime;
+		transform->position += transform->GetRight() * cameraMoveSpeed * deltaTime;
 
 	if (Input::GetKeyPressed(ZOTE_KEY_A))
-		transform->position += -camera->right * cameraMoveSpeed * deltaTime;
+		transform->position += -transform->GetRight() * cameraMoveSpeed * deltaTime;
 }
 
 void MoveCamera::RotateCamera(float deltaTime)

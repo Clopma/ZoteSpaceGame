@@ -19,8 +19,6 @@ namespace Zote
 
 		void CalculateModel(TransformComponent& t);
 
-		void UpdateCameraAxis();
-
 		void CalculateProjection(float aspectRatio);
 
 		void CalculateView();

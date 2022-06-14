@@ -40,9 +40,25 @@ namespace Zote
 
 		TransformComponent(const TransformComponent& other) = default;
 
-		const vec3& GetForward() const { return forward; }
-		const vec3& GetRight() const { return right; }
-		const vec3& GetUp() const { return up; }
+		vec3 GetForward() 
+		{ 
+			forward.x = glm::cos(glm::radians(rotation.y)) * glm::cos(glm::radians(rotation.x));
+			forward.y = glm::sin(glm::radians(rotation.x));
+			forward.z = glm::sin(glm::radians(rotation.y)) * glm::cos(glm::radians(rotation.x));
+
+			forward = glm::normalize(forward);
+			return forward; 
+		}
+		vec3 GetRight()  
+		{
+			right = glm::normalize(glm::cross(GetForward(), { 0, 1, 0 }));
+			return right; 
+		}
+		vec3 GetUp()  
+		{
+			up = glm::normalize(glm::cross(GetRight(), GetForward()));
+			return up;
+		}
 
 	private:
 		vec3 right = { 0, 0, 0 };
@@ -82,17 +98,10 @@ namespace Zote
 
 	struct ZOTE_API CameraComponent : public BaseComponent
 	{
-		using vec3 = glm::vec3;
 		float fov, near, far;
 
-		vec3 right;
-		vec3 up;
-		vec3 front;
-		vec3 worldUp;
-
 		CameraComponent() :
-			fov(45.f), near(0.1f), far(100.0f),
-			right(0, 0, 0), up(0, 0, 0), front(0, 0, 0), worldUp(0, 1, 0) {}
+			fov(45.f), near(0.1f), far(100.0f) {}
 
 		CameraComponent(const CameraComponent& other) = default;
 	};

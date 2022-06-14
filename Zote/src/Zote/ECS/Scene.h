@@ -37,7 +37,6 @@ namespace Zote
 		glm::vec3 defaultCameraRot = { 0.0f, -90.0f, 0.0f };
 		glm::vec3 defaultCameraPos = { 0.0f, 0.0f, 3.0f };
 
-		void HandleTransforms();
 		void DrawMeshes(OnRenderFrameArgs args);
 		void HandleScripts(OnRenderFrameArgs args);
 	};

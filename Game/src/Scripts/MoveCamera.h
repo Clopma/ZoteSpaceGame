@@ -6,7 +6,6 @@ using namespace Zote;
 class MoveCamera : public Script
 {
 	TransformComponent* transform = nullptr;
-	CameraComponent* camera = nullptr;
 
 	vec2 mouseDelta = {0, 0};
 	vec2 lastMousePos = {0, 0};
