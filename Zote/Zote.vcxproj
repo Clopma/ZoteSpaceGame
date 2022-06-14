@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Zote\Rendering\Line.h" />
     <ClInclude Include="src\ZoteApplication.h" />
     <ClInclude Include="src\Zote\Maths\GlmCommon.h" />
     <ClInclude Include="src\Zote\MouseButtonCodes.h" />
@@ -32,6 +33,7 @@
     <ClInclude Include="src\Zote\Rendering\Texture.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Zote\Rendering\Line.cpp" />
     <ClCompile Include="src\Zote\Input.cpp" />
     <ClCompile Include="src\Zote\ECS\Entity.cpp" />
     <ClCompile Include="src\Zote\Rendering\Renderer.cpp" />

@@ -5,6 +5,7 @@
 #include "Components.h"
 #include "Rendering/Window.h"
 #include "Event.h"
+#include "Rendering/Line.h"
 
 namespace Zote
 {

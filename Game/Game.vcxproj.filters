@@ -28,6 +28,8 @@
   <ItemGroup>
     <None Include="Shaders\shader.frag" />
     <None Include="Shaders\shader.vert" />
+    <None Include="Shaders\lineShader.frag" />
+    <None Include="Shaders\lineShader.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Scripts\MoveTriangle.h">

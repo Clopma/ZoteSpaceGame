@@ -98,6 +98,8 @@
     <ClCompile Include="src\Game.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Shaders\lineShader.frag" />
+    <None Include="Shaders\lineShader.vert" />
     <None Include="Shaders\shader.frag" />
     <None Include="Shaders\shader.vert" />
   </ItemGroup>

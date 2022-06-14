@@ -6,6 +6,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "ECS/Entity.h"
+#include "Line.h"
 
 namespace Zote
 {
@@ -16,6 +17,8 @@ namespace Zote
 		mat4 model = mat4(1.0);
 		mat4 view = mat4(1.0);
 		mat4 projection = mat4(1.0);
+
+		std::shared_ptr<Line> line;
 
 		void CalculateModel(TransformComponent& t);
 

@@ -1,7 +1,10 @@
 #include "Renderer.h"
 
 Zote::Renderer::Renderer(Entity* mainCamera)
-	: mainCamera(mainCamera), model(1.0f), view(1.0f), projection(1.0f) {}
+	: mainCamera(mainCamera), model(1.0f), view(1.0f), projection(1.0f) 
+{
+	line = std::make_shared<Line>(vec3(0, 0, 0), vec3(100, 100, 0));
+}
 
 void Zote::Renderer::CalculateModel(TransformComponent& t)
 {
@@ -56,4 +59,18 @@ void Zote::Renderer::DrawMesh(MeshComponent& meshRenderer, TransformComponent& t
 	meshRenderer.texture->Use();
 	meshRenderer.mesh->Render();
 	meshRenderer.shader->Unbind();
+
+	line->shader->Use();
+
+	projectionLocation = line->shader->GetProjectionLocation();
+	line->shader->SetUnfiformMat4(projectionLocation, GetProjection());
+
+	viewLocation = line->shader->GetViewLocation();
+	line->shader->SetUnfiformMat4(viewLocation, GetView());
+
+	modelLocation = line->shader->GetModelLocation();
+	line->shader->SetUnfiformMat4(modelLocation, GetModel());
+
+	line->Use();
+	line->shader->Unbind();
 }
