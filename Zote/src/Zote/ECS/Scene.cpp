@@ -9,7 +9,7 @@ namespace Zote
 		mainCamera = new Entity();
 		*mainCamera = CreateEntity();
 		mainCamera->AddComponent<CameraComponent>();
-		
+
 		TransformComponent& mainCam_t = mainCamera->GetComponent<TransformComponent>();
 
 		mainCam_t.position = defaultCameraPos;
@@ -23,6 +23,35 @@ namespace Zote
 
 	void Scene::OnRenderFrame(OnRenderFrameArgs args)
 	{
+		HandleTransforms();
+		DrawMeshes(args);
+		HandleScripts(args);
+	}
+
+	Entity Scene::CreateEntity()
+	{
+		return { registry.create(), this };
+	}
+	Scene::~Scene()
+	{
+		delete renderer;
+		delete mainCamera;
+	}
+	void Scene::HandleTransforms()
+	{
+		CameraComponent& camera = mainCamera->GetComponent<CameraComponent>();
+		auto view = registry.view<TransformComponent>();
+
+		for (auto entity : view)
+		{
+			TransformComponent& transform = view.get<TransformComponent>(entity);
+
+			transform.forward = glm::cross(transform.rotation, { 0, 0, 1 });
+			transform.forward = glm::normalize(transform.forward);
+		}
+	}
+	void Scene::DrawMeshes(OnRenderFrameArgs args)
+	{
 		auto group = registry.group<TransformComponent>(entt::get<MeshComponent>);
 		for (auto entity : group)
 		{
@@ -30,13 +59,15 @@ namespace Zote
 			TransformComponent& transform = group.get<TransformComponent>(entity);
 			renderer->DrawMesh(mesh, transform, args.aspect);
 		}
-
+	}
+	void Scene::HandleScripts(OnRenderFrameArgs args)
+	{
 		auto view = registry.view<ScriptComponent>();
 		for (auto entity : view)
 		{
 			ScriptComponent& scriptComponent = view.get<ScriptComponent>(entity);
-			
-			if (!scriptComponent.enabled) 
+
+			if (!scriptComponent.enabled)
 				return;
 
 			for (auto script : scriptComponent.scripts)
@@ -53,15 +84,5 @@ namespace Zote
 				script->Update(args.deltaTime);
 			}
 		}
-	}
-
-	Entity Scene::CreateEntity()
-	{
-		return { registry.create(), this };
-	}
-	Scene::~Scene()
-	{
-		delete renderer;
-		delete mainCamera;
 	}
 }

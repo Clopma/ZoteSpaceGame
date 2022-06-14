@@ -28,16 +28,26 @@ namespace Zote
 
 	struct ZOTE_API TransformComponent : public BaseComponent
 	{
+		friend class Scene;
+
 		using vec3 = glm::vec3;
 
-		vec3 position;
-		vec3 rotation;
-		vec3 scale;
+		vec3 position = { 0, 0, 0 };
+		vec3 rotation = { 0, 0, 0 };
+		vec3 scale = { 1, 1, 1 };
 
-		TransformComponent()
-			: position(0, 0, 0), rotation(0, 0, 0), scale(1, 1, 1)  {}
+		TransformComponent() {}
 
 		TransformComponent(const TransformComponent& other) = default;
+
+		const vec3& GetForward() const { return forward; }
+		const vec3& GetRight() const { return right; }
+		const vec3& GetUp() const { return up; }
+
+	private:
+		vec3 right = { 0, 0, 0 };
+		vec3 up = { 0, 0, 0 };
+		vec3 forward = { 0, 0, 0 };
 	};
 
 	struct ZOTE_API MeshComponent : public BaseComponent
