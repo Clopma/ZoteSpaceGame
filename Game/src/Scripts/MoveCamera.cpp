@@ -10,8 +10,6 @@ void MoveCamera::Update(float deltaTime)
 {
 	LocateCamera(deltaTime);
 	RotateCamera(deltaTime);
-
-	//LOG("CameraPosition: " << transform->position.x << ", " << transform->position.y << ", " << transform->position.z);
 }
 
 void MoveCamera::LocateCamera(float deltaTime)

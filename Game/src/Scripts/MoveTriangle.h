@@ -5,7 +5,6 @@ using namespace Zote;
 
 class MoveTriangleScript : public Script
 {
-	float speed = 30;
 	TransformComponent* transform;
 
 	virtual void Start() override;
