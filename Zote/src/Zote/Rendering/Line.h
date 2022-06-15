@@ -14,17 +14,20 @@ namespace Zote
 
 		const char* uniformColorName = "color";
 		std::shared_ptr<Shader> shader;
-		Line() {}
-		Line(vec3 start, vec3 end, Color color);
-		void Use();
+		
+		Line();
+		
+		void SetData(vec3 start, vec3 end, Color color);
+		void Render();
+
 		~Line();
 
 	private:
 		
-		float vertices[6];
-		Color color;
+		float vertices[6] = {0, 0, 0, 0, 0, 0};
+		Color color = Color::red;
 		unsigned int VAO = 0;
 		unsigned int VBO = 0;
-		
+		bool created = false;
 	};
 }

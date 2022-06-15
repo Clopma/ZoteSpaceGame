@@ -2,9 +2,25 @@
 
 namespace Zote
 {
-	Line::Line(vec3 start, vec3 end, Color color)
-		: color(color)
+	Line::Line()
 	{
+		glGenVertexArrays(1, &VAO);
+		glGenBuffers(1, &VBO);
+
+		glBindVertexArray(VAO);
+		
+		SetData({ 0, 0, 0 }, { 0, 0, 0 }, Color::red);
+
+		//Clean	
+		glBindVertexArray(0);
+
+		shader = std::make_shared<Shader>("Shaders/lineShader.vert", "Shaders/lineShader.frag");				
+	}
+
+	void Line::SetData(vec3 start, vec3 end, Color color)
+	{
+		this->color = color;
+
 		vertices[0] = start.x;
 		vertices[1] = start.y;
 		vertices[2] = start.z;
@@ -13,25 +29,22 @@ namespace Zote
 		vertices[4] = end.y;
 		vertices[5] = end.z;
 
-		glGenVertexArrays(1, &VAO);
-		glGenBuffers(1, &VBO);
-
-		glBindVertexArray(VAO);
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
 		glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), &vertices, GL_STATIC_DRAW);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+
+		if (!created)
+		{
+			created = true;
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+			glEnableVertexAttribArray(0);
+		}
 
 		//Clean
-		glEnableVertexAttribArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		glBindVertexArray(0);
-
-		shader = std::make_shared<Shader>("Shaders/lineShader.vert", "Shaders/lineShader.frag");
-		
 	}
 
-	void Line::Use()
+	void Line::Render()
 	{
 		shader->Use();
 		

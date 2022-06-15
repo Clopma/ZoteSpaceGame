@@ -8,6 +8,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <memory>
 #include "Rendering/Texture.h"
+#include "Rendering/Line.h"
 
 namespace Zote
 {
@@ -29,17 +30,28 @@ namespace Zote
 	{
 		using vec3 = glm::vec3;
 
-		TransformComponent() {}
+		std::shared_ptr<Line> xLine;
+		std::shared_ptr<Line> yLine;
+		std::shared_ptr<Line> zLine;
+
+		TransformComponent() 
+		{
+			xLine = std::make_shared<Line>();
+			yLine = std::make_shared<Line>();
+			zLine = std::make_shared<Line>();
+		}
 
 		TransformComponent(const TransformComponent& other) = default;
 
 		void SetPosition(const vec3& newPos) { position = newPos; }
 		const vec3& GetPosition() const { return position; }
+		
 		void SetScale(const vec3& newScale) { scale = newScale; }
 		const vec3& GetScale() const { return scale; }
+		
 		void SetRotation(const vec3& newRot) { rotation = newRot; UpdateAxis(); }
-
 		const vec3& GetRotation() const { return rotation; }
+
 		const vec3& GetForward() const { return forward; }
 		const vec3& GetRight() const { return right; }
 		const vec3& GetUp() const { return up; }
@@ -57,6 +69,7 @@ namespace Zote
 		void UpdateAxis()
 		{
 			mat4 axis = glm::mat4(1.0f);
+
 			axis = glm::rotate(axis, glm::radians(rotation.x), glm::vec3(1, 0, 0));
 			axis = glm::rotate(axis, glm::radians(rotation.y), glm::vec3(0, 1, 0));
 			axis = glm::rotate(axis, glm::radians(rotation.z), glm::vec3(0, 0, 1));

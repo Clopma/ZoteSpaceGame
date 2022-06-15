@@ -62,6 +62,21 @@ void Zote::Renderer::DrawMesh(MeshComponent& meshRenderer, TransformComponent& t
 
 void Zote::Renderer::DrawAxisGizmos(TransformComponent& t)
 {
+	t.xLine->SetData(t.GetPosition(), t.GetPosition() + t.GetForward() * 10000.0f, Color::blue);
+	
+	t.xLine->shader->Use();
+
+	int projectionLocation = t.xLine->shader->GetProjectionLocation();
+	t.xLine->shader->SetUnfiformMat4(projectionLocation, GetProjection());
+
+	int viewLocation = t.yLine->shader->GetViewLocation();
+	t.yLine->shader->SetUnfiformMat4(viewLocation, GetView());
+
+	int modelLocation = t.zLine->shader->GetModelLocation();
+	t.zLine->shader->SetUnfiformMat4(modelLocation, GetModel());
+
+	t.xLine->shader->Unbind();
+
 	/*Line forwardLine(t.position, t.position + t.GetForward() * 100.0f, Color::blue);
 	forwardLine.shader->Use();
 
