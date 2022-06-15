@@ -40,7 +40,7 @@ public:
 
 		Entity testTriangle = scene->CreateEntity();
 
-		testTriangle.GetComponent<TransformComponent>().position = {0, 0, 3};
+		testTriangle.GetComponent<TransformComponent>().SetPosition( { 0, 0, 3 });
 
 		testTriangle.AddComponent<MeshComponent>();
 

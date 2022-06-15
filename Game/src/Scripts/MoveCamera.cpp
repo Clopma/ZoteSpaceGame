@@ -16,17 +16,21 @@ void MoveCamera::LocateCamera(float deltaTime)
 {
 	vec3 moveDir = {0, 0, 0};
 
+	vec3 newPosition = transform->GetPosition();
+
 	if (Input::GetKeyPressed(ZOTE_KEY_W))
-			transform->position += transform->GetForward() * cameraMoveSpeed * deltaTime;
+		newPosition += transform->GetForward() * cameraMoveSpeed * deltaTime;
 
 	if (Input::GetKeyPressed(ZOTE_KEY_S))
-		transform->position += -transform->GetForward() * cameraMoveSpeed * deltaTime;
+		newPosition += -transform->GetForward() * cameraMoveSpeed * deltaTime;
 
 	if (Input::GetKeyPressed(ZOTE_KEY_D))
-		transform->position += transform->GetRight() * cameraMoveSpeed * deltaTime;
+		newPosition += transform->GetRight() * cameraMoveSpeed * deltaTime;
 
 	if (Input::GetKeyPressed(ZOTE_KEY_A))
-		transform->position += -transform->GetRight() * cameraMoveSpeed * deltaTime;
+		newPosition += -transform->GetRight() * cameraMoveSpeed * deltaTime;
+
+	transform->SetPosition(newPosition);
 }
 
 void MoveCamera::RotateCamera(float deltaTime)
@@ -34,8 +38,12 @@ void MoveCamera::RotateCamera(float deltaTime)
 	mouseDelta = lastMousePos - Input::GetMousePosition();
 	lastMousePos = Input::GetMousePosition();
 
-	transform->rotation.y += mouseDelta.x * cameraTurnSpeed * deltaTime;
-	transform->rotation.x += mouseDelta.y * -cameraTurnSpeed * deltaTime;
+	vec3 newRotation = transform->GetRotation();
 
-	transform->rotation.x = std::clamp(transform->rotation.x, minPitchAngle, maxPitchAngle);
+	newRotation.y += mouseDelta.x * cameraTurnSpeed * deltaTime;
+	newRotation.x += mouseDelta.y * -cameraTurnSpeed * deltaTime;
+
+	newRotation.x = std::clamp(newRotation.x, minPitchAngle, maxPitchAngle);
+
+	transform->SetRotation(newRotation);
 }

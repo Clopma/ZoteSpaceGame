@@ -12,8 +12,8 @@ namespace Zote
 
 		TransformComponent& mainCam_t = mainCamera->GetComponent<TransformComponent>();
 
-		mainCam_t.position = defaultCameraPos;
-		mainCam_t.rotation = defaultCameraRot;
+		mainCam_t.SetPosition(defaultCameraPos);
+		mainCam_t.SetRotation(defaultCameraRot);
 
 		renderer = new Renderer(mainCamera);
 

@@ -27,52 +27,44 @@ namespace Zote
 
 	struct ZOTE_API TransformComponent : public BaseComponent
 	{
-		friend class Scene;
-
 		using vec3 = glm::vec3;
-
-		vec3 position = { 0, 0, 0 };
-		vec3 rotation = { 0, 0, 0 };
-		vec3 scale = { 1, 1, 1 };
-
-		mat4 local = glm::mat4(1.0f);
 
 		TransformComponent() {}
 
 		TransformComponent(const TransformComponent& other) = default;
 
-		void UpdateLocalMat()
-		{
-			local = glm::mat4(1.0f);
-			local = glm::rotate(local, glm::radians(rotation.x), glm::vec3(1, 0, 0));
-			local = glm::rotate(local, glm::radians(rotation.y), glm::vec3(0, 1, 0));
-			local = glm::rotate(local, glm::radians(rotation.z), glm::vec3(0, 0, 1));
-		}
+		void SetPosition(const vec3& newPos) { position = newPos; }
+		const vec3& GetPosition() const { return position; }
+		void SetScale(const vec3& newScale) { scale = newScale; }
+		const vec3& GetScale() const { return scale; }
+		void SetRotation(const vec3& newRot) { rotation = newRot; UpdateAxis(); }
 
-		vec3 GetForward() 
-		{ 
-			UpdateLocalMat();
-
-			forward = local * vec4(0, 0, 1, 0);
-			return forward;
-		}
-		vec3 GetRight()  
-		{
-			UpdateLocalMat();
-			right = local * vec4(1, 0, 0, 0);
-			return -right; 
-		}
-		vec3 GetUp()  
-		{
-			UpdateLocalMat();
-			up = local * vec4(0, 1, 0, 0);
-			return up;
-		}
-
+		const vec3& GetRotation() const { return rotation; }
+		const vec3& GetForward() const { return forward; }
+		const vec3& GetRight() const { return right; }
+		const vec3& GetUp() const { return up; }
+		
 	private:
+
+		vec3 position = { 0, 0, 0 };
+		vec3 rotation = { 0, 0, 0 };
+		vec3 scale = { 1, 1, 1 };
+
 		vec3 right = { 0, 0, 0 };
 		vec3 up = { 0, 0, 0 };
 		vec3 forward = { 0, 0, 0 };
+
+		void UpdateAxis()
+		{
+			mat4 axis = glm::mat4(1.0f);
+			axis = glm::rotate(axis, glm::radians(rotation.x), glm::vec3(1, 0, 0));
+			axis = glm::rotate(axis, glm::radians(rotation.y), glm::vec3(0, 1, 0));
+			axis = glm::rotate(axis, glm::radians(rotation.z), glm::vec3(0, 0, 1));
+
+			forward = axis * vec4(0, 0, 1, 0);
+			right = -axis * vec4(1, 0, 0, 0);
+			up = axis * vec4(0, 1, 0, 0);
+		}
 	};
 
 	struct ZOTE_API MeshComponent : public BaseComponent
