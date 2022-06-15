@@ -127,6 +127,11 @@ namespace Zote
 	{
 		Clear();
 	}
+	void Shader::SetUniformVec4(c_str name, vec4 value)
+	{
+		int location = GetUniform(name);
+		glUniform4fv(location, 1, glm::value_ptr(value));
+	}
 	void Shader::Use()
 	{
 		glUseProgram(shaderID);

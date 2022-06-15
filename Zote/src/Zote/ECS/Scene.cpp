@@ -23,6 +23,7 @@ namespace Zote
 
 	void Scene::OnRenderFrame(OnRenderFrameArgs args)
 	{
+		DrawAxisGizmos();
 		DrawMeshes(args);
 		HandleScripts(args);
 	}
@@ -69,6 +70,15 @@ namespace Zote
 
 				script->Update(args.deltaTime);
 			}
+		}
+	}
+	void Scene::DrawAxisGizmos()
+	{
+		auto view = registry.view<TransformComponent>();
+		for (auto entity : view)
+		{
+			TransformComponent& transformComponent = view.get<TransformComponent>(entity);
+			renderer->DrawAxisGizmos(transformComponent);
 		}
 	}
 }

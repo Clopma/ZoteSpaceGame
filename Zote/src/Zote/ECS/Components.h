@@ -7,7 +7,6 @@
 #include "Rendering/Window.h"
 #include <glm/gtc/type_ptr.hpp>
 #include <memory>
-
 #include "Rendering/Texture.h"
 
 namespace Zote
@@ -36,27 +35,37 @@ namespace Zote
 		vec3 rotation = { 0, 0, 0 };
 		vec3 scale = { 1, 1, 1 };
 
+		mat4 local = glm::mat4(1.0f);
+
 		TransformComponent() {}
 
 		TransformComponent(const TransformComponent& other) = default;
 
+		void UpdateLocalMat()
+		{
+			local = glm::mat4(1.0f);
+			local = glm::rotate(local, glm::radians(rotation.x), glm::vec3(1, 0, 0));
+			local = glm::rotate(local, glm::radians(rotation.y), glm::vec3(0, 1, 0));
+			local = glm::rotate(local, glm::radians(rotation.z), glm::vec3(0, 0, 1));
+		}
+
 		vec3 GetForward() 
 		{ 
-			forward.x = glm::cos(glm::radians(rotation.y)) * glm::cos(glm::radians(rotation.x));
-			forward.y = glm::sin(glm::radians(rotation.x));
-			forward.z = glm::sin(glm::radians(rotation.y)) * glm::cos(glm::radians(rotation.x));
+			UpdateLocalMat();
 
-			forward = glm::normalize(forward);
-			return forward; 
+			forward = local * vec4(0, 0, 1, 0);
+			return forward;
 		}
 		vec3 GetRight()  
 		{
-			right = glm::normalize(glm::cross(GetForward(), { 0, 1, 0 }));
-			return right; 
+			UpdateLocalMat();
+			right = local * vec4(1, 0, 0, 0);
+			return -right; 
 		}
 		vec3 GetUp()  
 		{
-			up = glm::normalize(glm::cross(GetRight(), GetForward()));
+			UpdateLocalMat();
+			up = local * vec4(0, 1, 0, 0);
 			return up;
 		}
 

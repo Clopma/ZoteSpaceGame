@@ -2,7 +2,8 @@
 
 namespace Zote
 {
-	Line::Line(vec3 start, vec3 end)
+	Line::Line(vec3 start, vec3 end, Color color)
+		: color(color)
 	{
 		vertices[0] = start.x;
 		vertices[1] = start.y;
@@ -27,11 +28,14 @@ namespace Zote
 		glBindVertexArray(0);
 
 		shader = std::make_shared<Shader>("Shaders/lineShader.vert", "Shaders/lineShader.frag");
+		
 	}
 
 	void Line::Use()
 	{
 		shader->Use();
+		
+		shader->SetUniformVec4(uniformColorName, Color::ToVec4(color));
 
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_LINES, 0, 6);

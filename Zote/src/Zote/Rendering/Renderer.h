@@ -7,6 +7,7 @@
 
 #include "ECS/Entity.h"
 #include "Line.h"
+#include "Maths/Color.h"
 
 namespace Zote
 {
@@ -16,9 +17,7 @@ namespace Zote
 
 		mat4 model = mat4(1.0);
 		mat4 view = mat4(1.0);
-		mat4 projection = mat4(1.0);
-
-		std::shared_ptr<Line> line;
+		mat4 projection = mat4(1.0);	
 
 		void CalculateModel(TransformComponent& t);
 
@@ -37,5 +36,7 @@ namespace Zote
 		Renderer(Entity* mainCamera);
 
 		void DrawMesh(MeshComponent& meshRenderer, TransformComponent& transform, float aspectRatio);
+	
+		void DrawAxisGizmos(TransformComponent& transform);
 	};
 }

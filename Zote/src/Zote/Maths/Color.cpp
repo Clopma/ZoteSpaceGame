@@ -8,6 +8,11 @@ namespace Zote
 	Color::Color(float r, float g, float b, float a)
 		: r(r), g(g), b(b), a(a) {}
 
+	vec4 Color::ToVec4(const Color& color)
+	{
+		return vec4 (color.r, color.g, color.b, color.a);
+	}
+
 	Color Color::Normalize(const Color& color)
 	{
 		Color c;
@@ -19,4 +24,7 @@ namespace Zote
 	}
 
 	const Color Color::grey(108.0f, 122.0f, 137.0f, 1.0f);
+	const Color Color::red(1, 0, 0, 1);
+	const Color Color::green(0, 1, 0, 1);
+	const Color Color::blue(0, 0, 1, 1);
 }

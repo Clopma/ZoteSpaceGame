@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 #include "Core.h"
+#include "Maths/GlmCommon.h"
 
 using c_str = const char*;
 using string = std::string;
@@ -38,6 +39,7 @@ namespace Zote
 		int GetProjectionLocation() { return projectionLocation; }
 		
 		void SetUnfiformMat4(int location, const float* floatPtr) { glUniformMatrix4fv(location, 1, GL_FALSE, floatPtr); }
+		void SetUniformVec4(c_str name, vec4 value);
 
 		void Use();
 		void Unbind();

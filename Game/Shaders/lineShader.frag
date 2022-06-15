@@ -1,10 +1,9 @@
 #version 330
 
-in vec4 vCol;
+in vec4 lineColor;
 out vec4 FragColor;
-
 
 void main()
 {
-    FragColor = vCol;
+    FragColor = lineColor;
 }

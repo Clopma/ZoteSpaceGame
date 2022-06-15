@@ -17,7 +17,9 @@ public:
 	}
 	~Game()
 	{
-		delete scene;
+		if (scene != nullptr)
+			delete scene;
+		
 		delete window;
 	}
 
@@ -37,6 +39,8 @@ public:
 		scene = new Scene(*window);
 
 		Entity testTriangle = scene->CreateEntity();
+
+		testTriangle.GetComponent<TransformComponent>().position = {0, 0, 3};
 
 		testTriangle.AddComponent<MeshComponent>();
 

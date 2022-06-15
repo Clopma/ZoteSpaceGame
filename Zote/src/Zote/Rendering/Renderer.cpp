@@ -1,10 +1,7 @@
 #include "Renderer.h"
 
 Zote::Renderer::Renderer(Entity* mainCamera)
-	: mainCamera(mainCamera), model(1.0f), view(1.0f), projection(1.0f) 
-{
-	line = std::make_shared<Line>(vec3(0, 0, 0), vec3(100, 100, 0));
-}
+	: mainCamera(mainCamera), model(1.0f), view(1.0f), projection(1.0f) {}
 
 void Zote::Renderer::CalculateModel(TransformComponent& t)
 {
@@ -59,18 +56,22 @@ void Zote::Renderer::DrawMesh(MeshComponent& meshRenderer, TransformComponent& t
 	meshRenderer.texture->Use();
 	meshRenderer.mesh->Render();
 	meshRenderer.shader->Unbind();
+}
 
-	line->shader->Use();
+void Zote::Renderer::DrawAxisGizmos(TransformComponent& t)
+{
+	/*Line forwardLine(t.position, t.position + t.GetForward() * 100.0f, Color::blue);
+	forwardLine.shader->Use();
 
-	projectionLocation = line->shader->GetProjectionLocation();
-	line->shader->SetUnfiformMat4(projectionLocation, GetProjection());
+	int projectionLocation = forwardLine.shader->GetProjectionLocation();
+	forwardLine.shader->SetUnfiformMat4(projectionLocation, GetProjection());
 
-	viewLocation = line->shader->GetViewLocation();
-	line->shader->SetUnfiformMat4(viewLocation, GetView());
+	int viewLocation = forwardLine.shader->GetViewLocation();
+	forwardLine.shader->SetUnfiformMat4(viewLocation, GetView());
 
-	modelLocation = line->shader->GetModelLocation();
-	line->shader->SetUnfiformMat4(modelLocation, GetModel());
+	int modelLocation = forwardLine.shader->GetModelLocation();
+	forwardLine.shader->SetUnfiformMat4(modelLocation, GetModel());
 
-	line->Use();
-	line->shader->Unbind();
+	forwardLine.Use();
+	forwardLine.shader->Unbind();*/
 }
