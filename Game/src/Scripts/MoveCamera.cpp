@@ -38,6 +38,6 @@ void MoveCamera::RotateCamera(float deltaTime)
 	mouseDelta = lastMousePos - Input::GetMousePosition();
 	lastMousePos = Input::GetMousePosition();
 
-	transform->Rotate(mouseDelta.y * cameraTurnSpeed * deltaTime, { -1, 0, 0 });
-	transform->Rotate(mouseDelta.x * cameraTurnSpeed * deltaTime, { 0, 1, 0 });
+	transform->RotateLocal(mouseDelta.y * cameraTurnSpeed * deltaTime, { -1, 0, 0 });
+	transform->RotateGlobal(mouseDelta.x * cameraTurnSpeed * deltaTime, { 0, 1, 0 });
 }

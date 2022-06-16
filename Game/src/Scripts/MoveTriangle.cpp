@@ -12,14 +12,14 @@ void MoveTriangleScript::Update(float deltaTime)
 	float dirX = 0;
 
 	if (Input::GetKeyPressed(ZOTE_KEY_U))
-		transform->Rotate(1 * deltaTime, {0, 1, 0});
+		transform->RotateLocal(1 * deltaTime, {0, 1, 0});
 	if (Input::GetKeyPressed(ZOTE_KEY_O))
-		transform->Rotate(1 * deltaTime, {0, -1, 0});
+		transform->RotateLocal(1 * deltaTime, {0, -1, 0});
 
 	if (Input::GetKeyPressed(ZOTE_KEY_T))
-		transform->Rotate(1 * deltaTime, {1, 0, 0});
+		transform->RotateLocal(1 * deltaTime, {1, 0, 0});
 	if (Input::GetKeyPressed(ZOTE_KEY_G))
-		transform->Rotate(1 * deltaTime, {-1, 0, 0});
+		transform->RotateLocal(1 * deltaTime, {-1, 0, 0});
 
 	vec3 newPosition = transform->GetPosition();
 

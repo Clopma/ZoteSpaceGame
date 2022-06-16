@@ -14,9 +14,9 @@ namespace Zote
 
 		mainCam_t.SetPosition(defaultCameraPos);
 
-		mainCam_t.Rotate(defaultCameraRot.x, glm::vec3(1, 0, 0));
+		/*mainCam_t.RotateLocal(defaultCameraRot.x, glm::vec3(1, 0, 0));
 		mainCam_t.Rotate(defaultCameraRot.y, glm::vec3(0, 1, 0));
-		mainCam_t.Rotate(defaultCameraRot.z, glm::vec3(0, 0, 1));
+		mainCam_t.Rotate(defaultCameraRot.z, glm::vec3(0, 0, 1));*/
 
 		renderer = new Renderer(mainCamera);
 

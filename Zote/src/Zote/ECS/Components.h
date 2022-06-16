@@ -50,9 +50,17 @@ namespace Zote
 		const vec3& GetRight() const { return right; }
 		const vec3& GetUp() const { return up; }
 
-		void Rotate(const float& degrees, const glm::vec3& axis)
+		void RotateLocal(const float& degrees, const glm::vec3& axis)
 		{
 			rotation = rotation * glm::normalize(glm::angleAxis(degrees, axis));
+			rotation = glm::normalize(rotation);
+			UpdateAxis();
+		}
+
+		void RotateGlobal(const float& degrees, const glm::vec3& axis)
+		{
+			rotation = glm::normalize(glm::angleAxis(degrees, axis)) * rotation;
+			rotation = glm::normalize(rotation);
 			UpdateAxis();
 		}
 		
