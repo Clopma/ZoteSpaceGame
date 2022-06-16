@@ -28,6 +28,7 @@ namespace Zote
 	{
 		DrawAxisGizmos();
 		DrawMeshes(args);
+		DrawLights();
 		HandleScripts(args);
 	}
 
@@ -82,6 +83,22 @@ namespace Zote
 		{
 			TransformComponent& transformComponent = view.get<TransformComponent>(entity);
 			renderer->DrawAxisGizmos(transformComponent);
+		}
+	}
+	void Scene::DrawLights()
+	{
+		auto lightView = registry.view<LightComponent>();
+		auto meshView = registry.view<MeshComponent>();
+
+		for (auto lightEntity : lightView)
+		{
+			auto& light = lightView.get<LightComponent>(lightEntity);
+
+			for (auto meshEntity : meshView)
+			{
+				auto& mesh = meshView.get<MeshComponent>(meshEntity);
+				renderer->DrawLight(mesh, light);
+			}
 		}
 	}
 }

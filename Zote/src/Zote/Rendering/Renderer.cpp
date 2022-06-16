@@ -29,7 +29,6 @@ void Zote::Renderer::CalculateView()
 	view = glm::lookAt(cameraTransform.GetPosition(), cameraTransform.GetPosition()
 		+ cameraTransform.GetForward(), cameraTransform.GetUp());
 }
-
 void Zote::Renderer::DrawMesh(MeshComponent& meshRenderer, TransformComponent& transform, float aspectRatio)
 {
 	meshRenderer.shader->Use();
@@ -71,3 +70,8 @@ void Zote::Renderer::DrawAxisGizmos(TransformComponent& t)
 	forwardLine.Use();
 	forwardLine.shader->Unbind();*/
 }
+void Zote::Renderer::DrawLight(MeshComponent& mesh, LightComponent& light)
+{
+	light.light->Use(mesh.shader);
+}
+

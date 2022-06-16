@@ -35,8 +35,8 @@ namespace Zote
 
 		Renderer(Entity* mainCamera);
 
-		void DrawMesh(MeshComponent& meshRenderer, TransformComponent& transform, float aspectRatio);
-	
+		void DrawMesh(MeshComponent& meshRenderer, TransformComponent& transform, float aspectRatio);	
 		void DrawAxisGizmos(TransformComponent& transform);
+		void DrawLight(MeshComponent& mesh, LightComponent& light);
 	};
 }

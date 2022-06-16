@@ -38,6 +38,9 @@ public:
 	{
 		scene = new Scene(*window);
 
+		Entity direcionalLight = scene->CreateEntity();
+		direcionalLight.AddComponent<LightComponent>();
+
 		Entity testTriangle = scene->CreateEntity();
 
 		testTriangle.GetComponent<TransformComponent>().SetPosition( { 0, 0, 3 });

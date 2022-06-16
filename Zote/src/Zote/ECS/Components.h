@@ -10,6 +10,8 @@
 #include "Rendering/Texture.h"
 #include "Rendering/Line.h"
 #include <glm/gtx/quaternion.hpp>
+#include "Rendering/Lighting/Light.h"
+#include "Maths/Color.h"
 
 namespace Zote
 {
@@ -172,5 +174,25 @@ namespace Zote
 		bool started = false;
 		std::vector<Script*> scripts;
 		int count = 0;
+	};
+
+	struct ZOTE_API LightComponent : public BaseComponent
+	{
+		friend class Renderer;
+
+		const Color& GetColor() const { return light->m_color; }
+		void SetColor(const Color& newColor) { light->m_color = newColor; }
+
+		const float& GetIntensity() const { return light->m_intensity; }
+		void SetIntensity(const float& newIntens) { light->m_intensity = newIntens; }
+
+		LightComponent() 
+		{
+			light = std::make_shared<Light>();
+		}
+		LightComponent(const LightComponent& other) = default;
+
+	private:
+		std::shared_ptr<Light> light;
 	};
 }

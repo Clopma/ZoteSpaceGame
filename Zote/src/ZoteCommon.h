@@ -8,6 +8,7 @@
 #include "Zote/Rendering/Mesh.h"
 
 #include "Zote/Rendering/Texture.h"
+#include "Zote/Rendering/Lighting/Light.h"
 
 #include "Zote/ECS/Scene.h"
 #include "Zote/ECS/Entity.h"

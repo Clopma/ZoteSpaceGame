@@ -32,7 +32,7 @@ namespace Zote
 		Shader();
 		~Shader();
 
-		int GetUniform(c_str name) { return glGetUniformLocation(shaderID, name); }
+		const int GetUniform(c_str name) const { return glGetUniformLocation(shaderID, name); }
 		
 		int GetModelLocation() { return modelLocation; }
 		int GetViewLocation() { return viewLocation; }

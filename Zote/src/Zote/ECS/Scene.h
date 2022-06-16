@@ -41,5 +41,6 @@ namespace Zote
 		void DrawMeshes(OnRenderFrameArgs args);
 		void HandleScripts(OnRenderFrameArgs args);
 		void DrawAxisGizmos();
+		void DrawLights();
 	};
 }

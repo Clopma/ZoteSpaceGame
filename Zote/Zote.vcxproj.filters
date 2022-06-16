@@ -75,6 +75,9 @@
     <ClInclude Include="src\Zote\Rendering\Line.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Zote\Rendering\Lighting\Light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Zote\Application.cpp">
@@ -111,6 +114,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Zote\Rendering\Line.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Zote\Rendering\Lighting\Light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
