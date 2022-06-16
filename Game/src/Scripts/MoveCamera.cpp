@@ -38,12 +38,6 @@ void MoveCamera::RotateCamera(float deltaTime)
 	mouseDelta = lastMousePos - Input::GetMousePosition();
 	lastMousePos = Input::GetMousePosition();
 
-	vec3 newRotation = transform->GetRotation();
-
-	newRotation.y += mouseDelta.x * cameraTurnSpeed * deltaTime;
-	newRotation.x += mouseDelta.y * -cameraTurnSpeed * deltaTime;
-
-	newRotation.x = std::clamp(newRotation.x, minPitchAngle, maxPitchAngle);
-
-	transform->SetRotation(newRotation);
+	transform->Rotate(mouseDelta.y * cameraTurnSpeed * deltaTime, { -1, 0, 0 });
+	transform->Rotate(mouseDelta.x * cameraTurnSpeed * deltaTime, { 0, 1, 0 });
 }

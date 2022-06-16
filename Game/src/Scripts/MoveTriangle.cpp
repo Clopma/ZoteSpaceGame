@@ -11,25 +11,15 @@ void MoveTriangleScript::Update(float deltaTime)
 {
 	float dirX = 0;
 
-	vec3 newRotation = transform->GetRotation();
+	if (Input::GetKeyPressed(ZOTE_KEY_U))
+		transform->Rotate(1 * deltaTime, {0, 1, 0});
+	if (Input::GetKeyPressed(ZOTE_KEY_O))
+		transform->Rotate(1 * deltaTime, {0, -1, 0});
 
-	if (Input::GetKeyPressed(ZOTE_KEY_U)) //izquierda
-		newRotation -= vec3(0, 1, 0) * 40.0f * deltaTime;
-	else if (Input::GetKeyPressed(ZOTE_KEY_O)) //derecha
-		newRotation += vec3(0, 1, 0) * 40.0f * deltaTime;
-
-	if (Input::GetKeyPressed(ZOTE_KEY_T)) //izquierda
-		newRotation -= vec3(0, 0, 1) * 40.0f * deltaTime;
-	else if (Input::GetKeyPressed(ZOTE_KEY_G)) //derecha
-		newRotation += vec3(0, 0, 1) * 40.0f * deltaTime;
-
-	if(Input::GetKeyPressed(ZOTE_KEY_R)) //izquierda
-		newRotation -= vec3(1, 0, 0) * 40.0f * deltaTime;
-	else if (Input::GetKeyPressed(ZOTE_KEY_F)) //derecha
-		newRotation += vec3(1, 0, 0) * 40.0f * deltaTime;
-
-	transform->SetRotation(newRotation);
-	//LOG(newRotation.x << ", " << newRotation.y << ", " << newRotation.z);
+	if (Input::GetKeyPressed(ZOTE_KEY_T))
+		transform->Rotate(1 * deltaTime, {1, 0, 0});
+	if (Input::GetKeyPressed(ZOTE_KEY_G))
+		transform->Rotate(1 * deltaTime, {-1, 0, 0});
 
 	vec3 newPosition = transform->GetPosition();
 

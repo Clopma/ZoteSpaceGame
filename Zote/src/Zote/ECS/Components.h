@@ -9,6 +9,7 @@
 #include <memory>
 #include "Rendering/Texture.h"
 #include "Rendering/Line.h"
+#include <glm/gtx/quaternion.hpp>
 
 namespace Zote
 {
@@ -30,16 +31,7 @@ namespace Zote
 	{
 		using vec3 = glm::vec3;
 
-		std::shared_ptr<Line> xLine;
-		std::shared_ptr<Line> yLine;
-		std::shared_ptr<Line> zLine;
-
-		TransformComponent() 
-		{
-			xLine = std::make_shared<Line>();
-			yLine = std::make_shared<Line>();
-			zLine = std::make_shared<Line>();
-		}
+		TransformComponent() {}
 
 		TransformComponent(const TransformComponent& other) = default;
 
@@ -49,30 +41,34 @@ namespace Zote
 		void SetScale(const vec3& newScale) { scale = newScale; }
 		const vec3& GetScale() const { return scale; }
 		
-		void SetRotation(const vec3& newRot) { rotation = newRot; UpdateAxis(); }
-		const vec3& GetRotation() const { return rotation; }
+		void SetRotation(const glm::quat& newRot) { rotation = newRot; UpdateAxis(); }
+		const glm::quat& GetRotation() const { return rotation; }
 
 		const vec3& GetForward() const { return forward; }
 		const vec3& GetRight() const { return right; }
 		const vec3& GetUp() const { return up; }
+
+		void Rotate(const float& degrees, const glm::vec3& axis)
+		{
+			rotation = rotation * glm::normalize(glm::angleAxis(degrees, axis));
+			UpdateAxis();
+		}
 		
 	private:
 
 		vec3 position = { 0, 0, 0 };
-		vec3 rotation = { 0, 0, 0 };
+		glm::quat rotation = { 1, 0, 0, 0 };
 		vec3 scale = { 1, 1, 1 };
 
-		vec3 right = { 0, 0, 0 };
-		vec3 up = { 0, 0, 0 };
-		vec3 forward = { 0, 0, 0 };
+		vec3 right = { 1, 0, 0 };
+		vec3 up = { 0, 1, 0 };
+		vec3 forward = { 0, 0, 1 };	
 
 		void UpdateAxis()
 		{
 			mat4 axis = glm::mat4(1.0f);
 
-			axis = glm::rotate(axis, glm::radians(rotation.x), glm::vec3(1, 0, 0));
-			axis = glm::rotate(axis, glm::radians(rotation.y), glm::vec3(0, 1, 0));
-			axis = glm::rotate(axis, glm::radians(rotation.z), glm::vec3(0, 0, 1));
+			axis = axis * glm::toMat4(rotation);		
 
 			forward = axis * vec4(0, 0, 1, 0);
 			right = -axis * vec4(1, 0, 0, 0);

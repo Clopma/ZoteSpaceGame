@@ -13,7 +13,10 @@ namespace Zote
 		TransformComponent& mainCam_t = mainCamera->GetComponent<TransformComponent>();
 
 		mainCam_t.SetPosition(defaultCameraPos);
-		mainCam_t.SetRotation(defaultCameraRot);
+
+		mainCam_t.Rotate(defaultCameraRot.x, glm::vec3(1, 0, 0));
+		mainCam_t.Rotate(defaultCameraRot.y, glm::vec3(0, 1, 0));
+		mainCam_t.Rotate(defaultCameraRot.z, glm::vec3(0, 0, 1));
 
 		renderer = new Renderer(mainCamera);
 

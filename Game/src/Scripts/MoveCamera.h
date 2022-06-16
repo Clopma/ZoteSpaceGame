@@ -10,7 +10,7 @@ class MoveCamera : public Script
 	vec2 mouseDelta = {0, 0};
 	vec2 lastMousePos = {0, 0};
 
-	float cameraTurnSpeed = 5;
+	float cameraTurnSpeed = 0.1f;
 	float cameraMoveSpeed = 1;
 
 	float maxPitchAngle = 89.0f;
