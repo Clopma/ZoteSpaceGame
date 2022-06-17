@@ -118,10 +118,17 @@ namespace Zote
 
 	struct ZOTE_API CameraComponent : public BaseComponent
 	{
-		float fov, near, far;
+		enum class Mode { Perspective, Ortographic };
 
-		CameraComponent() :
-			fov(45.f), near(0.1f), far(100.0f) {}
+		Mode mode = Mode::Ortographic;
+
+		float fov = 45.f;
+		float near = 0.1f;
+		float far = 100.0f;
+
+		glm::vec2 size = { 2.f, 2.f };
+
+		CameraComponent() {}
 
 		CameraComponent(const CameraComponent& other) = default;
 	};

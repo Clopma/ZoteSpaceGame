@@ -16,8 +16,18 @@ void Zote::Renderer::CalculateProjection(float aspectRatio)
 {
 	CameraComponent& camera = mainCamera->GetComponent<CameraComponent>();
 
-	projection = mat4(1.0f);
-	projection = glm::perspective(camera.fov, aspectRatio, camera.near, camera.far);
+	if (camera.mode == CameraComponent::Mode::Ortographic)
+	{
+		vec2 size = camera.size;
+		projection = glm::ortho(-size.x, size.x, -size.y, size.y, camera.near, camera.far);
+		return;
+	}
+
+	if (camera.mode == CameraComponent::Mode::Perspective)
+	{
+		projection = glm::perspective(camera.fov, aspectRatio, camera.near, camera.far);
+		return;
+	}
 }
 
 void Zote::Renderer::CalculateView()
