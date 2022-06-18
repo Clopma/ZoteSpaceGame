@@ -2,26 +2,18 @@
 #include "Core.h"
 #include "Rendering/Mesh.h"
 #include "Rendering/Shader.h"
-#include "glm/glm.hpp"
-#include <glm/gtc/matrix_transform.hpp>
 #include "Rendering/Window.h"
-#include <glm/gtc/type_ptr.hpp>
-#include <memory>
 #include "Rendering/Texture.h"
-#include "Rendering/Line.h"
-#include <glm/gtx/quaternion.hpp>
 #include "Rendering/Lighting/Light.h"
-#include "Maths/Color.h"
 #include "Rendering/Sprite.h"
+
+#define UTILS_MEMORY
+#define UTILS_MATHS
+#include "Utils.h"
 
 namespace Zote
 {
 	class Entity;
-
-	template<typename T>
-	using Ref = std::shared_ptr<T>;
-
-	using vec3 = glm::vec3;
 
 	struct ZOTE_API BaseComponent
 	{
@@ -47,8 +39,8 @@ namespace Zote
 		void SetScale(const vec3& newScale) { scale = newScale; }
 		const vec3& GetScale() const { return scale; }
 		
-		void SetRotation(const glm::quat& newRot) { rotation = newRot; UpdateAxis(); }
-		const glm::quat& GetRotation() const { return rotation; }
+		void SetRotation(const quat& newRot) { rotation = newRot; UpdateAxis(); }
+		const quat& GetRotation() const { return rotation; }
 
 		const vec3& GetForward() const { return forward; }
 		const vec3& GetRight() const { return right; }
@@ -71,7 +63,7 @@ namespace Zote
 	private:
 
 		vec3 position = { 0, 0, 0 };
-		glm::quat rotation = { 1, 0, 0, 0 };
+		quat rotation = { 1, 0, 0, 0 };
 		vec3 scale = { 1, 1, 1 };
 
 		vec3 right = { 1, 0, 0 };
@@ -80,7 +72,7 @@ namespace Zote
 
 		void UpdateAxis()
 		{
-			mat4 axis = glm::mat4(1.0f);
+			mat4 axis = mat4(1.0f);
 
 			axis = axis * glm::toMat4(rotation);		
 
@@ -111,9 +103,9 @@ namespace Zote
 					2, 3, 0,
 					0, 1, 2
 			};
-			mesh = std::make_shared<Mesh>(vertices, indices, 20, 12);
-			shader = std::make_shared<Shader>();
-			texture = std::make_shared<Texture>("Textures/brick.png");
+			mesh = MakeRef<Mesh>(vertices, indices, 20, 12);
+			shader = MakeRef<Shader>();
+			texture = MakeRef<Texture>("Textures/brick.png");
 			texture->Load();
 		}
 
@@ -127,8 +119,8 @@ namespace Zote
 
 		SpriteComponent()
 		{
-			sprite = std::make_shared<Sprite>();
-			shader = std::make_shared<Shader> (sprite->GetVertPath(), sprite->GetFragPath());
+			sprite = MakeRef<Sprite>();
+			shader = MakeRef<Shader> (sprite->GetVertPath(), sprite->GetFragPath());
 		}
 	};
 
@@ -219,7 +211,7 @@ namespace Zote
 
 		LightComponent() 
 		{
-			light = std::make_shared<Light>();
+			light = MakeRef<Light>();
 		}
 		LightComponent(const LightComponent& other) = default;
 

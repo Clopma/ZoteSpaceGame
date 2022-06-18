@@ -33,6 +33,7 @@
     <ClInclude Include="src\Zote\EntryPoint.h" />
     <ClInclude Include="src\Zote\Rendering\Window.h" />
     <ClInclude Include="src\Zote\Rendering\Texture.h" />
+    <ClInclude Include="src\Zote\Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Zote\Rendering\Sprite.cpp" />
