@@ -46,7 +46,6 @@ public:
 		direcionalLight.AddComponent<LightComponent>();
 
 		Entity testTriangle = scene->CreateEntity();
-
 		testTriangle.AddComponent<MeshComponent>();
 
 		auto& testTriangle_scripts = testTriangle.AddComponent<ScriptComponent>();
@@ -54,6 +53,9 @@ public:
 
 		auto& mainCamera_scripts = scene->GetMainCamera().AddComponent<ScriptComponent>();
 		mainCamera_scripts.AddScript(new MoveCamera());
+
+		Entity testQuad = scene->CreateEntity();
+		testQuad.AddComponent<SpriteComponent>();
 
 		window->StartLoop();
 	}

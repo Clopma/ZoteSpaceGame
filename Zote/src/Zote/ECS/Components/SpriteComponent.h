@@ -9,7 +9,7 @@
 
 namespace Zote
 {
-	struct ZOTE_API SpriteComponent
+	struct ZOTE_API SpriteComponent : public BaseComponent
 	{
 		Ref<Sprite> sprite;
 		Ref<Shader> shader;

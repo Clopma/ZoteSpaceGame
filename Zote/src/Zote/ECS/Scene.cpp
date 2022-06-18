@@ -13,6 +13,7 @@ namespace Zote
 
 		m_scriptSystem = MakeRef<ScriptSystem>(this);
 		m_meshSystem = MakeRef<MeshSystem>(this, renderer);
+		m_spriteSystem = MakeRef<SpriteSystem>(this, renderer);
 		m_lightSystem = MakeRef<LightSystem>(this, renderer);
 
 		window.OnRenderFrame.AddListener(new Delegate<OnRenderFrameArgs>(this, &Scene::OnRenderFrame));
@@ -21,6 +22,7 @@ namespace Zote
 	void Scene::OnRenderFrame(OnRenderFrameArgs args)
 	{
 		m_meshSystem->HandleMeshes(args.aspect);
+		m_spriteSystem->HandleSprites(args.aspect);
 		m_lightSystem->HandleLights();
 		m_scriptSystem->HandleScripts(args.deltaTime);
 	}

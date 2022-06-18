@@ -63,6 +63,26 @@ namespace Zote
 		meshRenderer.shader->Unbind();
 	}
 
+	void Renderer::DrawSprite(SpriteComponent& sprite, TransformComponent& transform, float aspectRatio)
+	{
+		sprite.shader->Use();
+
+		//Projection matrix
+		CalculateProjection(aspectRatio);
+		sprite.shader->SetUnfiformMat4(projectionUniformName, projection);
+
+		//View matrix
+		CalculateView();
+		sprite.shader->SetUnfiformMat4(viewUniformName, view);
+
+		//Model matrix
+		CalculateModel(transform);
+		sprite.shader->SetUnfiformMat4(modelUniformName, model);
+
+		sprite.sprite->Render();
+		sprite.shader->Unbind();
+	}
+
 	void Renderer::DrawLight(MeshComponent& mesh, LightComponent& light)
 	{
 		light.light->Use(mesh.shader);

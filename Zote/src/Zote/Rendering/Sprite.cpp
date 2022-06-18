@@ -40,7 +40,7 @@ namespace Zote
 	{
 		glBindVertexArray(VAO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
-		glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, indicesCount, GL_UNSIGNED_INT, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 	}
@@ -63,8 +63,6 @@ namespace Zote
 			glDeleteVertexArrays(1, &VAO);
 			VAO = 0;
 		}
-
-		indexCount = 0;
 	}
 	Sprite::~Sprite()
 	{

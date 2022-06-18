@@ -12,7 +12,6 @@ namespace Zote
 		uint VAO = 0;
 		uint VBO = 0;
 		uint IBO = 0;
-		uint indexCount = 0;
 
 		const uint verticesCount = 12;
 		const uint indicesCount = 6;
@@ -20,10 +19,10 @@ namespace Zote
 	public:
 
 		const cstr GetVertPath() const 
-			{ return "Sprites/spriteShader.vert"; }
+			{ return "Shaders/spriteShader.vert"; }
 
 		const cstr GetFragPath() const
-			{ return "Sprites/spriteShader.frag"; }
+			{ return "Shaders/spriteShader.frag"; }
 
 		Sprite();
 		void Render();

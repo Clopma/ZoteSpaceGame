@@ -3,6 +3,7 @@
 #include "ECS/Components/CameraComponent.h"
 #include "ECS/Components/MeshComponent.h"
 #include "ECS/Components/LightComponent.h"
+#include "ECS/Components/SpriteComponent.h"
 
 #include "Utils/Math.h"
 #include "Utils/CustomTypes.h"
@@ -34,6 +35,7 @@ namespace Zote
 		Renderer(Entity* mainCamera);
 
 		void DrawMesh(MeshComponent& meshRenderer, TransformComponent& transform, float aspectRatio);
+		void DrawSprite(SpriteComponent& sprite, TransformComponent& transform, float aspectRatio);
 		void DrawLight(MeshComponent& mesh, LightComponent& light);
 	};
 }

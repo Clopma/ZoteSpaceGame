@@ -8,6 +8,7 @@
 #include "Systems/ScriptSystem.h"
 #include "Systems/MeshSystem.h"
 #include "Systems/LightSystem.h"
+#include "Systems/SpriteSystem.h"
 
 #include "Utils/Memory.h"
 
@@ -22,6 +23,7 @@ namespace Zote
 		friend class ScriptSystem;
 		friend class MeshSystem;
 		friend class LightSystem;
+		friend class SpriteSystem;
 
 	public:
 		Scene() {}
@@ -45,6 +47,7 @@ namespace Zote
 
 		Ref<ScriptSystem> m_scriptSystem;
 		Ref<MeshSystem> m_meshSystem;
+		Ref<SpriteSystem> m_spriteSystem;
 		Ref<LightSystem> m_lightSystem;
 	};
 }
