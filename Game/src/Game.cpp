@@ -38,7 +38,7 @@ public:
 	{
 		scene = new Scene(*window);
 
-		//scene->GetMainCamera().GetComponent<CameraComponent>().mode = CameraComponent::Mode::Perspective;
+		scene->GetMainCamera().GetComponent<CameraComponent>().mode = CameraComponent::Mode::Perspective;
 
 		scene->GetMainCamera().GetComponent<TransformComponent>().SetPosition({ 0, 0, -3 });
 

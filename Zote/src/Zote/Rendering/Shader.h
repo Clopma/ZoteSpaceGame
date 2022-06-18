@@ -18,10 +18,6 @@ namespace Zote
 		c_str defaultFragmentLocation = "Shaders/shader.frag";
 		c_str defaultVertexLocation = "Shaders/shader.vert";
 
-		c_str modelUniformName = "model";
-		c_str viewUniformName = "view";
-		c_str projectionUniformName = "projection";
-
 		string ReadFile(c_str fileLocation);
 		bool Compile(int shaderID, c_str shaderCode, int shaderType, int theShader);
 		void LinkAndValidate(c_str vertexCode, c_str fragmentCode);
@@ -34,11 +30,7 @@ namespace Zote
 
 		const int GetUniform(c_str name) const { return glGetUniformLocation(shaderID, name); }
 		
-		int GetModelLocation() { return modelLocation; }
-		int GetViewLocation() { return viewLocation; }
-		int GetProjectionLocation() { return projectionLocation; }
-		
-		void SetUnfiformMat4(int location, mat4 value);
+		void SetUnfiformMat4(c_str name, mat4 value);
 		void SetUniformVec4(c_str name, vec4 value);
 
 		void Use();

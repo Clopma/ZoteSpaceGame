@@ -6,6 +6,7 @@
 #include "ECS/Entity.h"
 
 #include "Utils/Math.h"
+#include "Utils/CustomTypes.h"
 
 namespace Zote
 {
@@ -16,6 +17,10 @@ namespace Zote
 		mat4 model = mat4(1.0);
 		mat4 view = mat4(1.0);
 		mat4 projection = mat4(1.0);	
+
+		cstr modelUniformName = "model";
+		cstr viewUniformName = "view";
+		cstr projectionUniformName = "projection";
 
 		void CalculateModel(TransformComponent& t);
 		void CalculateProjection(float aspectRatio);
