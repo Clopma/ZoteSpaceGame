@@ -46,17 +46,17 @@ void Zote::Renderer::DrawMesh(MeshComponent& meshRenderer, TransformComponent& t
 	//Projection matrix
 	CalculateProjection(aspectRatio);
 	int projectionLocation = meshRenderer.shader->GetProjectionLocation();
-	meshRenderer.shader->SetUnfiformMat4(projectionLocation, GetProjection());
+	meshRenderer.shader->SetUnfiformMat4(projectionLocation, projection);
 
 	//View matrix
 	CalculateView();
 	int viewLocation = meshRenderer.shader->GetViewLocation();
-	meshRenderer.shader->SetUnfiformMat4(viewLocation, GetView());
+	meshRenderer.shader->SetUnfiformMat4(viewLocation, view);
 
 	//Model matrix
 	CalculateModel(transform);
 	int modelLocation = meshRenderer.shader->GetModelLocation();
-	meshRenderer.shader->SetUnfiformMat4(modelLocation, GetModel());
+	meshRenderer.shader->SetUnfiformMat4(modelLocation, model);
 
 	meshRenderer.texture->Use();
 	meshRenderer.mesh->Render();

@@ -1,13 +1,11 @@
 #pragma once
-
-#include "ECS/Components.h"
-#include <memory>
-#include "Maths/GlmCommon.h"
-#include <glm/gtc/type_ptr.hpp>
+#include "ECS/Components/TransformComponent.h"
+#include "ECS/Components/CameraComponent.h"
+#include "ECS/Components/MeshComponent.h"
 
 #include "ECS/Entity.h"
-#include "Line.h"
-#include "Maths/Color.h"
+
+#include "Utils/Math.h"
 
 namespace Zote
 {
@@ -20,14 +18,8 @@ namespace Zote
 		mat4 projection = mat4(1.0);	
 
 		void CalculateModel(TransformComponent& t);
-
 		void CalculateProjection(float aspectRatio);
-
 		void CalculateView();
-
-		float* GetProjection() { return glm::value_ptr(projection); }
-		float* GetView() { return glm::value_ptr(view); }
-		float* GetModel() { return glm::value_ptr(model); }
 
 	public:
 

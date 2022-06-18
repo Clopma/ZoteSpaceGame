@@ -38,7 +38,7 @@ namespace Zote
 		int GetViewLocation() { return viewLocation; }
 		int GetProjectionLocation() { return projectionLocation; }
 		
-		void SetUnfiformMat4(int location, const float* floatPtr) { glUniformMatrix4fv(location, 1, GL_FALSE, floatPtr); }
+		void SetUnfiformMat4(int location, mat4 value);
 		void SetUniformVec4(c_str name, vec4 value);
 
 		void Use();
