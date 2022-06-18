@@ -1,5 +1,6 @@
 #include "SpriteSystem.h"
 #include "ECS/Scene.h"
+#include "ECS/Entity.h"
 
 namespace Zote
 {
@@ -8,12 +9,13 @@ namespace Zote
 
     void SpriteSystem::HandleSprites(float aspectRatio)
     {
-		/*auto group = m_scene->registry.group<TransformComponent>(entt::get<SpriteComponent>);
-		for (auto entity : group)
+		auto view = m_scene->registry.view<SpriteComponent>();
+
+		for (auto entity : view)
 		{
-			SpriteComponent& sprite = group.get<SpriteComponent>(entity);
-			TransformComponent& transform = group.get<TransformComponent>(entity);
+			SpriteComponent& sprite = view.get<SpriteComponent>(entity);
+			TransformComponent& transform = sprite.GetEntity()->GetComponent<TransformComponent>();
 			m_renderer->DrawSprite(sprite, transform, aspectRatio);
-		}*/
+		}
     }
 }
