@@ -2,14 +2,15 @@
 #include "ECS/Components/TransformComponent.h"
 #include "ECS/Components/CameraComponent.h"
 #include "ECS/Components/MeshComponent.h"
-
-#include "ECS/Entity.h"
+#include "ECS/Components/LightComponent.h"
 
 #include "Utils/Math.h"
 #include "Utils/CustomTypes.h"
 
 namespace Zote
 {
+	class Entity;
+
 	class ZOTE_API Renderer
 	{
 		Entity* mainCamera = nullptr;

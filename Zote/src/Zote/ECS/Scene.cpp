@@ -6,19 +6,20 @@ namespace Zote
 {
 	Scene::Scene(Window& window)
 	{
-		m_scriptSystem = MakeRef<ScriptSystem>(this);
-
 		mainCamera = new Entity();
 		*mainCamera = CreateEntity();
 		mainCamera->AddComponent<CameraComponent>();
 		renderer = new Renderer(mainCamera);
-		//Suscribe to DrawMesh to WindowUpdate
+
+		m_scriptSystem = MakeRef<ScriptSystem>(this);
+		m_meshSystem = MakeRef<MeshSystem>(this, renderer);
+
 		window.OnRenderFrame.AddListener(new Delegate<OnRenderFrameArgs>(this, &Scene::OnRenderFrame));
 	}
 
 	void Scene::OnRenderFrame(OnRenderFrameArgs args)
 	{
-		DrawMeshes(args);
+		m_meshSystem->HandleMeshes(args.aspect);
 		DrawLights();
 		m_scriptSystem->HandleScripts(args.deltaTime);
 	}
@@ -32,16 +33,7 @@ namespace Zote
 		delete renderer;
 		delete mainCamera;
 	}
-	void Scene::DrawMeshes(OnRenderFrameArgs args)
-	{
-		auto group = registry.group<TransformComponent>(entt::get<MeshComponent>);
-		for (auto entity : group)
-		{
-			MeshComponent& mesh = group.get<MeshComponent>(entity);
-			TransformComponent& transform = group.get<TransformComponent>(entity);
-			renderer->DrawMesh(mesh, transform, args.aspect);
-		}
-	}
+
 	void Scene::DrawLights()
 	{
 		auto lightView = registry.view<LightComponent>();

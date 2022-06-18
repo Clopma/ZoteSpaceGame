@@ -1,4 +1,5 @@
 #include "Renderer.h"
+#include "ECS/Entity.h"
 
 namespace Zote
 {

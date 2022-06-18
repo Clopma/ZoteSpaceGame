@@ -6,6 +6,7 @@
 #include "Rendering/Window.h"
 #include "Event.h"
 #include "Systems/ScriptSystem.h"
+#include "Systems/MeshSystem.h"
 
 #include "Utils/Memory.h"
 
@@ -18,6 +19,7 @@ namespace Zote
 	{
 		friend class Entity;
 		friend class ScriptSystem;
+		friend class MeshSystem;
 
 	public:
 		Scene() {}
@@ -39,8 +41,8 @@ namespace Zote
 		Entity* mainCamera = nullptr;
 
 		Ref<ScriptSystem> m_scriptSystem;
+		Ref<MeshSystem> m_meshSystem;
 
-		void DrawMeshes(OnRenderFrameArgs args);
 		void DrawLights();
 	};
 }
