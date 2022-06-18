@@ -11,6 +11,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Zote\ECS\Components\BaseComponent.h" />
+    <ClInclude Include="src\Zote\ECS\Components\CameraComponent.h" />
+    <ClInclude Include="src\Zote\ECS\Components\LightComponent.h" />
+    <ClInclude Include="src\Zote\ECS\Components\MeshComponent.h" />
+    <ClInclude Include="src\Zote\ECS\Components\ScriptComponent.h" />
+    <ClInclude Include="src\Zote\ECS\Components\SpriteComponent.h" />
+    <ClInclude Include="src\Zote\ECS\Components\TransformComponent.h" />
     <ClInclude Include="src\Zote\Rendering\Sprite.h" />
     <ClInclude Include="src\Zote\Rendering\Lighting\Light.h" />
     <ClInclude Include="src\Zote\Rendering\Line.h" />
@@ -33,7 +40,11 @@
     <ClInclude Include="src\Zote\EntryPoint.h" />
     <ClInclude Include="src\Zote\Rendering\Window.h" />
     <ClInclude Include="src\Zote\Rendering\Texture.h" />
-    <ClInclude Include="src\Zote\Utils.h" />
+    <ClInclude Include="src\Zote\Utils\CustomTypes.h" />
+    <ClInclude Include="src\Zote\Utils\Log.h" />
+    <ClInclude Include="src\Zote\Utils\Math.h" />
+    <ClInclude Include="src\Zote\Utils\Memory.h" />
+    <ClInclude Include="src\Zote\Utils\String.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Zote\Rendering\Sprite.cpp" />
