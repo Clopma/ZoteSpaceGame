@@ -6,6 +6,8 @@ namespace Zote
 {
 	Scene::Scene(Window& window)
 	{
+		m_scriptSystem = MakeRef<ScriptSystem>(this);
+
 		mainCamera = new Entity();
 		*mainCamera = CreateEntity();
 		mainCamera->AddComponent<CameraComponent>();
@@ -18,7 +20,7 @@ namespace Zote
 	{
 		DrawMeshes(args);
 		DrawLights();
-		HandleScripts(args);
+		m_scriptSystem->HandleScripts(args.deltaTime);
 	}
 
 	Entity Scene::CreateEntity()
@@ -38,31 +40,6 @@ namespace Zote
 			MeshComponent& mesh = group.get<MeshComponent>(entity);
 			TransformComponent& transform = group.get<TransformComponent>(entity);
 			renderer->DrawMesh(mesh, transform, args.aspect);
-		}
-	}
-	void Scene::HandleScripts(OnRenderFrameArgs args)
-	{
-		auto view = registry.view<ScriptComponent>();
-		for (auto entity : view)
-		{
-			ScriptComponent& scriptComponent = view.get<ScriptComponent>(entity);
-
-			if (!scriptComponent.enabled)
-				return;
-
-			for (auto script : scriptComponent.scripts)
-			{
-				if ((!script->enabled))
-					continue;
-
-				if (!script->started)
-				{
-					script->Start();
-					script->started = true;
-				}
-
-				script->Update(args.deltaTime);
-			}
 		}
 	}
 	void Scene::DrawLights()

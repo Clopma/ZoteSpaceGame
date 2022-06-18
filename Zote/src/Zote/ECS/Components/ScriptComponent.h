@@ -8,7 +8,7 @@ namespace Zote
 {
 	struct ZOTE_API Script
 	{
-		friend class Scene;
+		friend class ScriptSystem;
 		friend class ScriptComponent;
 
 		bool enabled = true;
@@ -29,7 +29,7 @@ namespace Zote
 
 	struct ZOTE_API ScriptComponent : public BaseComponent
 	{
-		friend class Scene;
+		friend class ScriptSystem;
 
 		ScriptComponent() {}
 

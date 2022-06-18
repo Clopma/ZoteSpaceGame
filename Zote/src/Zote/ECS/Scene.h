@@ -5,7 +5,9 @@
 #include "Components.h"
 #include "Rendering/Window.h"
 #include "Event.h"
-#include "Rendering/Line.h"
+#include "Systems/ScriptSystem.h"
+
+#include "Utils/Memory.h"
 
 namespace Zote
 {
@@ -15,6 +17,7 @@ namespace Zote
 	class ZOTE_API Scene
 	{
 		friend class Entity;
+		friend class ScriptSystem;
 
 	public:
 		Scene() {}
@@ -35,8 +38,9 @@ namespace Zote
 		entt::registry registry;
 		Entity* mainCamera = nullptr;
 
+		Ref<ScriptSystem> m_scriptSystem;
+
 		void DrawMeshes(OnRenderFrameArgs args);
-		void HandleScripts(OnRenderFrameArgs args);
 		void DrawLights();
 	};
 }
