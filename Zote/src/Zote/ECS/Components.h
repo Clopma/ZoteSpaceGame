@@ -134,7 +134,7 @@ namespace Zote
 		float near = 0.1f;
 		float far = 100.0f;
 
-		glm::vec2 size = { 2.f, 2.f };
+		vec2 size = { 2.f, 2.f };
 
 		CameraComponent() {}
 
