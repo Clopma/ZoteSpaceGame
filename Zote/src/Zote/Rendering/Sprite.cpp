@@ -18,9 +18,6 @@ namespace Zote
 			2, 3, 0  //triangle 2
 		};
 
-		//Not working at all
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
 		glGenVertexArrays(1, &VAO);
 		glBindVertexArray(VAO);
 

@@ -7,6 +7,10 @@ namespace Zote
 	
 	void Texture::Load()
 	{
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		stbi_set_flip_vertically_on_load(1);
 		unsigned char* textureData = stbi_load
 			(fileLoc.c_str(), &width, &height, &bitDepth, 0);
 		if (!textureData)
@@ -29,19 +33,19 @@ namespace Zote
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 		
-		/*glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0,
-			GL_RGBA, GL_UNSIGNED_BYTE, textureData);*/
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0,
+			GL_RGBA, GL_UNSIGNED_BYTE, textureData);
 
 		if (0 == bitDepth || 4 < bitDepth) { throw std::runtime_error("invalid depth"); }
 
-		GLenum const fmt[] = { GL_RED, GL_RG, GL_RGB, GL_RGBA };
+		/*GLenum const fmt[] = { GL_RED, GL_RG, GL_RGB, GL_RGBA };
 		GLenum const intFmt[] = {GL_R32F, GL_RG32F, GL_RGB32F, GL_RGBA32F};
 		glTexImage2D(
 			GL_TEXTURE_2D, 0, intFmt[bitDepth - 1],
 			width, height, 0,
-			fmt[bitDepth - 1], GL_UNSIGNED_BYTE, textureData);
+			fmt[bitDepth - 1], GL_UNSIGNED_BYTE, textureData);*/
 
-		glGenerateMipmap(GL_TEXTURE_2D);
+		//glGenerateMipmap(GL_TEXTURE_2D);
 
 		glBindTexture(GL_TEXTURE_2D, 0);
 		stbi_image_free(textureData);

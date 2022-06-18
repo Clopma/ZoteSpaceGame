@@ -20,7 +20,7 @@ namespace Zote
 		{
 			sprite = MakeRef<Sprite>();
 			shader = MakeRef<Shader>(sprite->GetVertPath(), sprite->GetFragPath());
-			texture = MakeRef<Texture>("Textures/zote.png");
+			texture = MakeRef<Texture>("Textures/sus.png");
 			texture->Load();
 		}
 	};
