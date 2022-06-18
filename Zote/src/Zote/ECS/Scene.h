@@ -2,11 +2,12 @@
 
 #include <entt.hpp>
 #include "Core.h"
-#include "Components.h"
+#include "Components/CameraComponent.h"
 #include "Rendering/Window.h"
 #include "Event.h"
 #include "Systems/ScriptSystem.h"
 #include "Systems/MeshSystem.h"
+#include "Systems/LightSystem.h"
 
 #include "Utils/Memory.h"
 
@@ -20,6 +21,7 @@ namespace Zote
 		friend class Entity;
 		friend class ScriptSystem;
 		friend class MeshSystem;
+		friend class LightSystem;
 
 	public:
 		Scene() {}
@@ -36,13 +38,13 @@ namespace Zote
 		~Scene();
 
 	private:
-		Renderer* renderer = nullptr;
 		entt::registry registry;
+
+		Renderer* renderer = nullptr;
 		Entity* mainCamera = nullptr;
 
 		Ref<ScriptSystem> m_scriptSystem;
 		Ref<MeshSystem> m_meshSystem;
-
-		void DrawLights();
+		Ref<LightSystem> m_lightSystem;
 	};
 }

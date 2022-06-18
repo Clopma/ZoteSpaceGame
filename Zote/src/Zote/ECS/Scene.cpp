@@ -13,6 +13,7 @@ namespace Zote
 
 		m_scriptSystem = MakeRef<ScriptSystem>(this);
 		m_meshSystem = MakeRef<MeshSystem>(this, renderer);
+		m_lightSystem = MakeRef<LightSystem>(this, renderer);
 
 		window.OnRenderFrame.AddListener(new Delegate<OnRenderFrameArgs>(this, &Scene::OnRenderFrame));
 	}
@@ -20,7 +21,7 @@ namespace Zote
 	void Scene::OnRenderFrame(OnRenderFrameArgs args)
 	{
 		m_meshSystem->HandleMeshes(args.aspect);
-		DrawLights();
+		m_lightSystem->HandleLights();
 		m_scriptSystem->HandleScripts(args.deltaTime);
 	}
 
@@ -32,22 +33,5 @@ namespace Zote
 	{
 		delete renderer;
 		delete mainCamera;
-	}
-
-	void Scene::DrawLights()
-	{
-		auto lightView = registry.view<LightComponent>();
-		auto meshView = registry.view<MeshComponent>();
-
-		for (auto lightEntity : lightView)
-		{
-			auto& light = lightView.get<LightComponent>(lightEntity);
-
-			for (auto meshEntity : meshView)
-			{
-				auto& mesh = meshView.get<MeshComponent>(meshEntity);
-				renderer->DrawLight(mesh, light);
-			}
-		}
 	}
 }

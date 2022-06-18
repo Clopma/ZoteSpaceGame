@@ -18,6 +18,7 @@
     <ClInclude Include="src\Zote\ECS\Components\ScriptComponent.h" />
     <ClInclude Include="src\Zote\ECS\Components\SpriteComponent.h" />
     <ClInclude Include="src\Zote\ECS\Components\TransformComponent.h" />
+    <ClInclude Include="src\Zote\ECS\Systems\LightSystem.h" />
     <ClInclude Include="src\Zote\ECS\Systems\MeshSystem.h" />
     <ClInclude Include="src\Zote\ECS\Systems\ScriptSystem.h" />
     <ClInclude Include="src\Zote\Rendering\Sprite.h" />
@@ -49,6 +50,7 @@
     <ClInclude Include="src\Zote\Utils\String.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Zote\ECS\Systems\LightSystem.cpp" />
     <ClCompile Include="src\Zote\ECS\Systems\MeshSystem.cpp" />
     <ClCompile Include="src\Zote\ECS\Systems\ScriptSystem.cpp" />
     <ClCompile Include="src\Zote\Rendering\Sprite.cpp" />
