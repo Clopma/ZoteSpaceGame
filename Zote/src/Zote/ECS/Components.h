@@ -18,6 +18,11 @@ namespace Zote
 {
 	class Entity;
 
+	template<typename T>
+	using Ref = std::shared_ptr<T>;
+
+	using vec3 = glm::vec3;
+
 	struct ZOTE_API BaseComponent
 	{
 		friend class Entity;
@@ -32,8 +37,6 @@ namespace Zote
 
 	struct ZOTE_API TransformComponent : public BaseComponent
 	{
-		using vec3 = glm::vec3;
-
 		TransformComponent() {}
 
 		TransformComponent(const TransformComponent& other) = default;
@@ -51,14 +54,14 @@ namespace Zote
 		const vec3& GetRight() const { return right; }
 		const vec3& GetUp() const { return up; }
 
-		void RotateLocal(const float& degrees, const glm::vec3& axis)
+		void RotateLocal(const float& degrees, const vec3& axis)
 		{
 			rotation = rotation * glm::normalize(glm::angleAxis(degrees, axis));
 			rotation = glm::normalize(rotation);
 			UpdateAxis();
 		}
 
-		void RotateGlobal(const float& degrees, const glm::vec3& axis)
+		void RotateGlobal(const float& degrees, const vec3& axis)
 		{
 			rotation = glm::normalize(glm::angleAxis(degrees, axis)) * rotation;
 			rotation = glm::normalize(rotation);
@@ -89,9 +92,9 @@ namespace Zote
 
 	struct ZOTE_API MeshComponent : public BaseComponent
 	{
-		std::shared_ptr<Mesh> mesh;
-		std::shared_ptr<Shader> shader;
-		std::shared_ptr<Texture> texture;
+		Ref<Mesh> mesh;
+		Ref<Shader> shader;
+		Ref<Texture> texture;
 
 		MeshComponent()
 		{
@@ -119,9 +122,6 @@ namespace Zote
 
 	struct ZOTE_API SpriteComponent
 	{
-		template<typename T>
-		using Ref = std::shared_ptr<T>;
-
 		Ref<Sprite> sprite;
 		Ref<Shader> shader;
 
@@ -224,6 +224,6 @@ namespace Zote
 		LightComponent(const LightComponent& other) = default;
 
 	private:
-		std::shared_ptr<Light> light;
+		Ref<Light> light;
 	};
 }

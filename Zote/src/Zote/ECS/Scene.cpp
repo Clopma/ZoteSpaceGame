@@ -9,24 +9,13 @@ namespace Zote
 		mainCamera = new Entity();
 		*mainCamera = CreateEntity();
 		mainCamera->AddComponent<CameraComponent>();
-
-		TransformComponent& mainCam_t = mainCamera->GetComponent<TransformComponent>();
-
-		mainCam_t.SetPosition(defaultCameraPos);
-
-		/*mainCam_t.RotateLocal(defaultCameraRot.x, glm::vec3(1, 0, 0));
-		mainCam_t.Rotate(defaultCameraRot.y, glm::vec3(0, 1, 0));
-		mainCam_t.Rotate(defaultCameraRot.z, glm::vec3(0, 0, 1));*/
-
 		renderer = new Renderer(mainCamera);
-
 		//Suscribe to DrawMesh to WindowUpdate
 		window.OnRenderFrame.AddListener(new Delegate<OnRenderFrameArgs>(this, &Scene::OnRenderFrame));
 	}
 
 	void Scene::OnRenderFrame(OnRenderFrameArgs args)
 	{
-		DrawAxisGizmos();
 		DrawMeshes(args);
 		DrawLights();
 		HandleScripts(args);
@@ -74,15 +63,6 @@ namespace Zote
 
 				script->Update(args.deltaTime);
 			}
-		}
-	}
-	void Scene::DrawAxisGizmos()
-	{
-		auto view = registry.view<TransformComponent>();
-		for (auto entity : view)
-		{
-			TransformComponent& transformComponent = view.get<TransformComponent>(entity);
-			renderer->DrawAxisGizmos(transformComponent);
 		}
 	}
 	void Scene::DrawLights()
