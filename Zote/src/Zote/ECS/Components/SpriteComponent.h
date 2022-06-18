@@ -7,6 +7,7 @@
 #include "Rendering/Texture.h"
 
 #include "Utils/Memory.h"
+#include "Utils/CustomTypes.h"
 
 namespace Zote
 {
@@ -16,11 +17,11 @@ namespace Zote
 		Ref<Texture> texture;
 		Ref<Shader> shader;
 
-		SpriteComponent()
+		SpriteComponent(cstr path)
 		{
 			sprite = MakeRef<Sprite>();
 			shader = MakeRef<Shader>(sprite->GetVertPath(), sprite->GetFragPath());
-			texture = MakeRef<Texture>("Textures/sus.png");
+			texture = MakeRef<Texture>(path);
 			texture->Load();
 		}
 	};

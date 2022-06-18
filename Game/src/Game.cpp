@@ -55,7 +55,11 @@ public:
 		mainCamera_scripts.AddScript(new MoveCamera());
 
 		Entity testQuad = scene->CreateEntity();
-		testQuad.AddComponent<SpriteComponent>();
+		testQuad.AddComponent<SpriteComponent>("Textures/zote.png");
+
+		Entity amogus = scene->CreateEntity();
+		amogus.AddComponent<SpriteComponent>("Textures/sus.png");
+		amogus.GetComponent<TransformComponent>().SetPosition({ -1, 0, 0 });
 
 		window->StartLoop();
 	}

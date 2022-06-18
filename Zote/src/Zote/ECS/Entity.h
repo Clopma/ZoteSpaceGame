@@ -20,10 +20,10 @@ namespace Zote
 			return scene->registry.valid<TComponent>(id);
 		}
 
-		template<typename TComponent>
-		TComponent& AddComponent()
+		template<typename TComponent, typename... Args>
+		TComponent& AddComponent(Args&&... args)
 		{
-			TComponent& component = scene->registry.emplace<TComponent>(id);
+			TComponent& component = scene->registry.emplace<TComponent>(id, std::forward<Args>(args)...);
 			BaseComponent& baseComponent = static_cast<BaseComponent&>(component);
 			baseComponent.entity = this;
 			return component;
