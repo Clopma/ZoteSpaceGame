@@ -79,6 +79,7 @@ namespace Zote
 		CalculateModel(transform);
 		sprite.shader->SetUnfiformMat4(modelUniformName, model);
 
+		sprite.texture->Use();
 		sprite.sprite->Render();
 		sprite.shader->Unbind();
 	}

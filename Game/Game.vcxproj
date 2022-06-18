@@ -109,6 +109,9 @@
     <ClInclude Include="src\Scripts\MoveCamera.h" />
     <ClInclude Include="src\Scripts\MoveTriangle.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Textures\zote.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

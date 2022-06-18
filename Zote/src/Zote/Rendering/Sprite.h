@@ -13,7 +13,7 @@ namespace Zote
 		uint VBO = 0;
 		uint IBO = 0;
 
-		const uint verticesCount = 12;
+		const uint verticesCount = 16;
 		const uint indicesCount = 6;
 
 	public:

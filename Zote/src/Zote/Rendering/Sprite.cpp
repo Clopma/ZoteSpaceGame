@@ -6,16 +6,20 @@ namespace Zote
 	{
 		//Quad data...
 		float vertices[] = {
-			-0.5f, -0.5f, // 0
-			 0.5f, -0.5f, // 1
-			 0.5f,  0.5f, // 2
-			-0.5f,	0.5f, // 3 
+			// x	 y	   u	 v
+			-0.5f, -0.5f, 0.0f, 0.0f, // 0
+			 0.5f, -0.5f, 1.0f, 0.0f, // 1
+			 0.5f,  0.5f, 1.0f, 1.0f, // 2
+			-0.5f,	0.5f, 0.0f, 1.0f, // 3 
 		};
 
 		unsigned int indices[] = {
 			0, 1, 2, //triangle 1
 			2, 3, 0  //triangle 2
 		};
+
+		//Not working at all
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		glGenVertexArrays(1, &VAO);
 		glBindVertexArray(VAO);
@@ -29,8 +33,11 @@ namespace Zote
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0]) * verticesCount, vertices, GL_STATIC_DRAW);
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
+		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(vertices[0]) * 4, 0);
 		glEnableVertexAttribArray(0);
+
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FLOAT, sizeof(vertices[0]) * 4, (void*)(sizeof(vertices[0]) * 2));
+		glEnableVertexAttribArray(1);
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);

@@ -1,9 +1,14 @@
 #version 330
 
 in vec4 spriteColor;
+in vec2 TexCoord;
+
 out vec4 FragColor;
+
+uniform sampler2D theTexture;
 
 void main()
 {
-    FragColor = spriteColor;
+    FragColor =  texture(theTexture, TexCoord); //* spriteColor
+    //FragColor = spriteColor;
 }
