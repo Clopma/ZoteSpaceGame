@@ -12,6 +12,7 @@
 #include <glm/gtx/quaternion.hpp>
 #include "Rendering/Lighting/Light.h"
 #include "Maths/Color.h"
+#include "Rendering/Sprite.h"
 
 namespace Zote
 {
@@ -114,6 +115,21 @@ namespace Zote
 		}
 
 		MeshComponent(const MeshComponent& other) = default;
+	};
+
+	struct ZOTE_API SpriteComponent
+	{
+		template<typename T>
+		using Ref = std::shared_ptr<T>;
+
+		Ref<Sprite> sprite;
+		Ref<Shader> shader;
+
+		SpriteComponent()
+		{
+			sprite = std::make_shared<Sprite>();
+			shader = std::make_shared<Shader> (sprite->GetVertPath(), sprite->GetFragPath());
+		}
 	};
 
 	struct ZOTE_API CameraComponent : public BaseComponent
