@@ -32,7 +32,7 @@ namespace Zote
 		Entity* GetEntity() { return entity; }
 
 	private:
-		Entity* entity;
+		Entity* entity = nullptr;
 	};
 
 	struct ZOTE_API TransformComponent : public BaseComponent
