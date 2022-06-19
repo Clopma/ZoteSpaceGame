@@ -37,11 +37,9 @@ namespace Zote
 	void Sprite::Render()
 	{
 		m_vertexArray->Bind();
-
 		m_indexBuffer->Bind();
 		glDrawElements(GL_TRIANGLES, indicesCount, GL_UNSIGNED_INT, 0);
 		m_indexBuffer->Unbind();
-		
 		m_vertexArray->Unbind();
 	}
 }

@@ -31,7 +31,7 @@ namespace Zote
 					2, 3, 0,
 					0, 1, 2
 			};
-			mesh = MakeRef<Mesh>(vertices, indices, 20, 12);
+			mesh = MakeRef<Mesh>(ZOTE_3D_MESH, true, vertices, indices, 20, 12);
 			shader = MakeRef<Shader>();
 			texture = MakeRef<Texture>("Textures/brick.png");
 			texture->Load();
