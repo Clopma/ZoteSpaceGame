@@ -2,16 +2,20 @@
 #include "Core.h"
 #include <glew.h>
 
+#include "VertexBuffer.h";
+#include "IndexBuffer.h";
+
+#include "Utils/CustomTypes.h";
+#include "Utils/Memory.h"
+
 namespace Zote
 {
 	class ZOTE_API Sprite
 	{
-		using uint = unsigned int;
-		using cstr = const char*;
-
 		uint VAO = 0;
-		uint VBO = 0;
-		uint IBO = 0;
+
+		Ref<VertexBuffer> vb;
+		Ref<IndexBuffer> ib;
 
 		const uint verticesCount = 16;
 		const uint indicesCount = 6;
@@ -26,7 +30,6 @@ namespace Zote
 
 		Sprite();
 		void Render();
-		void Clear();
 		~Sprite();
 	};
 }

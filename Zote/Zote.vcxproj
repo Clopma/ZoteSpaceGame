@@ -22,6 +22,7 @@
     <ClInclude Include="src\Zote\ECS\Systems\MeshSystem.h" />
     <ClInclude Include="src\Zote\ECS\Systems\ScriptSystem.h" />
     <ClInclude Include="src\Zote\ECS\Systems\SpriteSystem.h" />
+    <ClInclude Include="src\Zote\Rendering\IndexBuffer.h" />
     <ClInclude Include="src\Zote\Rendering\Sprite.h" />
     <ClInclude Include="src\Zote\Rendering\Lighting\Light.h" />
     <ClInclude Include="src\Zote\Rendering\Line.h" />
@@ -42,6 +43,7 @@
     <ClInclude Include="src\Zote\Application.h" />
     <ClInclude Include="src\Zote\Core.h" />
     <ClInclude Include="src\Zote\EntryPoint.h" />
+    <ClInclude Include="src\Zote\Rendering\VertexBuffer.h" />
     <ClInclude Include="src\Zote\Rendering\Window.h" />
     <ClInclude Include="src\Zote\Rendering\Texture.h" />
     <ClInclude Include="src\Zote\Utils\CustomTypes.h" />
@@ -55,6 +57,7 @@
     <ClCompile Include="src\Zote\ECS\Systems\MeshSystem.cpp" />
     <ClCompile Include="src\Zote\ECS\Systems\ScriptSystem.cpp" />
     <ClCompile Include="src\Zote\ECS\Systems\SpriteSystem.cpp" />
+    <ClCompile Include="src\Zote\Rendering\IndexBuffer.cpp" />
     <ClCompile Include="src\Zote\Rendering\Sprite.cpp" />
     <ClCompile Include="src\Zote\Rendering\Lighting\Light.cpp" />
     <ClCompile Include="src\Zote\Rendering\Line.cpp" />
@@ -67,6 +70,7 @@
     <ClCompile Include="src\Zote\Maths\Color.cpp" />
     <ClCompile Include="src\Zote\Application.cpp" />
     <ClCompile Include="src\Zote\Rendering\stb_image.cpp" />
+    <ClCompile Include="src\Zote\Rendering\VertexBuffer.cpp" />
     <ClCompile Include="src\Zote\Rendering\Window.cpp" />
     <ClCompile Include="src\Zote\Rendering\Texture.cpp" />
   </ItemGroup>
