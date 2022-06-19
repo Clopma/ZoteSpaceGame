@@ -43,7 +43,9 @@
     <ClInclude Include="src\Zote\Application.h" />
     <ClInclude Include="src\Zote\Core.h" />
     <ClInclude Include="src\Zote\EntryPoint.h" />
+    <ClInclude Include="src\Zote\Rendering\VertexArray.h" />
     <ClInclude Include="src\Zote\Rendering\VertexBuffer.h" />
+    <ClInclude Include="src\Zote\Rendering\VertexBufferLayout.h" />
     <ClInclude Include="src\Zote\Rendering\Window.h" />
     <ClInclude Include="src\Zote\Rendering\Texture.h" />
     <ClInclude Include="src\Zote\Utils\CustomTypes.h" />
@@ -70,6 +72,7 @@
     <ClCompile Include="src\Zote\Maths\Color.cpp" />
     <ClCompile Include="src\Zote\Application.cpp" />
     <ClCompile Include="src\Zote\Rendering\stb_image.cpp" />
+    <ClCompile Include="src\Zote\Rendering\VertexArray.cpp" />
     <ClCompile Include="src\Zote\Rendering\VertexBuffer.cpp" />
     <ClCompile Include="src\Zote\Rendering\Window.cpp" />
     <ClCompile Include="src\Zote\Rendering\Texture.cpp" />

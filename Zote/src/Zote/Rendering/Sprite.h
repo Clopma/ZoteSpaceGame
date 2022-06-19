@@ -2,6 +2,7 @@
 #include "Core.h"
 #include <glew.h>
 
+#include "VertexArray.h"
 #include "VertexBuffer.h";
 #include "IndexBuffer.h";
 
@@ -12,24 +13,20 @@ namespace Zote
 {
 	class ZOTE_API Sprite
 	{
-		uint VAO = 0;
-
-		Ref<VertexBuffer> vb;
-		Ref<IndexBuffer> ib;
-
-		const uint verticesCount = 16;
-		const uint indicesCount = 6;
-
 	public:
 
-		const cstr GetVertPath() const 
-			{ return "Shaders/spriteShader.vert"; }
-
-		const cstr GetFragPath() const
-			{ return "Shaders/spriteShader.frag"; }
+		cstr GetVertPath() const { return "Shaders/spriteShader.vert"; }
+		cstr GetFragPath() const { return "Shaders/spriteShader.frag"; }
 
 		Sprite();
 		void Render();
-		~Sprite();
+
+	private:
+		Ref<VertexArray> m_vertexArray;
+		Ref<VertexBuffer> m_vertexBuffer;
+		Ref<IndexBuffer> m_indexBuffer;
+
+		const uint verticesCount = 16;
+		const uint indicesCount = 6;
 	};
 }

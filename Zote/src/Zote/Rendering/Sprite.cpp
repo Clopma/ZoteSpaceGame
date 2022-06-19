@@ -18,39 +18,30 @@ namespace Zote
 			2, 3, 0  //triangle 2
 		};
 
-		glGenVertexArrays(1, &VAO);
-		glBindVertexArray(VAO);
+		m_vertexArray = MakeRef<VertexArray>();
 
-		vb = MakeRef<VertexBuffer>(vertices, sizeof(vertices[0]) * verticesCount);
+		m_vertexBuffer = MakeRef<VertexBuffer>(vertices, sizeof(vertices[0]) * verticesCount);
+	
+		VertexBufferLayout layout;
 
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(vertices[0]) * 4, 0);
-
-		ib = MakeRef<IndexBuffer>(indices, sizeof(indices[0]) * indicesCount);
-
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FLOAT, sizeof(vertices[0]) * 4, (void*)(sizeof(vertices[0]) * 2));	
+		layout.Push<float>(2);
+		layout.Push<float>(2);
 		
-		ib->Unbind();
-		vb->Unbind();
-		glBindVertexArray(0);
+		m_vertexArray->AddLayout(m_vertexBuffer, layout);
+
+		m_indexBuffer = MakeRef<IndexBuffer>(indices, sizeof(indices[0]) * indicesCount);
+		
+		m_indexBuffer->Unbind();
+		m_vertexBuffer->Unbind();
 	}
 	void Sprite::Render()
 	{
-		glBindVertexArray(VAO);
-		
-		ib->Bind();
+		m_vertexArray->Bind();
+
+		m_indexBuffer->Bind();
 		glDrawElements(GL_TRIANGLES, indicesCount, GL_UNSIGNED_INT, 0);
-		ib->Unbind();
+		m_indexBuffer->Unbind();
 		
-		glBindVertexArray(0);
-	}
-	Sprite::~Sprite()
-	{
-		if (VAO != 0)
-		{
-			glDeleteVertexArrays(1, &VAO);
-			VAO = 0;
-		}
+		m_vertexArray->Unbind();
 	}
 }
