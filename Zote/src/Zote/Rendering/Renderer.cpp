@@ -80,7 +80,7 @@ namespace Zote
 		sprite.shader->SetUnfiformMat4(modelUniformName, model);
 
 		sprite.texture->Use();
-		sprite.sprite->Render();
+		sprite.mesh->Render();
 		sprite.shader->Unbind();
 	}
 
