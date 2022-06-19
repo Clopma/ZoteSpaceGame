@@ -15,7 +15,7 @@ namespace Zote
 		{
 			SpriteComponent& sprite = view.get<SpriteComponent>(entity);
 			TransformComponent& transform = sprite.GetEntity()->GetComponent<TransformComponent>();
-			m_renderer->DrawSprite(sprite, transform, aspectRatio);
+			m_renderer->DrawMesh(sprite.mesh, sprite.shader, sprite.texture, transform, aspectRatio);
 		}
     }
 }

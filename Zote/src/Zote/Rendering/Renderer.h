@@ -7,6 +7,7 @@
 
 #include "Utils/Math.h"
 #include "Utils/CustomTypes.h"
+#include "Utils/Memory.h"
 
 namespace Zote
 {
@@ -34,8 +35,7 @@ namespace Zote
 
 		Renderer(Entity* mainCamera);
 
-		void DrawMesh(MeshComponent& meshRenderer, TransformComponent& transform, float aspectRatio);
-		void DrawSprite(SpriteComponent& sprite, TransformComponent& transform, float aspectRatio);
+		void DrawMesh(Ref<Mesh> mesh, Ref<Shader> shader, Ref<Texture> texture, TransformComponent& transform, float aspectRatio);
 		void DrawLight(MeshComponent& mesh, LightComponent& light);
 	};
 }

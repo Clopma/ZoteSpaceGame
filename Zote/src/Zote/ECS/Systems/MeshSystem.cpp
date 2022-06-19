@@ -13,7 +13,7 @@ namespace Zote
 		{
 			MeshComponent& mesh = group.get<MeshComponent>(entity);
 			TransformComponent& transform = group.get<TransformComponent>(entity);
-			m_renderer->DrawMesh(mesh, transform, aspectRatio);
+			m_renderer->DrawMesh(mesh.mesh, mesh.shader, mesh.texture, transform, aspectRatio);
 		}
 	}
 }

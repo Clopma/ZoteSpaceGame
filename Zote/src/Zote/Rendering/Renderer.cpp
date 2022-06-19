@@ -42,46 +42,25 @@ namespace Zote
 		view = glm::lookAt(cameraTransform.GetPosition(), cameraTransform.GetPosition()
 			+ cameraTransform.GetForward(), cameraTransform.GetUp());
 	}
-	void Renderer::DrawMesh(MeshComponent& meshRenderer, TransformComponent& transform, float aspectRatio)
+	void Renderer::DrawMesh(Ref<Mesh> mesh, Ref<Shader> shader, Ref<Texture> texture, TransformComponent& transform, float aspectRatio)
 	{
-		meshRenderer.shader->Use();
+		shader->Use();
 
 		//Projection matrix
 		CalculateProjection(aspectRatio);
-		meshRenderer.shader->SetUnfiformMat4(projectionUniformName, projection);
+		shader->SetUnfiformMat4(projectionUniformName, projection);
 
 		//View matrix
 		CalculateView();
-		meshRenderer.shader->SetUnfiformMat4(viewUniformName, view);
+		shader->SetUnfiformMat4(viewUniformName, view);
 
 		//Model matrix
 		CalculateModel(transform);
-		meshRenderer.shader->SetUnfiformMat4(modelUniformName, model);
+		shader->SetUnfiformMat4(modelUniformName, model);
 
-		meshRenderer.texture->Use();
-		meshRenderer.mesh->Render();
-		meshRenderer.shader->Unbind();
-	}
-
-	void Renderer::DrawSprite(SpriteComponent& sprite, TransformComponent& transform, float aspectRatio)
-	{
-		sprite.shader->Use();
-
-		//Projection matrix
-		CalculateProjection(aspectRatio);
-		sprite.shader->SetUnfiformMat4(projectionUniformName, projection);
-
-		//View matrix
-		CalculateView();
-		sprite.shader->SetUnfiformMat4(viewUniformName, view);
-
-		//Model matrix
-		CalculateModel(transform);
-		sprite.shader->SetUnfiformMat4(modelUniformName, model);
-
-		sprite.texture->Use();
-		sprite.mesh->Render();
-		sprite.shader->Unbind();
+		texture->Use();
+		mesh->Render();
+		shader->Unbind();
 	}
 
 	void Renderer::DrawLight(MeshComponent& mesh, LightComponent& light)
