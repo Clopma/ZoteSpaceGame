@@ -14,6 +14,6 @@ namespace Zote
 	public:
 
 		MeshSystem(Scene* scene, Renderer* renderer);
-		void HandleMeshes(float aspectRatio);
+		void HandleMeshes();
 	};
 }

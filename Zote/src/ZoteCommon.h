@@ -19,4 +19,8 @@
 
 #include "Zote/Maths/GlmCommon.h"
 
-#define LOG(a) std::cout << a << std::endl;
+#include "Zote/Utils/CustomTypes.h"
+#include "Zote/Utils/Math.h"
+#include "Zote/Utils/Log.h"
+#include "Zote/Utils/Memory.h"
+#include "Zote/Utils/String.h"

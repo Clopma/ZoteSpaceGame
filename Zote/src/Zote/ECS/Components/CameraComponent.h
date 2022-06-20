@@ -1,13 +1,18 @@
 #pragma once
 #include "Core.h"
 #include "BaseComponent.h"
+#include "TransformComponent.h"
+#include "Rendering/Window.h"
 
 #include "Utils/Math.h"
+#include "Utils/Memory.h"
 
 namespace Zote
 {
 	struct ZOTE_API CameraComponent : public BaseComponent
 	{
+		friend class Renderer;
+
 		enum class Mode { Perspective, Ortographic };
 
 		Mode mode = Mode::Ortographic;
@@ -18,8 +23,28 @@ namespace Zote
 
 		vec2 size = { 2.f, 2.f };
 
-		CameraComponent() {}
+		CameraComponent(Ref<Window> window)
+			: m_window(window) {}
 
 		CameraComponent(const CameraComponent& other) = default;
+
+	private:
+
+		Ref<Window> m_window;
+	
+		const mat4& GetProjection() const 
+		{
+			if (mode == CameraComponent::Mode::Ortographic)
+				return glm::ortho(-size.x, size.x, -size.y, size.y, near, far);
+
+			if (mode == CameraComponent::Mode::Perspective)
+				return glm::perspective(fov, m_window->GetAspect(), near, far);
+		}
+
+		const mat4& GetView(TransformComponent& cameraTransform) const
+		{
+			return glm::lookAt(cameraTransform.GetPosition(), cameraTransform.GetPosition()
+				+ cameraTransform.GetForward(), cameraTransform.GetUp());
+		}
 	};
 }

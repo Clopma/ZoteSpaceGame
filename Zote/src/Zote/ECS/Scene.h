@@ -28,7 +28,7 @@ namespace Zote
 	public:
 		Scene() {}
 		
-		Scene(Window& window);
+		Scene(Ref<Window> window);
 
 		void OnRenderFrame(OnRenderFrameArgs args);
 		

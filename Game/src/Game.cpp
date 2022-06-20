@@ -6,28 +6,21 @@ using namespace Zote;
 
 class Game : public Application
 {
-	Window* window = nullptr;
-	Scene* scene = nullptr;
+	Ref<Window> window;
+	Ref<Scene> scene;
 
 public:
 
 	Game()
 	{
-		window = new Window();
-	}
-	~Game()
-	{
-		if (scene != nullptr)
-			delete scene;
-		
-		delete window;
+		window = MakeRef<Window>();
 	}
 
 	void Run() override
 	{
 		if (!window->Init())
 		{
-			LOG("Zote Game window failed!")
+			LOG("Zote Game window failed!");
 			return;
 		}
 
@@ -36,7 +29,7 @@ public:
 
 	void GameContext()
 	{
-		scene = new Scene(*window);
+		scene = MakeRef<Scene>(window);
 
 		scene->GetMainCamera().GetComponent<CameraComponent>().mode = CameraComponent::Mode::Perspective;
 

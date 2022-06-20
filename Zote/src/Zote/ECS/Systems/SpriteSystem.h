@@ -13,6 +13,6 @@ namespace Zote
 
 	public:
 		SpriteSystem(Scene* scene, Renderer* renderer);
-		void HandleSprites(float aspectRatio);
+		void HandleSprites();
 	};
 }

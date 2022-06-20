@@ -30,6 +30,8 @@ namespace Zote
 
 	struct ZOTE_API TransformComponent : public BaseComponent
 	{
+		friend class Renderer;
+
 		TransformComponent() {}
 
 		TransformComponent(const TransformComponent& other) = default;
@@ -80,6 +82,15 @@ namespace Zote
 			forward = axis * vec4(0, 0, 1, 0);
 			right = -axis * vec4(1, 0, 0, 0);
 			up = axis * vec4(0, 1, 0, 0);
+		}
+
+		const mat4 GetModel() const
+		{
+			mat4 model = mat4(1.0f);
+			model = glm::translate(model, GetPosition());
+			model = model * glm::toMat4(GetRotation());
+			model = glm::scale(model, GetScale());
+			return model;
 		}
 	};
 }

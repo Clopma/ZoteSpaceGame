@@ -6,14 +6,14 @@ namespace Zote
 	MeshSystem::MeshSystem(Scene* scene, Renderer* renderer)
 		: m_scene(scene), m_renderer(renderer) {}
 
-	void MeshSystem::HandleMeshes(float aspectRatio)
+	void MeshSystem::HandleMeshes()
 	{
 		auto group = m_scene->registry.group<TransformComponent>(entt::get<MeshComponent>);
 		for (auto entity : group)
 		{
 			MeshComponent& mesh = group.get<MeshComponent>(entity);
 			TransformComponent& transform = group.get<TransformComponent>(entity);
-			m_renderer->DrawMesh(mesh.mesh, mesh.shader, mesh.texture, transform, aspectRatio);
+			m_renderer->DrawMesh(mesh.mesh, mesh.shader, mesh.texture, transform);
 		}
 	}
 }

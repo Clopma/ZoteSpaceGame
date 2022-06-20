@@ -8,6 +8,7 @@
 #include "Utils/Math.h"
 #include "Utils/CustomTypes.h"
 #include "Utils/Memory.h"
+#include "Utils/GlobalUniforms.h"
 
 namespace Zote
 {
@@ -17,19 +18,7 @@ namespace Zote
 	{
 		Entity* mainCamera = nullptr;
 
-		mat4 model = mat4(1.0);
-		mat4 view = mat4(1.0);
-		mat4 projection = mat4(1.0);	
-
-		cstr modelUniformName = "model";
-		cstr viewUniformName = "view";
-		cstr projectionUniformName = "projection";
-
-		void CalculateModel(TransformComponent& t);
-		void CalculateProjection(float aspectRatio);
-		void CalculateView();
-
-		void ApplyMatrixes(Ref<Shader> shader, TransformComponent& transform, float aspectRatio);
+		void ApplyMatrixes(Ref<Shader> shader, TransformComponent& transform);
 
 	public:
 
@@ -37,8 +26,8 @@ namespace Zote
 
 		Renderer(Entity* mainCamera);		
 
-		void DrawMesh(Ref<Mesh> mesh, Ref<Shader> shader, Ref<Texture> texture, TransformComponent& transform, float aspectRatio);
-		void DrawLine(Ref<Line> line, Ref<Shader> shader, TransformComponent& transform, float aspectRatio);
+		void DrawMesh(Ref<Mesh> mesh, Ref<Shader> shader, Ref<Texture> texture, TransformComponent& transform);
+		void DrawLine(Ref<Line> line, Ref<Shader> shader, TransformComponent& transform);
 		void DrawLight(MeshComponent& mesh, LightComponent& light);
 	};
 }

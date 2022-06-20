@@ -4,11 +4,11 @@
 
 namespace Zote
 {
-	Scene::Scene(Window& window)
+	Scene::Scene(Ref<Window> window)
 	{
 		mainCamera = new Entity();
 		*mainCamera = CreateEntity();
-		mainCamera->AddComponent<CameraComponent>();
+		mainCamera->AddComponent<CameraComponent>(window);
 		renderer = new Renderer(mainCamera);
 
 		m_scriptSystem = MakeRef<ScriptSystem>(this);
@@ -16,13 +16,13 @@ namespace Zote
 		m_spriteSystem = MakeRef<SpriteSystem>(this, renderer);
 		m_lightSystem = MakeRef<LightSystem>(this, renderer);
 
-		window.OnRenderFrame.AddListener(new Delegate<OnRenderFrameArgs>(this, &Scene::OnRenderFrame));
+		window->OnRenderFrame.AddListener(new Delegate<OnRenderFrameArgs>(this, &Scene::OnRenderFrame));
 	}
 
 	void Scene::OnRenderFrame(OnRenderFrameArgs args)
 	{
-		m_meshSystem->HandleMeshes(args.aspect);
-		m_spriteSystem->HandleSprites(args.aspect);
+		m_meshSystem->HandleMeshes();
+		m_spriteSystem->HandleSprites();
 		m_lightSystem->HandleLights();
 		m_scriptSystem->HandleScripts(args.deltaTime);
 	}
