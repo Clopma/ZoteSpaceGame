@@ -29,13 +29,16 @@ namespace Zote
 		void CalculateProjection(float aspectRatio);
 		void CalculateView();
 
+		void ApplyMatrixes(Ref<Shader> shader, TransformComponent& transform, float aspectRatio);
+
 	public:
 
 		Renderer() {}
 
-		Renderer(Entity* mainCamera);
+		Renderer(Entity* mainCamera);		
 
 		void DrawMesh(Ref<Mesh> mesh, Ref<Shader> shader, Ref<Texture> texture, TransformComponent& transform, float aspectRatio);
+		void DrawLine(Ref<Line> line, Ref<Shader> shader, TransformComponent& transform, float aspectRatio);
 		void DrawLight(MeshComponent& mesh, LightComponent& light);
 	};
 }

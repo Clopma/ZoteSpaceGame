@@ -32,7 +32,6 @@ namespace Zote
 			return;
 		}
 	}
-
 	void Renderer::CalculateView()
 	{
 		TransformComponent& cameraTransform = mainCamera->GetComponent<TransformComponent>();
@@ -42,7 +41,7 @@ namespace Zote
 		view = glm::lookAt(cameraTransform.GetPosition(), cameraTransform.GetPosition()
 			+ cameraTransform.GetForward(), cameraTransform.GetUp());
 	}
-	void Renderer::DrawMesh(Ref<Mesh> mesh, Ref<Shader> shader, Ref<Texture> texture, TransformComponent& transform, float aspectRatio)
+	void Renderer::ApplyMatrixes(Ref<Shader> shader, TransformComponent& transform, float aspectRatio)
 	{
 		shader->Use();
 
@@ -58,9 +57,26 @@ namespace Zote
 		CalculateModel(transform);
 		shader->SetUnfiformMat4(modelUniformName, model);
 
+		shader->Unbind();
+	}
+	void Renderer::DrawMesh(Ref<Mesh> mesh, Ref<Shader> shader, Ref<Texture> texture, TransformComponent& transform, float aspectRatio)
+	{
+		ApplyMatrixes(shader, transform, aspectRatio);
+
+		shader->Use();
 		texture->Use();
 		mesh->Render();
 		shader->Unbind();
+
+		/*GizmosAxis forwardAxis(transform.GetPosition(), transform.GetForward(), Color::blue);
+		DrawLine(forwardAxis.GetLine(), forwardAxis.GetShader(), transform, aspectRatio);*/
+	}
+
+	void Renderer::DrawLine(Ref<Line> line, Ref<Shader> shader,TransformComponent& transform, float aspectRatio)
+	{
+		ApplyMatrixes(shader, transform, aspectRatio);
+		shader->Use();
+		line->Render(shader);
 	}
 
 	void Renderer::DrawLight(MeshComponent& mesh, LightComponent& light)

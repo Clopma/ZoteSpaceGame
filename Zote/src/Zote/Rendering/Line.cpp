@@ -1,72 +1,36 @@
 #include "Line.h"
 
 namespace Zote
-{
-	Line::Line()
+{	
+	Line::Line(vec3 start, vec3 end, Color color) :
+		m_color(color)
 	{
-		glGenVertexArrays(1, &VAO);
-		glGenBuffers(1, &VBO);
+		m_vertexArray = MakeRef<VertexArray>();
 
-		glBindVertexArray(VAO);
-		
-		SetData({ 0, 0, 0 }, { 0, 0, 0 }, Color::red);
+		float lineArray[] = {
+			start.x, start.y, start.z,
+			end.x, end.y, end.x
+		};
 
-		//Clean	
-		glBindVertexArray(0);
+		m_vertexBuffer = MakeRef<VertexBuffer>(lineArray, sizeof(lineArray[0]) * m_lineCount);
 
-		shader = std::make_shared<Shader>("Shaders/lineShader.vert", "Shaders/lineShader.frag");				
+		VertexBufferLayout layout;
+		layout.Push<float>(m_lineCount / 2);
+		m_vertexArray->AddLayout(m_vertexBuffer, layout);
+
+		m_vertexBuffer->Unbind();
 	}
 
-	void Line::SetData(vec3 start, vec3 end, Color color)
-	{
-		this->color = color;
-
-		vertices[0] = start.x;
-		vertices[1] = start.y;
-		vertices[2] = start.z;
-
-		vertices[3] = end.x;
-		vertices[4] = end.y;
-		vertices[5] = end.z;
-
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
-		glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), &vertices, GL_STATIC_DRAW);
-
-		if (!created)
-		{
-			created = true;
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-			glEnableVertexAttribArray(0);
-		}
-
-		//Clean
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-	}
-
-	void Line::Render()
+	void Line::Render(Ref<Shader> shader)
 	{
 		shader->Use();
-		
-		shader->SetUniformVec4(uniformColorName, Color::ToVec4(color));
+		shader->SetUniformVec4(m_uniformColorName, Color::ToVec4(m_color));
+		shader->Unbind();
 
-		glBindVertexArray(VAO);
-		glDrawArrays(GL_LINES, 0, 6);
-		glBindVertexArray(0);
-	}
-
-	Line::~Line()
-	{
-		if (VBO != 0)
-		{
-			glDeleteBuffers(1, &VBO);
-			VBO = 0;
-		}
-
-		if (VAO != 0)
-		{
-			glDeleteVertexArrays(1, &VAO);
-			VAO = 0;
-		}
+		shader->Use();
+		m_vertexArray->Bind();
+		glDrawArrays(GL_LINES, 0, m_lineCount);
+		m_vertexArray->Unbind();
+		shader->Unbind();
 	}
 }

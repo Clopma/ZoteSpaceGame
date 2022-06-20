@@ -1,33 +1,33 @@
 #pragma once
 #include "Core.h"
 #include <glew.h>
-#include "Maths/GlmCommon.h"
-#include <memory>
 #include "Shader.h"
-#include "Maths/Color.h"
+
+#include "VertexArray.h"
+#include "VertexBuffer.h"
+
+#include "Utils/CustomTypes.h"
+#include "Utils/Math.h"
+#include "Utils/Memory.h"
 
 namespace Zote
 {
 	class ZOTE_API Line
 	{
 	public:
-
-		const char* uniformColorName = "color";
-		std::shared_ptr<Shader> shader;
 		
-		Line();
-		
-		void SetData(vec3 start, vec3 end, Color color);
-		void Render();
+		Line(vec3 start, vec3 end, Color color);
+		void Render(Ref<Shader> shader);
 
-		~Line();
+		cstr GetVertShaderPath() const { return "Shaders/lineShader.vert"; }
+		cstr GetFragShaderPath() const { return "Shaders/lineShader.frag"; }
 
 	private:
-		
-		float vertices[6] = {0, 0, 0, 0, 0, 0};
-		Color color = Color::red;
-		unsigned int VAO = 0;
-		unsigned int VBO = 0;
-		bool created = false;
+
+		Ref<VertexArray> m_vertexArray;
+		Ref<VertexBuffer> m_vertexBuffer;
+		Color m_color = Color::red;
+		cstr m_uniformColorName = "color";
+		const uint m_lineCount = 6;
 	};
 }

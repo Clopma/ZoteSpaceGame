@@ -2,10 +2,32 @@
 #include "Core.h"
 #include "BaseComponent.h"
 
+#include "Rendering/Line.h"
+
 #include "Utils/Math.h"
+#include "Utils/Memory.h"
 
 namespace Zote
 {
+	struct GizmosAxis
+	{
+		Ref<Shader> m_shader;
+		Ref<Line> m_Line;
+		const float m_lenght = 20.f;
+
+		Ref<Line> GetLine() const { return m_Line; }
+		Ref<Shader> GetShader() const { return m_shader; }
+
+		GizmosAxis(const vec3& pos, const vec3& dir, const Color& color)
+		{
+			vec3 start = pos;
+			vec3 end = start + dir * m_lenght;
+			m_Line = MakeRef<Line>(start, end, color);
+			m_shader = MakeRef<Shader>(m_Line->GetVertShaderPath(),
+				m_Line->GetFragShaderPath());
+		}
+	};
+
 	struct ZOTE_API TransformComponent : public BaseComponent
 	{
 		TransformComponent() {}

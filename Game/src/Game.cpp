@@ -54,8 +54,8 @@ public:
 		auto& mainCamera_scripts = scene->GetMainCamera().AddComponent<ScriptComponent>();
 		mainCamera_scripts.AddScript(new MoveCamera());
 
-		Entity testQuad = scene->CreateEntity();
-		testQuad.AddComponent<SpriteComponent>("Textures/zote.png");
+		Entity zote = scene->CreateEntity();
+		zote.AddComponent<SpriteComponent>("Textures/zote.png");
 
 		Entity amogus = scene->CreateEntity();
 		amogus.AddComponent<SpriteComponent>("Textures/sus.png");
