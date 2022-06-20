@@ -10,3 +10,5 @@
 #define SHADER_FRAG_DEF "Shaders/shader.frag"
 #define SHADER_VERT_LINE "Shaders/lineShader.vert"
 #define SHADER_FRAG_LINE "Shaders/lineShader.frag"
+#define SHADER_VERT_SPRITE "Shaders/spriteShader.vert"
+#define SHADER_FRAG_SPRITE "Shaders/spriteShader.frag"

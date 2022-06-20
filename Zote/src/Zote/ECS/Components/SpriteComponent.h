@@ -8,6 +8,7 @@
 
 #include "Utils/Memory.h"
 #include "Utils/CustomTypes.h"
+#include "Utils/GlobalStrings.h"
 
 namespace Zote
 {
@@ -34,13 +35,9 @@ namespace Zote
 			};
 
 			mesh = MakeRef<Mesh>(ZOTE_2D_MESH, true, vertices, indices, 16, 6);
-			shader = MakeRef<Shader>(vertexPath, fragmentPath);
+			shader = MakeRef<Shader>(SHADER_VERT_SPRITE, SHADER_FRAG_SPRITE);
 			texture = MakeRef<Texture>(path);
 			texture->Load();
 		}
-
-	private:
-		cstr vertexPath = "Shaders/spriteShader.vert";
-		cstr fragmentPath = "Shaders/spriteShader.frag";
 	};
 }
