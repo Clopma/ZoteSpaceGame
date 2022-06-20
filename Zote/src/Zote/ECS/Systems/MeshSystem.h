@@ -1,6 +1,5 @@
 #pragma once
 #include "Core.h"
-#include "Rendering/Renderer.h"
 
 namespace Zote
 {
@@ -9,11 +8,10 @@ namespace Zote
 	class ZOTE_API MeshSystem
 	{
 		Scene* m_scene = nullptr;
-		Renderer* m_renderer = nullptr;
 
 	public:
 
-		MeshSystem(Scene* scene, Renderer* renderer);
+		MeshSystem(Scene* scene);
 		void HandleMeshes();
 	};
 }

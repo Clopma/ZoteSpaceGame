@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include "Components/TransformComponent.h"
 
 namespace Zote
 {

@@ -2,36 +2,12 @@
 #include "Core.h"
 #include "BaseComponent.h"
 
-#include "Rendering/Line.h"
-
 #include "Utils/Math.h"
-#include "Utils/Memory.h"
-#include "Utils/GlobalStrings.h"
 
 namespace Zote
 {
-	struct GizmosAxis
-	{
-		Ref<Shader> m_shader;
-		Ref<Line> m_Line;
-		const float m_lenght = 20.f;
-
-		Ref<Line> GetLine() const { return m_Line; }
-		Ref<Shader> GetShader() const { return m_shader; }
-
-		GizmosAxis(const vec3& pos, const vec3& dir, const Color& color)
-		{
-			vec3 start = pos;
-			vec3 end = start + dir * m_lenght;
-			m_Line = MakeRef<Line>(start, end, color);
-			m_shader = MakeRef<Shader>(SHADER_VERT_LINE, SHADER_FRAG_LINE);
-		}
-	};
-
 	struct ZOTE_API TransformComponent : public BaseComponent
 	{
-		friend class Renderer;
-
 		TransformComponent() {}
 
 		TransformComponent(const TransformComponent& other) = default;
@@ -63,6 +39,15 @@ namespace Zote
 			UpdateAxis();
 		}
 
+		const mat4 GetModel() const
+		{
+			mat4 model = mat4(1.0f);
+			model = glm::translate(model, GetPosition());
+			model = model * glm::toMat4(GetRotation());
+			model = glm::scale(model, GetScale());
+			return model;
+		}
+
 	private:
 
 		vec3 position = { 0, 0, 0 };
@@ -82,15 +67,6 @@ namespace Zote
 			forward = axis * vec4(0, 0, 1, 0);
 			right = -axis * vec4(1, 0, 0, 0);
 			up = axis * vec4(0, 1, 0, 0);
-		}
-
-		const mat4 GetModel() const
-		{
-			mat4 model = mat4(1.0f);
-			model = glm::translate(model, GetPosition());
-			model = model * glm::toMat4(GetRotation());
-			model = glm::scale(model, GetScale());
-			return model;
-		}
+		}	
 	};
 }

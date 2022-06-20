@@ -11,8 +11,6 @@ namespace Zote
 {
 	struct ZOTE_API CameraComponent : public BaseComponent
 	{
-		friend class Renderer;
-
 		enum class Mode { Perspective, Ortographic };
 
 		Mode mode = Mode::Ortographic;
@@ -28,11 +26,7 @@ namespace Zote
 
 		CameraComponent(const CameraComponent& other) = default;
 
-	private:
-
-		Ref<Window> m_window;
-	
-		const mat4& GetProjection() const 
+		const mat4& GetProjection() const
 		{
 			if (mode == CameraComponent::Mode::Ortographic)
 				return glm::ortho(-size.x, size.x, -size.y, size.y, near, far);
@@ -46,5 +40,8 @@ namespace Zote
 			return glm::lookAt(cameraTransform.GetPosition(), cameraTransform.GetPosition()
 				+ cameraTransform.GetForward(), cameraTransform.GetUp());
 		}
+
+	private:
+		Ref<Window> m_window;
 	};
 }

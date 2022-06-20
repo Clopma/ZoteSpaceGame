@@ -2,12 +2,13 @@
 
 #include <entt.hpp>
 #include "Core.h"
-#include "Components/CameraComponent.h"
+
 #include "Rendering/Window.h"
+
 #include "Event.h"
+
 #include "Systems/ScriptSystem.h"
 #include "Systems/MeshSystem.h"
-#include "Systems/LightSystem.h"
 #include "Systems/SpriteSystem.h"
 
 #include "Utils/Memory.h"
@@ -42,12 +43,10 @@ namespace Zote
 	private:
 		entt::registry registry;
 
-		Renderer* renderer = nullptr;
 		Entity* mainCamera = nullptr;
 
 		Ref<ScriptSystem> m_scriptSystem;
 		Ref<MeshSystem> m_meshSystem;
 		Ref<SpriteSystem> m_spriteSystem;
-		Ref<LightSystem> m_lightSystem;
 	};
 }

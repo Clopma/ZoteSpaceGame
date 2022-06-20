@@ -9,10 +9,9 @@ namespace Zote
 	class ZOTE_API SpriteSystem
 	{
 		Scene* m_scene = nullptr;
-		Renderer* m_renderer = nullptr;
 
 	public:
-		SpriteSystem(Scene* scene, Renderer* renderer);
+		SpriteSystem(Scene* scene);
 		void HandleSprites();
 	};
 }

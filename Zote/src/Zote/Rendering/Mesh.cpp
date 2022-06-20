@@ -23,12 +23,12 @@ namespace Zote
 		m_indexBuffer->Unbind();
 		m_vertexBuffer->Unbind();
     }
-	void Mesh::Render()
+	void Mesh::Render(const Ref<Shader> shader, mat4 projection, mat4 view, mat4 model) const
 	{
-		m_vertexArray->Bind();
-		m_indexBuffer->Bind();
-		glDrawElements(GL_TRIANGLES, m_indexBuffer->GetCount(), GL_UNSIGNED_INT, 0);
-		m_indexBuffer->Unbind();
-		m_vertexArray->Unbind();
+		Renderer::SetUniformMatrix(UNIFORM_PROJECTION, shader, projection);
+		Renderer::SetUniformMatrix(UNIFORM_VIEW, shader, view);
+		Renderer::SetUniformMatrix(UNIFORM_MODEL, shader, model);
+
+		Renderer::DrawTriangles(m_vertexArray, m_indexBuffer, shader);
 	}
 }

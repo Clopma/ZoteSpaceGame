@@ -12,6 +12,7 @@
 
 #include "Zote/ECS/Scene.h"
 #include "Zote/ECS/Entity.h"
+#include "Zote/ECS/Components.h"
 
 #include "Zote/Input.h"
 #include "Zote/KeyCodes.h"

@@ -9,11 +9,10 @@ namespace Zote
 	class ZOTE_API LightSystem
 	{
 		Scene* m_scene = nullptr;
-		Renderer* m_renderer = nullptr;
 
 	public:
 
-		LightSystem(Scene* scene, Renderer* renderer);
+		LightSystem(Scene* scene);
 		void HandleLights();
 	};
 }

@@ -35,9 +35,6 @@ public:
 
 		scene->GetMainCamera().GetComponent<TransformComponent>().SetPosition({ 0, 0, -3 });
 
-		Entity direcionalLight = scene->CreateEntity();
-		direcionalLight.AddComponent<LightComponent>();
-
 		Entity testTriangle = scene->CreateEntity();
 		testTriangle.AddComponent<MeshComponent>();
 

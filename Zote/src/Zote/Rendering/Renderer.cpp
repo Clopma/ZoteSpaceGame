@@ -1,43 +1,30 @@
 #include "Renderer.h"
-#include "ECS/Entity.h"
 
 namespace Zote
 {
-	Renderer::Renderer(Entity* mainCamera)
-		: mainCamera(mainCamera) {}
-
-	void Renderer::ApplyMatrixes(Ref<Shader> shader, TransformComponent& transform)
+	void Renderer::SetUniformMatrix(const cstr uniformName, Ref<Shader> shader, const mat4& matrix)
 	{
-		CameraComponent& camera = mainCamera->GetComponent<CameraComponent>();
-		TransformComponent& cameraTransform = mainCamera->GetComponent<TransformComponent>();
-
 		shader->Use();
-
-		shader->SetUnfiformMat4(UNIFORM_PROJECTION, camera.GetProjection());
-		shader->SetUnfiformMat4(UNIFORM_VIEW, camera.GetView(cameraTransform));
-		shader->SetUnfiformMat4(UNIFORM_MODEL, transform.GetModel());
-
-		shader->Unbind();
-	}
-	void Renderer::DrawMesh(Ref<Mesh> mesh, Ref<Shader> shader, Ref<Texture> texture, TransformComponent& transform)
-	{
-		ApplyMatrixes(shader, transform);
-
-		shader->Use();
-		texture->Use();
-		mesh->Render();
+		shader->SetUnfiformMat4(uniformName, matrix);
 		shader->Unbind();
 	}
 
-	void Renderer::DrawLine(Ref<Line> line, Ref<Shader> shader,TransformComponent& transform)
+	void Renderer::DrawTriangles(const Ref<VertexArray> vertexArray, const Ref<IndexBuffer> indexBuffer, const Ref<Shader> shader)
 	{
-		ApplyMatrixes(shader, transform);
 		shader->Use();
-		line->Render(shader);
+		vertexArray->Bind();
+		indexBuffer->Bind();
+		glDrawElements(GL_TRIANGLES, indexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
+		indexBuffer->Unbind();
+		vertexArray->Unbind();
+		shader->Unbind();
 	}
-
-	void Renderer::DrawLight(MeshComponent& mesh, LightComponent& light)
+	void Renderer::DrawLines(const Ref<VertexArray> vertexArray, const Ref<Shader> shader)
 	{
-		light.light->Use(mesh.shader);
+		shader->Use();
+		vertexArray->Bind();
+		glDrawArrays(GL_LINES, 0, 6); //two 3D vectors (6 floats)
+		vertexArray->Unbind();
+		shader->Unbind();
 	}
 }

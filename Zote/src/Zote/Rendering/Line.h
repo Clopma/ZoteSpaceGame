@@ -5,6 +5,7 @@
 
 #include "VertexArray.h"
 #include "VertexBuffer.h"
+#include "Rendering/Renderer.h"
 
 #include "Utils/CustomTypes.h"
 #include "Utils/Math.h"

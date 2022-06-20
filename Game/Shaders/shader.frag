@@ -16,5 +16,6 @@ uniform DirectionalLight directionalLight;
 void main()
 {
     vec4 ambientColor = vec4(directionalLight.color, 1.0f) * directionalLight.intensity;
-    FragColor = texture(theTexture, TexCoord) * ambientColor;
+    //FragColor = texture(theTexture, TexCoord) * ambientColor;
+    FragColor = texture(theTexture, TexCoord);
 }

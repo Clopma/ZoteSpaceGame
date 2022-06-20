@@ -27,10 +27,6 @@ namespace Zote
 		shader->SetUniformVec4(m_uniformColorName, Color::ToVec4(m_color));
 		shader->Unbind();
 
-		shader->Use();
-		m_vertexArray->Bind();
-		glDrawArrays(GL_LINES, 0, m_lineCount);
-		m_vertexArray->Unbind();
-		shader->Unbind();
+		Renderer::DrawLines(m_vertexArray, shader);
 	}
 }
