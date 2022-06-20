@@ -8,7 +8,7 @@
 #include "Utils/Math.h"
 #include "Utils/CustomTypes.h"
 #include "Utils/Memory.h"
-#include "Utils/GlobalUniforms.h"
+#include "Utils/GlobalStrings.h"
 
 namespace Zote
 {

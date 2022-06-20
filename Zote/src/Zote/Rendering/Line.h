@@ -19,9 +19,6 @@ namespace Zote
 		Line(vec3 start, vec3 end, Color color);
 		void Render(Ref<Shader> shader);
 
-		cstr GetVertShaderPath() const { return "Shaders/lineShader.vert"; }
-		cstr GetFragShaderPath() const { return "Shaders/lineShader.frag"; }
-
 	private:
 
 		Ref<VertexArray> m_vertexArray;

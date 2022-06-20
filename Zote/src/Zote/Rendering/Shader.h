@@ -5,6 +5,7 @@
 #include <string>
 #include "Core.h"
 #include "Maths/GlmCommon.h"
+#include "Utils/GlobalStrings.h"
 
 using c_str = const char*;
 using string = std::string;
@@ -14,9 +15,6 @@ namespace Zote
 	class ZOTE_API Shader
 	{
 		int shaderID, modelLocation, projectionLocation, viewLocation;
-
-		c_str defaultFragmentLocation = "Shaders/shader.frag";
-		c_str defaultVertexLocation = "Shaders/shader.vert";
 
 		string ReadFile(c_str fileLocation);
 		bool Compile(int shaderID, c_str shaderCode, int shaderType, int theShader);

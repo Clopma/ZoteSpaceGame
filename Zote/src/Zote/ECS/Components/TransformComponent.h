@@ -6,6 +6,7 @@
 
 #include "Utils/Math.h"
 #include "Utils/Memory.h"
+#include "Utils/GlobalStrings.h"
 
 namespace Zote
 {
@@ -23,8 +24,7 @@ namespace Zote
 			vec3 start = pos;
 			vec3 end = start + dir * m_lenght;
 			m_Line = MakeRef<Line>(start, end, color);
-			m_shader = MakeRef<Shader>(m_Line->GetVertShaderPath(),
-				m_Line->GetFragShaderPath());
+			m_shader = MakeRef<Shader>(SHADER_VERT_LINE, SHADER_FRAG_LINE);
 		}
 	};
 

@@ -48,7 +48,7 @@
     <ClInclude Include="src\Zote\Rendering\Window.h" />
     <ClInclude Include="src\Zote\Rendering\Texture.h" />
     <ClInclude Include="src\Zote\Utils\CustomTypes.h" />
-    <ClInclude Include="src\Zote\Utils\GlobalUniforms.h" />
+    <ClInclude Include="src\Zote\Utils\GlobalStrings.h" />
     <ClInclude Include="src\Zote\Utils\Log.h" />
     <ClInclude Include="src\Zote\Utils\Math.h" />
     <ClInclude Include="src\Zote\Utils\Memory.h" />

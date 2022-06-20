@@ -138,7 +138,7 @@
     <ClInclude Include="src\Zote\Rendering\VertexBufferLayout.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Zote\Utils\GlobalUniforms.h">
+    <ClInclude Include="src\Zote\Utils\GlobalStrings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

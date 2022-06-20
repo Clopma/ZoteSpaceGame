@@ -117,7 +117,7 @@ namespace Zote
 	Shader::Shader()
 		: shaderID(0), modelLocation(0), viewLocation(0), projectionLocation(0)
 	{
-		Create(defaultVertexLocation, defaultFragmentLocation);
+		Create(SHADER_VERT_DEF, SHADER_FRAG_DEF);
 	}
 	Shader::~Shader()
 	{
