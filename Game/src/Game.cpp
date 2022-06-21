@@ -45,7 +45,13 @@ public:
 		mainCamera_scripts.AddScript(new MoveCamera());
 
 		Entity zote = scene->CreateEntity();
-		zote.AddComponent<SpriteComponent>("Textures/zote.png");
+		zote.GetComponent<TransformComponent>().SetPosition({ 0, 1, 0 });
+		auto& zoteSprite = zote.AddComponent<SpriteComponent>("Textures/zote.png");
+		//zoteSprite.color = Color::red;
+
+		Entity redSquare = scene->CreateEntity();
+		auto& redSquareSprite = redSquare.AddComponent<SpriteComponent>();
+		redSquareSprite.color = Color::blue;
 
 		Entity amogus = scene->CreateEntity();
 		amogus.AddComponent<SpriteComponent>("Textures/sus.png");

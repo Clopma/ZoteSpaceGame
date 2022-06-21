@@ -17,6 +17,8 @@ namespace Zote
 	{
 
 	public:
+		static void SetUniformFloat(cstr uniformName, Ref<Shader> shader, float value);
+		static void SetUniformColor(cstr uniformName, Ref<Shader> shader, const Color& color);
 		static void SetUniformMatrix(const cstr uniformName, Ref<Shader> shader, const mat4& matrix);
 		static void DrawTriangles(const Ref<VertexArray> vertexArray, const Ref<IndexBuffer> indexBuffer, const Ref<Shader> shader);
 		static void DrawLines(const Ref<VertexArray> vertexArray, const Ref<Shader> shader);

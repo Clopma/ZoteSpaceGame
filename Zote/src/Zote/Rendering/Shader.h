@@ -28,6 +28,7 @@ namespace Zote
 
 		const int GetUniform(c_str name) const { return glGetUniformLocation(shaderID, name); }
 		
+		void SetUniformFloat(c_str name, float value);
 		void SetUnfiformMat4(c_str name, mat4 value);
 		void SetUniformVec4(c_str name, vec4 value);
 

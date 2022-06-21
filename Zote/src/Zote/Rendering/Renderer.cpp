@@ -2,6 +2,18 @@
 
 namespace Zote
 {
+	void Renderer::SetUniformFloat(cstr uniformName, Ref<Shader> shader, float value)
+	{
+		shader->Use();
+		shader->SetUniformFloat(uniformName, value);
+		shader->Unbind();
+	}
+	void Renderer::SetUniformColor(cstr uniformName, Ref<Shader> shader, const Color& color)
+	{
+		shader->Use();
+		shader->SetUniformVec4(uniformName, Color::ToVec4(color));
+		shader->Unbind();
+	}
 	void Renderer::SetUniformMatrix(const cstr uniformName, Ref<Shader> shader, const mat4& matrix)
 	{
 		shader->Use();

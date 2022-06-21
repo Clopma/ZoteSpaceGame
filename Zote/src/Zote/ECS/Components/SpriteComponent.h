@@ -14,11 +14,15 @@ namespace Zote
 {
 	struct ZOTE_API SpriteComponent : public BaseComponent
 	{
+		Color color = { 1.f, 1.f, 1.f, 1.f };
 		Ref<Mesh> mesh;
 		Ref<Texture> texture;
 		Ref<Shader> shader;
+		
+		bool HasTexture() { return std::string(m_path) != ""; }
 
-		SpriteComponent(cstr path)
+		SpriteComponent(cstr path = "")
+			: m_path(path)
 		{
 			//Quad data...
 			float vertices[] = {
@@ -36,8 +40,12 @@ namespace Zote
 
 			mesh = MakeRef<Mesh>(ZOTE_2D_MESH, true, vertices, indices, 16, 6);
 			shader = MakeRef<Shader>(SHADER_VERT_SPRITE, SHADER_FRAG_SPRITE);
+			
 			texture = MakeRef<Texture>(path);
 			texture->Load();
 		}
+
+	private:
+		cstr m_path = "";
 	};
 }

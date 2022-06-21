@@ -123,6 +123,11 @@ namespace Zote
 	{
 		Clear();
 	}
+	void Shader::SetUniformFloat(c_str name, float value)
+	{
+		int location = GetUniform(name);
+		glUniform1f(location, value);
+	}
 	void Shader::SetUnfiformMat4(c_str name, mat4 value)
 	{
 		int location = GetUniform(name);
