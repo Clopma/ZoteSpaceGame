@@ -23,10 +23,8 @@ namespace Zote
 
 	void Line::Render(Ref<Shader> shader)
 	{
-		shader->Use();
-		shader->SetUniformVec4(m_uniformColorName, Color::ToVec4(m_color));
-		shader->Unbind();
-
+		Renderer::SetUniformColor(UNIFORM_LINE_COLOR, 
+			shader, m_color);
 		Renderer::DrawLines(m_vertexArray, shader);
 	}
 }

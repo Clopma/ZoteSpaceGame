@@ -32,7 +32,7 @@ public:
 	{
 		scene = MakeRef<Scene>(window);
 
-		//scene->GetMainCamera().GetComponent<CameraComponent>().mode = CameraComponent::Mode::Perspective;
+		scene->GetMainCamera().GetComponent<CameraComponent>().mode = CameraComponent::Mode::Perspective;
 
 		scene->GetMainCamera().GetComponent<TransformComponent>().SetPosition({ 0, 0, -3 });
 
@@ -55,7 +55,7 @@ public:
 		redSquareSprite.color = Color::blue;
 
 		Entity amogus = scene->CreateEntity();
-		amogus.AddComponent<SpriteComponent>("Textures/sus.png");
+		auto& amogusSprite = amogus.AddComponent<SpriteComponent>("Textures/sus.png");
 		amogus.GetComponent<TransformComponent>().SetPosition({ -1, 0, 0 });
 		window->StartLoop();
 		

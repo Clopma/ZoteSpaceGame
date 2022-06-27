@@ -6,6 +6,7 @@
 #define UNIFORM_PROJECTION "projection"
 #define UNIFORM_SPRITE_COLOR "spriteColor"
 #define UNIFORM_SPRITE_HAS_TEXTURE "spriteHasTexture"
+#define UNIFORM_LINE_COLOR "u_LineColor"
 
 //Shaders...
 #define SHADER_VERT_DEF "Shaders/shader.vert"

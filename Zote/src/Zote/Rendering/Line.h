@@ -10,6 +10,7 @@
 #include "Utils/CustomTypes.h"
 #include "Utils/Math.h"
 #include "Utils/Memory.h"
+#include "Utils/GlobalStrings.h"
 
 namespace Zote
 {
@@ -25,7 +26,6 @@ namespace Zote
 		Ref<VertexArray> m_vertexArray;
 		Ref<VertexBuffer> m_vertexBuffer;
 		Color m_color = Color::red;
-		cstr m_uniformColorName = "color";
 		const uint m_lineCount = 6;
 	};
 }
