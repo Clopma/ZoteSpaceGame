@@ -13,12 +13,14 @@ namespace Zote
 		m_scriptSystem = MakeRef<ScriptSystem>(this);
 		m_meshSystem = MakeRef<MeshSystem>(this);
 		m_spriteSystem = MakeRef<SpriteSystem>(this);
+		m_gizmosAxisSystem = MakeRef<GizmosAxisSystem>(this);
 
 		window->OnRenderFrame.AddListener(new Delegate<OnRenderFrameArgs>(this, &Scene::OnRenderFrame));
 	}
 
 	void Scene::OnRenderFrame(OnRenderFrameArgs args)
 	{
+		m_gizmosAxisSystem->HandleGizmosAxis();
 		m_meshSystem->HandleMeshes();
 		m_spriteSystem->HandleSprites();
 		m_scriptSystem->HandleScripts(args.deltaTime);

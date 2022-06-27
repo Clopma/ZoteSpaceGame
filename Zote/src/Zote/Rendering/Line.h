@@ -19,7 +19,7 @@ namespace Zote
 	public:
 		
 		Line(vec3 start, vec3 end, Color color);
-		void Render(Ref<Shader> shader);
+		void Render(Ref<Shader> shader, mat4 projection, mat4 view, mat4 model);
 
 	private:
 

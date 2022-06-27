@@ -8,7 +8,12 @@ namespace Zote
 {
 	struct ZOTE_API TransformComponent : public BaseComponent
 	{
-		TransformComponent() {}
+		TransformComponent() 
+		{
+			RotateGlobal(0, GetForward());
+			RotateGlobal(0, GetRight());
+			RotateGlobal(0, GetUp());
+		}
 
 		TransformComponent(const TransformComponent& other) = default;
 

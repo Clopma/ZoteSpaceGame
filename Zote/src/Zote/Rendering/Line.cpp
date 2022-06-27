@@ -9,7 +9,7 @@ namespace Zote
 
 		float lineArray[] = {
 			start.x, start.y, start.z,
-			end.x, end.y, end.x
+			end.x, end.y, end.z
 		};
 
 		m_vertexBuffer = MakeRef<VertexBuffer>(lineArray, sizeof(lineArray[0]) * m_lineCount);
@@ -21,10 +21,15 @@ namespace Zote
 		m_vertexBuffer->Unbind();
 	}
 
-	void Line::Render(Ref<Shader> shader)
+	void Line::Render(Ref<Shader> shader, mat4 projection, mat4 view, mat4 model)
 	{
+		Renderer::SetUniformMatrix(UNIFORM_PROJECTION, shader, projection);
+		Renderer::SetUniformMatrix(UNIFORM_VIEW, shader, view);
+		Renderer::SetUniformMatrix(UNIFORM_MODEL, shader, model);
+
 		Renderer::SetUniformColor(UNIFORM_LINE_COLOR, 
 			shader, m_color);
+
 		Renderer::DrawLines(m_vertexArray, shader);
 	}
 }
