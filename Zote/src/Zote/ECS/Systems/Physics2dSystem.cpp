@@ -82,7 +82,12 @@ namespace Zote
 			transform.SetPosition({ position.x, position.y, transform.GetPosition().z });
 			
 			float angle = rb.m_body->GetAngle();
-			transform.RotateGlobal(angle, { 0, 0, 1 });
+			float selfAngle = glm::eulerAngles(transform.GetRotation()).z;
+			
+			float dif = std::abs(std::abs(angle) - std::abs(selfAngle));
+
+			if (dif > 0.1f)
+				transform.RotateGlobal(angle, { 0, 0, 1 });
 		}
 	}
 }

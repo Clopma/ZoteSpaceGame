@@ -32,14 +32,14 @@ namespace Zote
 
 		void RotateLocal(const float& degrees, const vec3& axis)
 		{
-			rotation = rotation * glm::normalize(glm::angleAxis(degrees, axis));
+			rotation = rotation * glm::normalize(glm::angleAxis(glm::radians(degrees), axis));
 			rotation = glm::normalize(rotation);
 			UpdateAxis();
 		}
 
 		void RotateGlobal(const float& degrees, const vec3& axis)
 		{
-			rotation = glm::normalize(glm::angleAxis(degrees, axis)) * rotation;
+			rotation = glm::normalize(glm::angleAxis(glm::radians(degrees), axis)) * rotation;
 			rotation = glm::normalize(rotation);
 			UpdateAxis();
 		}

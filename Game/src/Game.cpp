@@ -33,7 +33,6 @@ public:
 		scene = MakeRef<Scene>(window);
 
 		scene->GetMainCamera().GetComponent<CameraComponent>().mode = CameraComponent::Mode::Perspective;
-
 		scene->GetMainCamera().GetComponent<TransformComponent>().SetPosition({ 0, 0, -6 });
 
 		/*Entity testTriangle = scene->CreateEntity();
@@ -46,7 +45,7 @@ public:
 		auto& blackSquareSprite = blackSquare.AddComponent<SpriteComponent>();
 		blackSquareSprite.color = { 0.f, 0.f, 0.f, 1.f };
 		auto& blackSquareTransform = blackSquare.GetComponent<TransformComponent>();
-		blackSquareTransform.RotateGlobal(.01f, { 0, 0, 1 });
+		blackSquareTransform.RotateGlobal(-30.f, {0, 0, 1});
 		blackSquareTransform.SetPosition({ 0, -3, 0 });
 		blackSquareTransform.SetScale({ 5.f, 1.f, 1.f });
 		auto& blackSquare_rb = blackSquare.AddComponent<Rigidbody2DComponent>();
@@ -65,6 +64,7 @@ public:
 		auto& zoteSprite = zote.AddComponent<SpriteComponent>("Textures/zote.png");
 		auto& zote_rb = zote.AddComponent<Rigidbody2DComponent>();
 		zote_rb.SetMode(Rigidbody2DComponent::Mode::dynamic);
+		zote_rb.SetGScale(.2f);
 
 		Entity redSquare = scene->CreateEntity();
 		auto& redSquareSprite = redSquare.AddComponent<SpriteComponent>();
