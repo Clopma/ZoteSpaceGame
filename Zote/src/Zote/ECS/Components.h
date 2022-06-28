@@ -7,3 +7,4 @@
 #include "Components/ScriptComponent.h"
 #include "Components/SpriteComponent.h"
 #include "Components/TransformComponent.h"
+#include "Components/Rigidbody2DComponent.h"

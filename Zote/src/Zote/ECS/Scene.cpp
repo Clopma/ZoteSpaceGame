@@ -14,6 +14,7 @@ namespace Zote
 		m_meshSystem = MakeRef<MeshSystem>(this);
 		m_spriteSystem = MakeRef<SpriteSystem>(this);
 		m_gizmosAxisSystem = MakeRef<GizmosAxisSystem>(this);
+		m_physics2dSystem = MakeRef<Physics2dSystem>(this);
 
 		window->OnRenderFrame.AddListener(new Delegate<OnRenderFrameArgs>(this, &Scene::OnRenderFrame));
 	}
@@ -24,6 +25,7 @@ namespace Zote
 		m_meshSystem->HandleMeshes();
 		m_spriteSystem->HandleSprites();
 		m_scriptSystem->HandleScripts(args.deltaTime);
+		m_physics2dSystem->Handle2dPhysics();
 	}
 
 	Entity Scene::CreateEntity()

@@ -24,7 +24,7 @@ namespace Zote
 
 		Ref<Shader> m_shader;
 
-		const float m_lenght = 1.5f;
+		const float m_lenght = .5f;
 
 		void DrawGizmosAxis(mat4 p, mat4 v, mat4 m)
 		{

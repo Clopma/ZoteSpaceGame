@@ -34,13 +34,28 @@ public:
 
 		scene->GetMainCamera().GetComponent<CameraComponent>().mode = CameraComponent::Mode::Perspective;
 
-		scene->GetMainCamera().GetComponent<TransformComponent>().SetPosition({ 0, 0, -3 });
+		scene->GetMainCamera().GetComponent<TransformComponent>().SetPosition({ 0, 0, -6 });
 
-		Entity testTriangle = scene->CreateEntity();
+		/*Entity testTriangle = scene->CreateEntity();
 		testTriangle.AddComponent<MeshComponent>();
+		
+		auto& testTriangle_rb = testTriangle.AddComponent<Rigidbody2DComponent>();
+		testTriangle_rb.SetMode(Rigidbody2DComponent::Mode::dynamic);*/
 
-		auto& testTriangle_scripts = testTriangle.AddComponent<ScriptComponent>();
-		testTriangle_scripts.AddScript(new MoveTriangleScript());
+		Entity blackSquare = scene->CreateEntity();
+		auto& blackSquareSprite = blackSquare.AddComponent<SpriteComponent>();
+		blackSquareSprite.color = { 0.f, 0.f, 0.f, 1.f };
+		auto& blackSquareTransform = blackSquare.GetComponent<TransformComponent>();
+		blackSquareTransform.RotateGlobal(.01f, { 0, 0, 1 });
+		blackSquareTransform.SetPosition({ 0, -3, 0 });
+		blackSquareTransform.SetScale({ 5.f, 1.f, 1.f });
+		auto& blackSquare_rb = blackSquare.AddComponent<Rigidbody2DComponent>();
+		blackSquare_rb.SetColliderSize({ 5.f, 1.f });
+		blackSquare_rb.SetGScale(0);
+		blackSquare_rb.SetMode(Rigidbody2DComponent::Mode::kinematic);
+
+		/*auto& testTriangle_scripts = testTriangle.AddComponent<ScriptComponent>();
+		testTriangle_scripts.AddScript(new MoveTriangleScript()); */
 
 		auto& mainCamera_scripts = scene->GetMainCamera().AddComponent<ScriptComponent>();
 		mainCamera_scripts.AddScript(new MoveCamera());
@@ -48,7 +63,8 @@ public:
 		Entity zote = scene->CreateEntity();
 		zote.GetComponent<TransformComponent>().SetPosition({ 0, 1, 0 });
 		auto& zoteSprite = zote.AddComponent<SpriteComponent>("Textures/zote.png");
-		//zoteSprite.color = Color::red;
+		auto& zote_rb = zote.AddComponent<Rigidbody2DComponent>();
+		zote_rb.SetMode(Rigidbody2DComponent::Mode::dynamic);
 
 		Entity redSquare = scene->CreateEntity();
 		auto& redSquareSprite = redSquare.AddComponent<SpriteComponent>();
