@@ -45,11 +45,10 @@ public:
 		auto& blackSquareSprite = blackSquare.AddComponent<SpriteComponent>();
 		blackSquareSprite.color = { 0.f, 0.f, 0.f, 1.f };
 		auto& blackSquareTransform = blackSquare.GetComponent<TransformComponent>();
-		blackSquareTransform.RotateGlobal(-30.f, {0, 0, 1});
+		blackSquareTransform.RotateGlobal(-15.f, {0, 0, 1});
 		blackSquareTransform.SetPosition({ 0, -3, 0 });
 		blackSquareTransform.SetScale({ 5.f, 1.f, 1.f });
 		auto& blackSquare_rb = blackSquare.AddComponent<Rigidbody2DComponent>();
-		blackSquare_rb.SetColliderSize({ 5.f, 1.f });
 		blackSquare_rb.SetGScale(0);
 		blackSquare_rb.SetMode(Rigidbody2DComponent::Mode::kinematic);
 

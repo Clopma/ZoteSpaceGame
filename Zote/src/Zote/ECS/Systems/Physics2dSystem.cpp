@@ -2,7 +2,6 @@
 
 #include <entt.hpp>
 
-
 #include <box2d/b2_body.h>
 #include <box2d/b2_polygon_shape.h>
 #include <box2d/b2_fixture.h>
@@ -13,6 +12,7 @@
 
 #include "ECS/Entity.h"
 #include "ECS/Scene.h"
+#include "ECS/Components/CameraComponent.h"
 
 namespace Zote
 {
@@ -23,6 +23,7 @@ namespace Zote
 		fixtureDef.shape = &rb.m_box;
 		fixtureDef.density = rb.m_density;
 		fixtureDef.friction = rb.m_friction;
+		fixtureDef.isSensor = rb.m_isTrigger;
 
 		if (rb.m_fixture != nullptr)
 		{
@@ -37,7 +38,9 @@ namespace Zote
 	void Physics2dSystem::UpdateBodyDef(Rigidbody2DComponent& rb, TransformComponent& transform)
 	{
 		b2BodyDef bodyDef;
-		bodyDef.type = rb.m_mode == Rigidbody2DComponent::Mode::dynamic ? b2_dynamicBody : b2_staticBody;
+		bodyDef.type = rb.m_mode == Rigidbody2DComponent::Mode::dynamic ? 
+			b2_dynamicBody : b2_staticBody;
+
 		bodyDef.position.Set(transform.GetPosition().x, transform.GetPosition().y);
 		bodyDef.angle = glm::eulerAngles(transform.GetRotation()).z;
 		bodyDef.gravityScale = rb.m_gScale;
@@ -49,7 +52,9 @@ namespace Zote
 		}
 
 		rb.m_body = m_world->CreateBody(&bodyDef);
-		rb.m_box.SetAsBox(rb.m_colliderSize.x/2.f, rb.m_colliderSize.y/2.f);
+		
+		rb.m_box.SetAsBox((rb.m_colliderSize.x/2.f) * transform.GetScale().x,
+			(rb.m_colliderSize.y / 2.f) * transform.GetScale().y);
 
 		rb.m_bodyUpdated = true;
 		UpdateFixture(rb);
@@ -58,26 +63,42 @@ namespace Zote
 	Physics2dSystem::Physics2dSystem(Scene* scene)
 		: m_scene(scene)
 	{
-		m_world = MakeRef<b2World>(b2Vec2(0.f, -10.f));
+		m_world = MakeRef<b2World>(b2Vec2(m_worldGravity.x, m_worldGravity.y));
 	}
 
 	void Physics2dSystem::Handle2dPhysics()
 	{
 		auto view = m_scene->registry.view<Rigidbody2DComponent>();
+		auto& camera = m_scene->GetMainCamera().GetComponent<CameraComponent>();
+		auto& cameraTransform = m_scene->GetMainCamera().GetComponent<TransformComponent>();
 
 		m_world->Step(m_timeStep, m_velocityIterations, m_positionIterations);
 
 		for (auto entity : view)
 		{
 			auto& rb = view.get<Rigidbody2DComponent>(entity);
+
+			if (!rb.enabled)
+				continue;
+
 			auto& transform = rb.GetEntity()->GetComponent<TransformComponent>();
 			
+			//Keep data updated
 			if (!rb.m_bodyUpdated)
 				UpdateBodyDef(rb, transform);
 
 			else if (!rb.m_fixtureUpdated)
 				UpdateFixture(rb);
 
+			if (!rb.m_HasGizmos)
+			{
+				rb.boxGizmos = MakeRef<BoxGizmos>(rb.GetColliderSize());
+				rb.m_HasGizmos = true;
+			}
+			
+			rb.boxGizmos->Render(camera.GetProjection(), camera.GetView(cameraTransform), transform.GetModel());
+
+			//Apply physics to transforms
 			b2Vec2 position = rb.m_body->GetPosition();
 			transform.SetPosition({ position.x, position.y, transform.GetPosition().z });
 			
@@ -86,8 +107,8 @@ namespace Zote
 			
 			float dif = std::abs(std::abs(angle) - std::abs(selfAngle));
 
-			if (dif > 0.1f)
-				transform.RotateGlobal(angle, { 0, 0, 1 });
+			if (dif > m_rotationOffset)
+				transform.RotateGlobal(angle, VEC3_FORWARD);
 		}
 	}
 }

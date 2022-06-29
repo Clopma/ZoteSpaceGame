@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Zote\ECS\Components\BaseComponent.h" />
+    <ClInclude Include="src\Zote\ECS\Components\BoxCollider2DComponent.h" />
     <ClInclude Include="src\Zote\ECS\Components\CameraComponent.h" />
     <ClInclude Include="src\Zote\ECS\Components\LightComponent.h" />
     <ClInclude Include="src\Zote\ECS\Components\MeshComponent.h" />

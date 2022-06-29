@@ -11,3 +11,10 @@ using vec2 = glm::vec2;
 using vec4 = glm::vec4;
 using mat4 = glm::mat4;
 using quat = glm::quat;
+
+#define VEC3_UP vec3(0, 1, 0)
+#define VEC3_RIGHT vec3(1, 0, 0)
+#define VEC3_FORWARD vec3(0, 0, 1)
+
+#define VEC2_UP vec2(0, 1)
+#define VEC2_RIGHT vec2(1, 0)

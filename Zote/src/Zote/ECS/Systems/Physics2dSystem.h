@@ -8,6 +8,7 @@
 #include "ECS/Components/TransformComponent.h"
 
 #include "Utils/Memory.h"
+#include "Utils/Math.h"
 
 namespace Zote
 {
@@ -21,11 +22,13 @@ namespace Zote
 		float m_timeStep = 1.f / 60.f;
 		int32 m_velocityIterations = 6;
 		int32 m_positionIterations = 2;
+		float m_rotationOffset = .01f;
 
 		void UpdateFixture(Rigidbody2DComponent& rb);
 		void UpdateBodyDef(Rigidbody2DComponent& rb, TransformComponent& transform);
 
 	public:
+		vec2 m_worldGravity = { 0.f, -10.f };
 		Physics2dSystem(Scene* scene);
 		void Handle2dPhysics();
 	};
