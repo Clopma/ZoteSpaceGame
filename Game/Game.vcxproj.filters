@@ -32,6 +32,8 @@
     <None Include="Shaders\lineShader.vert" />
     <None Include="Shaders\spriteShader.frag" />
     <None Include="Shaders\spriteShader.vert" />
+    <None Include="Shaders\circleShader.frag" />
+    <None Include="Shaders\circleShader.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Scripts\MoveTriangle.h">

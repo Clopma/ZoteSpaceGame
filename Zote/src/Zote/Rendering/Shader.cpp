@@ -138,6 +138,11 @@ namespace Zote
 		int location = GetUniform(name);
 		glUniform4fv(location, 1, glm::value_ptr(value));
 	}
+	void Shader::SetUniformVec3(c_str name, vec3 value)
+	{
+		int location = GetUniform(name);
+		glUniform3fv(location, 1, glm::value_ptr(value));
+	}
 	void Shader::Use()
 	{
 		glUseProgram(shaderID);

@@ -21,6 +21,13 @@ namespace Zote
 		shader->Unbind();
 	}
 
+	void Renderer::SetUniformVec3(const cstr uniformName, Ref<Shader> shader, const vec3& vector)
+	{
+		shader->Use();
+		shader->SetUniformVec3(uniformName, vector);
+		shader->Unbind();
+	}
+
 	void Renderer::DrawTriangles(const Ref<VertexArray> vertexArray, const Ref<IndexBuffer> indexBuffer, const Ref<Shader> shader)
 	{
 		shader->Use();

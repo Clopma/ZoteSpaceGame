@@ -31,6 +31,7 @@ namespace Zote
 		void SetUniformFloat(c_str name, float value);
 		void SetUnfiformMat4(c_str name, mat4 value);
 		void SetUniformVec4(c_str name, vec4 value);
+		void SetUniformVec3(c_str name, vec3 value);
 
 		void Use();
 		void Unbind();

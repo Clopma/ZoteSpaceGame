@@ -20,7 +20,17 @@ namespace Zote
 	{
 		b2FixtureDef fixtureDef;
 
-		fixtureDef.shape = &rb.m_box;
+		switch (rb.m_shape)
+		{
+		case Rigidbody2DComponent::Shape::circle: 
+			fixtureDef.shape = &rb.m_circle;
+			break;
+
+		default: 
+			fixtureDef.shape = &rb.m_box; 
+			break;
+		}
+
 		fixtureDef.density = rb.m_density;
 		fixtureDef.friction = rb.m_friction;
 		fixtureDef.isSensor = rb.m_isTrigger;
@@ -53,8 +63,19 @@ namespace Zote
 
 		rb.m_body = m_world->CreateBody(&bodyDef);
 		
-		rb.m_box.SetAsBox((rb.m_colliderSize.x/2.f) * transform.GetScale().x,
-			(rb.m_colliderSize.y / 2.f) * transform.GetScale().y);
+		switch (rb.m_shape)
+		{
+			case Rigidbody2DComponent::Shape::circle:
+				vec3 pos = transform.GetPosition();
+				rb.m_circle.m_p.Set(pos.x, pos.y + -1.f);
+				rb.m_circle.m_radius = rb.m_radius;			
+				break;
+
+			default: //Shape::box:
+				rb.m_box.SetAsBox((rb.m_colliderSize.x / 2.f) * transform.GetScale().x,
+					(rb.m_colliderSize.y / 2.f) * transform.GetScale().y);		
+				break;
+		}
 
 		rb.m_bodyUpdated = true;
 		UpdateFixture(rb);
@@ -92,11 +113,13 @@ namespace Zote
 
 			if (!rb.m_HasGizmos)
 			{
-				rb.boxGizmos = MakeRef<BoxGizmos>(rb.GetColliderSize());
+				rb.m_boxGizmos = MakeRef<BoxGizmos>(rb.GetColliderSize());
+				//rb.circleGizmos = MakeRef<CircleGizmos>();
 				rb.m_HasGizmos = true;
 			}
 			
-			rb.boxGizmos->Render(camera.GetProjection(), camera.GetView(cameraTransform), transform.GetModel());
+			rb.m_boxGizmos->Render(camera.GetProjection(), camera.GetView(cameraTransform), transform.GetModel());
+			//rb.circleGizmos->Render(camera.GetProjection(), camera.GetView(cameraTransform), transform.GetModel());
 
 			//Apply physics to transforms
 			b2Vec2 position = rb.m_body->GetPosition();
