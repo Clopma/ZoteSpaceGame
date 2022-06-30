@@ -9,7 +9,7 @@ void MoveTriangleScript::Start()
 
 void MoveTriangleScript::Update(float deltaTime)
 {
-	float dirX = 0;
+	/*float dirX = 0;
 
 	if (Input::GetKeyPressed(ZOTE_KEY_U))
 		transform->RotateLocal(1 * deltaTime, {0, 1, 0});
@@ -38,5 +38,10 @@ void MoveTriangleScript::Update(float deltaTime)
 	if (Input::GetKeyPressed(ZOTE_KEY_H))
 		newPosition -= transform->GetUp() * 1.0f * deltaTime;
 
-	transform->SetPosition(newPosition);
+	transform->SetPosition(newPosition);*/
+}
+
+void MoveTriangleScript::OnCollision(Entity* rb)
+{
+	LOG("Collisioooon....");
 }

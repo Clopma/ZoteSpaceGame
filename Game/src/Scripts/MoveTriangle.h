@@ -9,4 +9,5 @@ class MoveTriangleScript : public Script
 
 	virtual void Start() override;
 	virtual void Update(float deltaTime) override;
+	virtual void OnCollision(Entity* rb) override;
 };

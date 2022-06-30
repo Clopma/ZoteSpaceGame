@@ -21,11 +21,11 @@ namespace Zote
 
 	void Scene::OnRenderFrame(OnRenderFrameArgs args)
 	{
+		m_physics2dSystem->Handle2dPhysics();
 		m_gizmosAxisSystem->HandleGizmosAxis();
 		m_meshSystem->HandleMeshes();
 		m_spriteSystem->HandleSprites();
 		m_scriptSystem->HandleScripts(args.deltaTime);
-		m_physics2dSystem->Handle2dPhysics();
 	}
 
 	Entity Scene::CreateEntity()

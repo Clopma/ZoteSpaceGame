@@ -21,6 +21,7 @@ namespace Zote
 
 		virtual void Start() {}
 		virtual void Update(float deltaTime) {}
+		virtual void OnCollision(Entity* entity) {}
 
 	private:
 		Entity* entity = nullptr;

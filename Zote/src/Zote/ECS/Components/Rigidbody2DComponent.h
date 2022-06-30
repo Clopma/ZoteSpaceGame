@@ -96,6 +96,7 @@ namespace Zote
 	struct ZOTE_API Rigidbody2DComponent : public BaseComponent
 	{
 		friend class Physics2dSystem;
+		friend class ScriptSystem;
 	public:
 
 		Rigidbody2DComponent() {}

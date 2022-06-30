@@ -63,10 +63,12 @@ public:
 		auto& zoteSprite = zote.AddComponent<SpriteComponent>("Textures/zote.png");
 		auto& zote_rb = zote.AddComponent<Rigidbody2DComponent>();
 		zote_rb.SetMode(Rigidbody2DComponent::Mode::dynamic);
-		zote_rb.SetGScale(.2f);
+		zote_rb.SetGScale(.05f);
 
-		zote_rb.SetShape(Rigidbody2DComponent::Shape::circle);
-		zote_rb.SetRadius(.5f);
+		auto& scComponent = zote.AddComponent<ScriptComponent>();
+		scComponent.AddScript(new MoveTriangleScript());
+		//zote_rb.SetShape(Rigidbody2DComponent::Shape::circle);
+		//zote_rb.SetRadius(.5f);
 
 		Entity redSquare = scene->CreateEntity();
 		auto& redSquareSprite = redSquare.AddComponent<SpriteComponent>();

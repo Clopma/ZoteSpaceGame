@@ -1,6 +1,11 @@
 #include "ScriptSystem.h"
 #include "ECS/Scene.h"
 
+#include "box2d/b2_api.h"
+#include "box2d/b2_math.h"
+#include "box2d/b2_shape.h"
+#include "box2d/b2_fixture.h"
+
 namespace Zote
 {
 	ScriptSystem::ScriptSystem(Scene* scene)
@@ -14,8 +19,8 @@ namespace Zote
 		{
 			ScriptComponent& scriptComponent = view.get<ScriptComponent>(entity);
 
-			if (!scriptComponent.enabled)
-				return;
+			if (!scriptComponent.enabled || scriptComponent.count == 0)
+				continue;
 
 			for (auto script : scriptComponent.scripts)
 			{
@@ -29,6 +34,36 @@ namespace Zote
 				}
 
 				script->Update(deltaTime);
+			}
+		}
+
+		//Agrupamos todos los ScriptsComponents que tengan un RigidbodyComponent
+		//auto group = m_scene->registry.group<ScriptComponent>(entt::get<Rigidbody2DComponent>);
+
+		auto rb_script_view = m_scene->registry.view<ScriptComponent, Rigidbody2DComponent>();
+
+		for (auto script_entity : rb_script_view) //Para cada uno...
+		{
+			auto& scriptComponent = rb_script_view.get<ScriptComponent>(script_entity);
+
+			if (scriptComponent.count == 0) continue; //Si no tiene scripts se pasa al siguiente
+
+			auto& currentRb = rb_script_view.get<Rigidbody2DComponent>(script_entity); //Obtenemos su Rigidbody
+			auto view_allRb = m_scene->registry.view<Rigidbody2DComponent>(); //Agrupamos todos los Rigidbody
+
+			for (auto rb_entity : view_allRb)
+			{
+				auto& otherRb = view_allRb.get<Rigidbody2DComponent>(rb_entity);
+				
+				if (currentRb.GetEntity() == otherRb.GetEntity()) continue; //Omitimos el suyo propio
+
+				bool collision = b2TestOverlap(currentRb.m_fixture->GetShape(), 0, otherRb.m_fixture->GetShape(), 0,
+					currentRb.m_body->GetTransform(), otherRb.m_body->GetTransform()); //Comprobamos si colisiona con alguno de los demás
+
+				if (!collision) continue;
+
+				for (auto script : scriptComponent.scripts)
+					script->OnCollision(otherRb.GetEntity()); //Si colisiona ejecutamos el OnCollision de todos sus scripts
 			}
 		}
 	}
