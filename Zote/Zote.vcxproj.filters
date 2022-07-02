@@ -129,7 +129,7 @@
     <ClInclude Include="src\Zote\Utils\GlobalStrings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Zote\ECS\Systems\GizmosAxisSystem.h">
+    <ClInclude Include="src\Zote\ECS\Systems\TransformGizmoSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Zote\ECS\Systems\Physic2DSystem.h">
@@ -139,6 +139,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Zote\ECS\Components\BoxCollider2DComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Zote\ECS\Systems\Collision2DCheckSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -197,10 +200,13 @@
     <ClCompile Include="src\Zote\Rendering\VertexArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Zote\ECS\Systems\GizmosAxisSystem.cpp">
+    <ClCompile Include="src\Zote\ECS\Systems\TransformGizmoSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Zote\ECS\Systems\Physic2DSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Zote\ECS\Systems\Collision2DCheckSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

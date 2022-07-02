@@ -97,6 +97,8 @@ namespace Zote
 	{
 		friend class Physic2DSystem;
 		friend class ScriptSystem;
+		friend class Collision2DCheckSystem;
+
 	public:
 
 		PBody2DComponent() {}

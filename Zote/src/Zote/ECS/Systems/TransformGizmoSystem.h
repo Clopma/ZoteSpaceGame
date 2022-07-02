@@ -44,11 +44,11 @@ namespace Zote
 		}
 	};
 
-	class GizmosAxisSystem
+	class TransformGizmoSystem
 	{
 	public:
-		GizmosAxisSystem(Scene* scene);
-		void HandleGizmosAxis();
+		TransformGizmoSystem(Scene* scene);
+		void HandleGizmos();
 
 	private:
 

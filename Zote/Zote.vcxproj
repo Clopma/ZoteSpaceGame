@@ -19,7 +19,8 @@
     <ClInclude Include="src\Zote\ECS\Components\ScriptComponent.h" />
     <ClInclude Include="src\Zote\ECS\Components\SpriteComponent.h" />
     <ClInclude Include="src\Zote\ECS\Components\TransformComponent.h" />
-    <ClInclude Include="src\Zote\ECS\Systems\GizmosAxisSystem.h" />
+    <ClInclude Include="src\Zote\ECS\Systems\Collision2DCheckSystem.h" />
+    <ClInclude Include="src\Zote\ECS\Systems\TransformGizmoSystem.h" />
     <ClInclude Include="src\Zote\ECS\Systems\MeshSystem.h" />
     <ClInclude Include="src\Zote\ECS\Systems\Physic2DSystem.h" />
     <ClInclude Include="src\Zote\ECS\Systems\ScriptSystem.h" />
@@ -55,7 +56,8 @@
     <ClInclude Include="src\Zote\Utils\String.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Zote\ECS\Systems\GizmosAxisSystem.cpp" />
+    <ClCompile Include="src\Zote\ECS\Systems\Collision2DCheckSystem.cpp" />
+    <ClCompile Include="src\Zote\ECS\Systems\TransformGizmoSystem.cpp" />
     <ClCompile Include="src\Zote\ECS\Systems\MeshSystem.cpp" />
     <ClCompile Include="src\Zote\ECS\Systems\Physic2DSystem.cpp" />
     <ClCompile Include="src\Zote\ECS\Systems\ScriptSystem.cpp" />

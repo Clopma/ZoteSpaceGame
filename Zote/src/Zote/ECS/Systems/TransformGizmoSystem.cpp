@@ -1,4 +1,4 @@
-#include "GizmosAxisSystem.h"
+#include "TransformGizmoSystem.h"
 
 #include "ECS/Scene.h"
 #include "ECS/Entity.h"
@@ -9,10 +9,10 @@
 
 namespace Zote
 {
-	GizmosAxisSystem::GizmosAxisSystem(Scene* scene)
+	TransformGizmoSystem::TransformGizmoSystem(Scene* scene)
 	: m_scene(scene) {}
 
-	void GizmosAxisSystem::HandleGizmosAxis()
+	void TransformGizmoSystem::HandleGizmos()
 	{
 		auto view = m_scene->registry.view<TransformComponent>();
 		auto& camera = m_scene->GetMainCamera().GetComponent<CameraComponent>();
@@ -29,7 +29,7 @@ namespace Zote
 		}
 	}
 
-	bool GizmosAxisSystem::GizmosExists(const entt::entity& entity) const
+	bool TransformGizmoSystem::GizmosExists(const entt::entity& entity) const
 	{
 		for (auto gizmo : gizmos)
 		{
@@ -40,7 +40,7 @@ namespace Zote
 		return false;
 	}
 
-	void GizmosAxisSystem::DrawGizmosAxis(const entt::entity& entity, mat4 p, mat4 v, mat4 m) const
+	void TransformGizmoSystem::DrawGizmosAxis(const entt::entity& entity, mat4 p, mat4 v, mat4 m) const
 	{
 		for (auto gizmo : gizmos)
 		{

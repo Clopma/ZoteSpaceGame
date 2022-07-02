@@ -10,8 +10,9 @@
 #include "Systems/ScriptSystem.h"
 #include "Systems/MeshSystem.h"
 #include "Systems/SpriteSystem.h"
-#include "Systems/GizmosAxisSystem.h"
+#include "Systems/TransformGizmoSystem.h"
 #include "Systems/Physic2DSystem.h"
+#include "Systems/Collision2DCheckSystem.h"
 
 #include "Utils/Memory.h"
 
@@ -26,8 +27,9 @@ namespace Zote
 		friend class ScriptSystem;
 		friend class MeshSystem;
 		friend class SpriteSystem;
-		friend class GizmosAxisSystem;
+		friend class TransformGizmoSystem;
 		friend class Physic2DSystem;
+		friend class Collision2DCheckSystem;
 
 	public:
 		Scene() {}
@@ -51,7 +53,8 @@ namespace Zote
 		Ref<ScriptSystem> m_scriptSystem;
 		Ref<MeshSystem> m_meshSystem;
 		Ref<SpriteSystem> m_spriteSystem;
-		Ref<GizmosAxisSystem> m_gizmosAxisSystem;
+		Ref<TransformGizmoSystem> m_transformGizmoSystem;
 		Ref<Physic2DSystem> m_Physic2DSystem;
+		Ref<Collision2DCheckSystem> m_CollisionCheckSystem;
 	};
 }

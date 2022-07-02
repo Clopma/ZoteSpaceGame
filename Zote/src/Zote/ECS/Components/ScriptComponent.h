@@ -31,6 +31,7 @@ namespace Zote
 	struct ZOTE_API ScriptComponent : public BaseComponent
 	{
 		friend class ScriptSystem;
+		friend class Collision2DCheckSystem;
 
 		ScriptComponent() {}
 
