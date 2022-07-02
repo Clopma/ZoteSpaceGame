@@ -1,8 +1,8 @@
 #pragma once
 
-#include <Maths/GlmCommon.h>
 #include <glfw3.h>
 #include "Core.h"
+#include "Utils/Math.h"
 
 namespace Zote
 {

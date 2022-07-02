@@ -23,4 +23,3 @@ class MoveCamera : public Script
 	void LocateCamera(float deltaTime);
 	void RotateCamera(float deltaTime);
 };
-

@@ -2,9 +2,9 @@
 
 namespace Zote
 {
-	string Shader::ReadFile(c_str fileLocation)
+	str Shader::ReadFile(cstr fileLocation)
 	{
-		string content;
+		str content;
 		std::ifstream fileStream(fileLocation, std::ios::in);
 
 		if (!fileStream.is_open())
@@ -13,7 +13,7 @@ namespace Zote
 			return "";
 		}
 
-		string line = "";
+		str line = "";
 		while (!fileStream.eof())
 		{
 			std::getline(fileStream, line);
@@ -23,9 +23,9 @@ namespace Zote
 		fileStream.close();
 		return content;
 	}
-	bool Shader::Compile(int shaderID, c_str shaderCode, int shaderType, int theShader)
+	bool Shader::Compile(int shaderID, cstr shaderCode, int shaderType, int theShader)
 	{
-		c_str theCode[1];
+		cstr theCode[1];
 		theCode[0] = shaderCode;
 
 		int codeLength[1];
@@ -48,7 +48,7 @@ namespace Zote
 		glAttachShader(shaderID, theShader);
 		return true;
 	}
-	void Shader::LinkAndValidate(c_str vertexCode, c_str fragmentCode)
+	void Shader::LinkAndValidate(cstr vertexCode, cstr fragmentCode)
 	{
 		shaderID = glCreateProgram();
 
@@ -103,13 +103,13 @@ namespace Zote
 		glDeleteShader(vertex);
 		glDeleteShader(fragment);
 	}
-	void Shader::Create(c_str vertexLocation, c_str fragmentLocation)
+	void Shader::Create(cstr vertexLocation, cstr fragmentLocation)
 	{
-		string vertexString = ReadFile(vertexLocation);
-		string fragmentString = ReadFile(fragmentLocation);
+		str vertexString = ReadFile(vertexLocation);
+		str fragmentString = ReadFile(fragmentLocation);
 		LinkAndValidate(vertexString.c_str(), fragmentString.c_str());
 	}
-	Shader::Shader(c_str vertexLocation, c_str fragmentLocation)
+	Shader::Shader(cstr vertexLocation, cstr fragmentLocation)
 		: shaderID(0), modelLocation(0), viewLocation(0), projectionLocation(0)
 	{
 		Create(vertexLocation, fragmentLocation);
@@ -123,22 +123,22 @@ namespace Zote
 	{
 		Clear();
 	}
-	void Shader::SetUniformFloat(c_str name, float value)
+	void Shader::SetUniformFloat(cstr name, float value)
 	{
 		int location = GetUniform(name);
 		glUniform1f(location, value);
 	}
-	void Shader::SetUnfiformMat4(c_str name, mat4 value)
+	void Shader::SetUnfiformMat4(cstr name, mat4 value)
 	{
 		int location = GetUniform(name);
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
 	}
-	void Shader::SetUniformVec4(c_str name, vec4 value)
+	void Shader::SetUniformVec4(cstr name, vec4 value)
 	{
 		int location = GetUniform(name);
 		glUniform4fv(location, 1, glm::value_ptr(value));
 	}
-	void Shader::SetUniformVec3(c_str name, vec3 value)
+	void Shader::SetUniformVec3(cstr name, vec3 value)
 	{
 		int location = GetUniform(name);
 		glUniform3fv(location, 1, glm::value_ptr(value));

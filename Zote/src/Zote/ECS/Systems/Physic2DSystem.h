@@ -4,7 +4,7 @@
 
 #include <box2d/b2_world.h>
 
-#include "ECS/Components/Rigidbody2DComponent.h"
+#include "ECS/Components/PBody2DComponent.h"
 #include "ECS/Components/TransformComponent.h"
 
 #include "Utils/Memory.h"
@@ -14,7 +14,7 @@ namespace Zote
 {
 	class Scene;
 
-	class ZOTE_API Physics2dSystem
+	class ZOTE_API Physic2DSystem
 	{
 	private:
 		Ref<b2World> m_world;
@@ -24,12 +24,12 @@ namespace Zote
 		int32 m_positionIterations = 2;
 		float m_rotationOffset = .01f;
 
-		void UpdateFixture(Rigidbody2DComponent& rb);
-		void UpdateBodyDef(Rigidbody2DComponent& rb, TransformComponent& transform);
+		void UpdateFixture(PBody2DComponent& rb);
+		void UpdateBodyDef(PBody2DComponent& rb, TransformComponent& transform);
 
 	public:
 		vec2 m_worldGravity = { 0.f, -10.f };
-		Physics2dSystem(Scene* scene);
+		Physic2DSystem(Scene* scene);
 		void Handle2dPhysics();
 	};
 }

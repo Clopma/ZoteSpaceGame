@@ -1,14 +1,12 @@
 #pragma once
-#include <iostream>
 #include <glew.h>
-#include <fstream>
-#include <string>
 #include "Core.h"
-#include "Maths/GlmCommon.h"
-#include "Utils/GlobalStrings.h"
 
-using c_str = const char*;
-using string = std::string;
+#include "Utils/Math.h"
+#include "Utils/Log.h"
+#include "Utils/CustomTypes.h"
+#include "Utils/String.h"
+#include "Utils/GlobalStrings.h"
 
 namespace Zote
 {
@@ -16,22 +14,22 @@ namespace Zote
 	{
 		int shaderID, modelLocation, projectionLocation, viewLocation;
 
-		string ReadFile(c_str fileLocation);
-		bool Compile(int shaderID, c_str shaderCode, int shaderType, int theShader);
-		void LinkAndValidate(c_str vertexCode, c_str fragmentCode);
-		void Create(c_str vertexLocation, c_str fragmentLocation);
+		str ReadFile(cstr fileLocation);
+		bool Compile(int shaderID, cstr shaderCode, int shaderType, int theShader);
+		void LinkAndValidate(cstr vertexCode, cstr fragmentCode);
+		void Create(cstr vertexLocation, cstr fragmentLocation);
 
 	public:
-		Shader(c_str vertexLocation, c_str fragmentLocation);
+		Shader(cstr vertexLocation, cstr fragmentLocation);
 		Shader();
 		~Shader();
 
-		const int GetUniform(c_str name) const { return glGetUniformLocation(shaderID, name); }
+		const int GetUniform(cstr name) const { return glGetUniformLocation(shaderID, name); }
 		
-		void SetUniformFloat(c_str name, float value);
-		void SetUnfiformMat4(c_str name, mat4 value);
-		void SetUniformVec4(c_str name, vec4 value);
-		void SetUniformVec3(c_str name, vec3 value);
+		void SetUniformFloat(cstr name, float value);
+		void SetUnfiformMat4(cstr name, mat4 value);
+		void SetUniformVec4(cstr name, vec4 value);
+		void SetUniformVec3(cstr name, vec3 value);
 
 		void Use();
 		void Unbind();

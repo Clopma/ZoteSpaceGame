@@ -8,11 +8,6 @@ namespace Zote
 	Color::Color(float r, float g, float b, float a)
 		: r(r), g(g), b(b), a(a) {}
 
-	vec4 Color::ToVec4(const Color& color)
-	{
-		return vec4 (color.r, color.g, color.b, color.a);
-	}
-
 	Color Color::Normalize(const Color& color)
 	{
 		Color c;

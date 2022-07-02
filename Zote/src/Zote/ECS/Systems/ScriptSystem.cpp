@@ -37,10 +37,10 @@ namespace Zote
 			}
 		}
 
-		//Agrupamos todos los ScriptsComponents que tengan un RigidbodyComponent
-		//auto group = m_scene->registry.group<ScriptComponent>(entt::get<Rigidbody2DComponent>);
+		//Agrupamos todos los ScriptsComponents que tengan un PBody2DComponent
+		//auto group = m_scene->registry.group<ScriptComponent>(entt::get<PBody2DComponent>);
 
-		auto rb_script_view = m_scene->registry.view<ScriptComponent, Rigidbody2DComponent>();
+		auto rb_script_view = m_scene->registry.view<ScriptComponent, PBody2DComponent>();
 
 		for (auto script_entity : rb_script_view) //Para cada uno...
 		{
@@ -48,12 +48,12 @@ namespace Zote
 
 			if (scriptComponent.count == 0) continue; //Si no tiene scripts se pasa al siguiente
 
-			auto& currentRb = rb_script_view.get<Rigidbody2DComponent>(script_entity); //Obtenemos su Rigidbody
-			auto view_allRb = m_scene->registry.view<Rigidbody2DComponent>(); //Agrupamos todos los Rigidbody
+			auto& currentRb = rb_script_view.get<PBody2DComponent>(script_entity); //Obtenemos su PBody2DComponent
+			auto view_allRb = m_scene->registry.view<PBody2DComponent>(); //Agrupamos todos los PBody2DComponent
 
 			for (auto rb_entity : view_allRb)
 			{
-				auto& otherRb = view_allRb.get<Rigidbody2DComponent>(rb_entity);
+				auto& otherRb = view_allRb.get<PBody2DComponent>(rb_entity);
 				
 				if (currentRb.GetEntity() == otherRb.GetEntity()) continue; //Omitimos el suyo propio
 

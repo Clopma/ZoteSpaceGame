@@ -93,14 +93,14 @@ namespace Zote
 		float m_fade = 0.005f;
 	};
 
-	struct ZOTE_API Rigidbody2DComponent : public BaseComponent
+	struct ZOTE_API PBody2DComponent : public BaseComponent
 	{
-		friend class Physics2dSystem;
+		friend class Physic2DSystem;
 		friend class ScriptSystem;
 	public:
 
-		Rigidbody2DComponent() {}
-		Rigidbody2DComponent(const Rigidbody2DComponent& other) = default;
+		PBody2DComponent() {}
+		PBody2DComponent(const PBody2DComponent& other) = default;
 
 		enum class Mode { kinematic, dynamic };
 		enum class Shape { box, circle };

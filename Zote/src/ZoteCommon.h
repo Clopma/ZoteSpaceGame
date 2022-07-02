@@ -8,7 +8,6 @@
 #include "Zote/Rendering/Mesh.h"
 
 #include "Zote/Rendering/Texture.h"
-#include "Zote/Rendering/Lighting/Light.h"
 
 #include "Zote/ECS/Scene.h"
 #include "Zote/ECS/Entity.h"
@@ -17,8 +16,6 @@
 #include "Zote/Input.h"
 #include "Zote/KeyCodes.h"
 #include "Zote/MouseButtonCodes.h"
-
-#include "Zote/Maths/GlmCommon.h"
 
 #include "Zote/Utils/CustomTypes.h"
 #include "Zote/Utils/Math.h"

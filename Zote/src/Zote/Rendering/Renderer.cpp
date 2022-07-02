@@ -11,7 +11,7 @@ namespace Zote
 	void Renderer::SetUniformColor(cstr uniformName, Ref<Shader> shader, const Color& color)
 	{
 		shader->Use();
-		shader->SetUniformVec4(uniformName, Color::ToVec4(color));
+		shader->SetUniformVec4(uniformName, vec4(color.r, color.g, color.b, color.a));
 		shader->Unbind();
 	}
 	void Renderer::SetUniformMatrix(const cstr uniformName, Ref<Shader> shader, const mat4& matrix)

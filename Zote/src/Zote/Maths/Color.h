@@ -1,6 +1,7 @@
 #pragma once
-#include "../Core.h"
-#include "Maths/GlmCommon.h"
+
+#include "Core.h"
+#include "Utils/Math.h"
 
 namespace Zote
 {
@@ -11,8 +12,6 @@ namespace Zote
 		Color();
 		Color(float r, float g, float b, float a);
 
-		static vec4 ToVec4(const Color& color);
-
 		static const Color grey;
 		static const Color red;
 		static const Color green;
@@ -21,5 +20,3 @@ namespace Zote
 		static Color Normalize(const Color& color);
 	};
 }
-
-

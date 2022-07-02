@@ -2,7 +2,6 @@
 in vec3 aPosition;
 layout(location = 1) in vec2 tex;
 
-
 out vec4 vCol;
 out vec2 TexCoord;
 

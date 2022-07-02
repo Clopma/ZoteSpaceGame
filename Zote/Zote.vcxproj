@@ -14,23 +14,19 @@
     <ClInclude Include="src\Zote\ECS\Components\BaseComponent.h" />
     <ClInclude Include="src\Zote\ECS\Components\BoxCollider2DComponent.h" />
     <ClInclude Include="src\Zote\ECS\Components\CameraComponent.h" />
-    <ClInclude Include="src\Zote\ECS\Components\LightComponent.h" />
     <ClInclude Include="src\Zote\ECS\Components\MeshComponent.h" />
-    <ClInclude Include="src\Zote\ECS\Components\Rigidbody2DComponent.h" />
+    <ClInclude Include="src\Zote\ECS\Components\PBody2DComponent.h" />
     <ClInclude Include="src\Zote\ECS\Components\ScriptComponent.h" />
     <ClInclude Include="src\Zote\ECS\Components\SpriteComponent.h" />
     <ClInclude Include="src\Zote\ECS\Components\TransformComponent.h" />
     <ClInclude Include="src\Zote\ECS\Systems\GizmosAxisSystem.h" />
-    <ClInclude Include="src\Zote\ECS\Systems\LightSystem.h" />
     <ClInclude Include="src\Zote\ECS\Systems\MeshSystem.h" />
-    <ClInclude Include="src\Zote\ECS\Systems\Physics2dSystem.h" />
+    <ClInclude Include="src\Zote\ECS\Systems\Physic2DSystem.h" />
     <ClInclude Include="src\Zote\ECS\Systems\ScriptSystem.h" />
     <ClInclude Include="src\Zote\ECS\Systems\SpriteSystem.h" />
     <ClInclude Include="src\Zote\Rendering\IndexBuffer.h" />
-    <ClInclude Include="src\Zote\Rendering\Lighting\Light.h" />
     <ClInclude Include="src\Zote\Rendering\Line.h" />
     <ClInclude Include="src\ZoteApplication.h" />
-    <ClInclude Include="src\Zote\Maths\GlmCommon.h" />
     <ClInclude Include="src\Zote\MouseButtonCodes.h" />
     <ClInclude Include="src\Zote\KeyCodes.h" />
     <ClInclude Include="src\Zote\Input.h" />
@@ -60,13 +56,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Zote\ECS\Systems\GizmosAxisSystem.cpp" />
-    <ClCompile Include="src\Zote\ECS\Systems\LightSystem.cpp" />
     <ClCompile Include="src\Zote\ECS\Systems\MeshSystem.cpp" />
-    <ClCompile Include="src\Zote\ECS\Systems\Physics2dSystem.cpp" />
+    <ClCompile Include="src\Zote\ECS\Systems\Physic2DSystem.cpp" />
     <ClCompile Include="src\Zote\ECS\Systems\ScriptSystem.cpp" />
     <ClCompile Include="src\Zote\ECS\Systems\SpriteSystem.cpp" />
     <ClCompile Include="src\Zote\Rendering\IndexBuffer.cpp" />
-    <ClCompile Include="src\Zote\Rendering\Lighting\Light.cpp" />
     <ClCompile Include="src\Zote\Rendering\Line.cpp" />
     <ClCompile Include="src\Zote\Input.cpp" />
     <ClCompile Include="src\Zote\ECS\Entity.cpp" />

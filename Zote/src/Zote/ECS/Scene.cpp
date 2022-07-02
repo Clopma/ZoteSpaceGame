@@ -14,14 +14,14 @@ namespace Zote
 		m_meshSystem = MakeRef<MeshSystem>(this);
 		m_spriteSystem = MakeRef<SpriteSystem>(this);
 		m_gizmosAxisSystem = MakeRef<GizmosAxisSystem>(this);
-		m_physics2dSystem = MakeRef<Physics2dSystem>(this);
+		m_Physic2DSystem = MakeRef<Physic2DSystem>(this);
 
 		window->OnRenderFrame.AddListener(new Delegate<OnRenderFrameArgs>(this, &Scene::OnRenderFrame));
 	}
 
 	void Scene::OnRenderFrame(OnRenderFrameArgs args)
 	{
-		m_physics2dSystem->Handle2dPhysics();
+		m_Physic2DSystem->Handle2dPhysics();
 		m_gizmosAxisSystem->HandleGizmosAxis();
 		m_meshSystem->HandleMeshes();
 		m_spriteSystem->HandleSprites();

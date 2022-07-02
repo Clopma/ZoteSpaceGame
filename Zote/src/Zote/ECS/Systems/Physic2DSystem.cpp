@@ -1,4 +1,4 @@
-#include "Physics2dSystem.h"
+#include "Physic2DSystem.h"
 
 #include <entt.hpp>
 
@@ -16,13 +16,13 @@
 
 namespace Zote
 {
-	void Physics2dSystem::UpdateFixture(Rigidbody2DComponent& rb)
+	void Physic2DSystem::UpdateFixture(PBody2DComponent& rb)
 	{
 		b2FixtureDef fixtureDef;
 
 		switch (rb.m_shape)
 		{
-		case Rigidbody2DComponent::Shape::circle: 
+		case PBody2DComponent::Shape::circle:
 			fixtureDef.shape = &rb.m_circle;
 			break;
 
@@ -45,10 +45,10 @@ namespace Zote
 		rb.m_fixtureUpdated = true;
 	}
 
-	void Physics2dSystem::UpdateBodyDef(Rigidbody2DComponent& rb, TransformComponent& transform)
+	void Physic2DSystem::UpdateBodyDef(PBody2DComponent& rb, TransformComponent& transform)
 	{
 		b2BodyDef bodyDef;
-		bodyDef.type = rb.m_mode == Rigidbody2DComponent::Mode::dynamic ? 
+		bodyDef.type = rb.m_mode == PBody2DComponent::Mode::dynamic ?
 			b2_dynamicBody : b2_staticBody;
 
 		bodyDef.position.Set(transform.GetPosition().x, transform.GetPosition().y);
@@ -65,7 +65,7 @@ namespace Zote
 		
 		switch (rb.m_shape)
 		{
-			case Rigidbody2DComponent::Shape::circle:
+			case PBody2DComponent::Shape::circle:
 				vec3 pos = transform.GetPosition();
 				rb.m_circle.m_p.Set(pos.x, pos.y + -1.f);
 				rb.m_circle.m_radius = rb.m_radius;			
@@ -81,15 +81,15 @@ namespace Zote
 		UpdateFixture(rb);
 	}
 
-	Physics2dSystem::Physics2dSystem(Scene* scene)
+	Physic2DSystem::Physic2DSystem(Scene* scene)
 		: m_scene(scene)
 	{
 		m_world = MakeRef<b2World>(b2Vec2(m_worldGravity.x, m_worldGravity.y));
 	}
 
-	void Physics2dSystem::Handle2dPhysics()
+	void Physic2DSystem::Handle2dPhysics()
 	{
-		auto view = m_scene->registry.view<Rigidbody2DComponent>();
+		auto view = m_scene->registry.view<PBody2DComponent>();
 		auto& camera = m_scene->GetMainCamera().GetComponent<CameraComponent>();
 		auto& cameraTransform = m_scene->GetMainCamera().GetComponent<TransformComponent>();
 
@@ -97,7 +97,7 @@ namespace Zote
 
 		for (auto entity : view)
 		{
-			auto& rb = view.get<Rigidbody2DComponent>(entity);
+			auto& rb = view.get<PBody2DComponent>(entity);
 
 			if (!rb.enabled)
 				continue;

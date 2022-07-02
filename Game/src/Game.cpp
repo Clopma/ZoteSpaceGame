@@ -13,7 +13,6 @@ public:
 
 	Game()
 	{
-		//window = MakeRef<Window>("My Zote Game!", 1920, 1080, Color::Normalize(Color::grey));		
 		window = MakeRef<Window>();
 	}
 
@@ -36,21 +35,18 @@ public:
 		scene->GetMainCamera().GetComponent<TransformComponent>().SetPosition({ 0, 0, -6 });
 
 		/*Entity testTriangle = scene->CreateEntity();
-		testTriangle.AddComponent<MeshComponent>();
-		
-		auto& testTriangle_rb = testTriangle.AddComponent<Rigidbody2DComponent>();
-		testTriangle_rb.SetMode(Rigidbody2DComponent::Mode::dynamic);*/
-
+		testTriangle.AddComponent<MeshComponent>();*/
+	
 		Entity blackSquare = scene->CreateEntity();
 		auto& blackSquareSprite = blackSquare.AddComponent<SpriteComponent>();
 		blackSquareSprite.color = { 0.f, 0.f, 0.f, 1.f };
 		auto& blackSquareTransform = blackSquare.GetComponent<TransformComponent>();
-		blackSquareTransform.RotateGlobal(-5.f, {0, 0, 1});
+		blackSquareTransform.RotateGlobal(-15.f, {0, 0, 1});
 		blackSquareTransform.SetPosition({ 0, -3, 0 });
 		blackSquareTransform.SetScale({ 200.f, 1.f, 1.f });
-		auto& blackSquare_rb = blackSquare.AddComponent<Rigidbody2DComponent>();
+		auto& blackSquare_rb = blackSquare.AddComponent<PBody2DComponent>();
 		blackSquare_rb.SetGScale(0);
-		blackSquare_rb.SetMode(Rigidbody2DComponent::Mode::kinematic);
+		blackSquare_rb.SetMode(PBody2DComponent::Mode::kinematic);
 
 		/*auto& testTriangle_scripts = testTriangle.AddComponent<ScriptComponent>();
 		testTriangle_scripts.AddScript(new MoveTriangleScript()); */
@@ -61,9 +57,9 @@ public:
 		Entity zote = scene->CreateEntity();
 		zote.GetComponent<TransformComponent>().SetPosition({ 0, 1, 0 });
 		auto& zoteSprite = zote.AddComponent<SpriteComponent>("Textures/zote.png");
-		auto& zote_rb = zote.AddComponent<Rigidbody2DComponent>();
-		zote_rb.SetMode(Rigidbody2DComponent::Mode::dynamic);
-		zote_rb.SetGScale(.05f);
+		auto& zote_rb = zote.AddComponent<PBody2DComponent>();
+		zote_rb.SetMode(PBody2DComponent::Mode::dynamic);
+		zote_rb.SetGScale(.2f);
 
 		auto& scComponent = zote.AddComponent<ScriptComponent>();
 		scComponent.AddScript(new MoveTriangleScript());
