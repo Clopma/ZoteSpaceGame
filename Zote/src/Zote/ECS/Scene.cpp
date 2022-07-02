@@ -16,6 +16,7 @@ namespace Zote
 		m_transformGizmoSystem = MakeRef<TransformGizmoSystem>(this);
 		m_Physic2DSystem = MakeRef<Physic2DSystem>(this);
 		m_CollisionCheckSystem = MakeRef<Collision2DCheckSystem>(this);
+		m_Box2DGizmoSystem = MakeRef<Box2DGizmoSystem>(this);
 
 		window->OnRenderFrame.AddListener(new Delegate<OnRenderFrameArgs>(this, &Scene::OnRenderFrame));
 	}
@@ -28,6 +29,7 @@ namespace Zote
 		m_spriteSystem->HandleSprites();
 		m_scriptSystem->HandleScripts(args.deltaTime);
 		m_CollisionCheckSystem->Check2DCollisions();
+		m_Box2DGizmoSystem->HandleBox2DGizmos();
 	}
 
 	Entity Scene::CreateEntity()

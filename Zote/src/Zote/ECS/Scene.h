@@ -13,6 +13,7 @@
 #include "Systems/TransformGizmoSystem.h"
 #include "Systems/Physic2DSystem.h"
 #include "Systems/Collision2DCheckSystem.h"
+#include "Systems/Box2DGizmoSystem.h"
 
 #include "Utils/Memory.h"
 
@@ -30,6 +31,7 @@ namespace Zote
 		friend class TransformGizmoSystem;
 		friend class Physic2DSystem;
 		friend class Collision2DCheckSystem;
+		friend class Box2DGizmoSystem;
 
 	public:
 		Scene() {}
@@ -56,5 +58,6 @@ namespace Zote
 		Ref<TransformGizmoSystem> m_transformGizmoSystem;
 		Ref<Physic2DSystem> m_Physic2DSystem;
 		Ref<Collision2DCheckSystem> m_CollisionCheckSystem;
+		Ref<Box2DGizmoSystem> m_Box2DGizmoSystem;
 	};
 }

@@ -111,14 +111,7 @@ namespace Zote
 			else if (!rb.m_fixtureUpdated)
 				UpdateFixture(rb);
 
-			if (!rb.m_HasGizmos)
-			{
-				rb.m_boxGizmos = MakeRef<BoxGizmos>(rb.GetColliderSize());
-				//rb.circleGizmos = MakeRef<CircleGizmos>();
-				rb.m_HasGizmos = true;
-			}
 			
-			rb.m_boxGizmos->Render(camera.GetProjection(), camera.GetView(cameraTransform), transform.GetModel());
 			//rb.circleGizmos->Render(camera.GetProjection(), camera.GetView(cameraTransform), transform.GetModel());
 
 			//Apply physics to transforms
