@@ -111,9 +111,6 @@ namespace Zote
 			else if (!rb.m_fixtureUpdated)
 				UpdateFixture(rb);
 
-			
-			//rb.circleGizmos->Render(camera.GetProjection(), camera.GetView(cameraTransform), transform.GetModel());
-
 			//Apply physics to transforms
 			b2Vec2 position = rb.m_body->GetPosition();
 			transform.SetPosition({ position.x, position.y, transform.GetPosition().z });

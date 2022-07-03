@@ -91,6 +91,31 @@ namespace Zote
 			m_radius = newRadius;
 			m_bodyUpdated = false;
 		}
+		void SetLinearVelocity(const vec2 velocity)
+		{
+			m_body->SetLinearVelocity({ velocity.x, velocity.y });
+		}
+		void SetAngularVelocity(float velocity)
+		{
+			m_body->SetAngularVelocity(velocity);
+		}
+		
+		void ApplyForce(const vec2& force)
+		{
+			m_body->ApplyForceToCenter({ force.x, force.y }, true);
+		}
+		void ApplyTorque(float torque)
+		{
+			m_body->ApplyTorque(torque, true);
+		}		
+		void ApplyLinearImpulse(const vec2& impulse)
+		{
+			m_body->ApplyLinearImpulseToCenter({ impulse.x, impulse.y }, true);
+		}
+		void ApplyAngularImpulse(float impulse)
+		{
+			m_body->ApplyAngularImpulse(impulse, true);
+		}
 
 	private:
 
