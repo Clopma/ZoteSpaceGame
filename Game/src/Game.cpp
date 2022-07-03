@@ -1,7 +1,7 @@
 #include <ZoteApplication.h>
 #include "Scripts/MoveTriangle.h"
 #include "Scripts/MoveCamera.h"
-
+#include "ZoteCommon.h"
 using namespace Zote;
 
 class Game : public Application
@@ -59,7 +59,7 @@ public:
 		auto& zoteSprite = zote.AddComponent<SpriteComponent>("Textures/zote.png");
 		auto& zote_rb = zote.AddComponent<PBody2DComponent>();
 		zote_rb.SetMode(PBody2DComponent::Mode::dynamic);
-		zote_rb.SetGScale(.2f);
+		zote_rb.SetGScale(.02f);
 
 		auto& scComponent = zote.AddComponent<ScriptComponent>();
 		scComponent.AddScript(new MoveTriangleScript());

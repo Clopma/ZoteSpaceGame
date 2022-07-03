@@ -19,7 +19,7 @@ namespace Zote
 	private:
 		Ref<b2World> m_world;
 		Scene* m_scene = nullptr;
-		float m_timeStep = 1.f / 60.f;
+		float m_timeStep = 1.f / 120.f;
 		int32 m_velocityIterations = 6;
 		int32 m_positionIterations = 2;
 		float m_rotationOffset = .01f;

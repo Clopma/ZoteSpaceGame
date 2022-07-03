@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -9,83 +9,15 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\Zote\ECS\Components\BaseComponent.h" />
-    <ClInclude Include="src\Zote\ECS\Components\BoxCollider2DComponent.h" />
-    <ClInclude Include="src\Zote\ECS\Components\CameraComponent.h" />
-    <ClInclude Include="src\Zote\ECS\Components\MeshComponent.h" />
-    <ClInclude Include="src\Zote\ECS\Components\PBody2DComponent.h" />
-    <ClInclude Include="src\Zote\ECS\Components\ScriptComponent.h" />
-    <ClInclude Include="src\Zote\ECS\Components\SpriteComponent.h" />
-    <ClInclude Include="src\Zote\ECS\Components\TransformComponent.h" />
-    <ClInclude Include="src\Zote\ECS\Systems\Box2DGizmoSystem.h" />
-    <ClInclude Include="src\Zote\ECS\Systems\CircleGizmoSystem.h" />
-    <ClInclude Include="src\Zote\ECS\Systems\Collision2DCheckSystem.h" />
-    <ClInclude Include="src\Zote\ECS\Systems\TransformGizmoSystem.h" />
-    <ClInclude Include="src\Zote\ECS\Systems\MeshSystem.h" />
-    <ClInclude Include="src\Zote\ECS\Systems\Physic2DSystem.h" />
-    <ClInclude Include="src\Zote\ECS\Systems\ScriptSystem.h" />
-    <ClInclude Include="src\Zote\ECS\Systems\SpriteSystem.h" />
-    <ClInclude Include="src\Zote\Rendering\IndexBuffer.h" />
-    <ClInclude Include="src\Zote\Rendering\Line.h" />
-    <ClInclude Include="src\ZoteApplication.h" />
-    <ClInclude Include="src\Zote\MouseButtonCodes.h" />
-    <ClInclude Include="src\Zote\KeyCodes.h" />
-    <ClInclude Include="src\Zote\Input.h" />
-    <ClInclude Include="src\Zote\ECS\Entity.h" />
-    <ClInclude Include="src\Zote\ECS\Components.h" />
-    <ClInclude Include="src\Zote\ECS\Scene.h" />
-    <ClInclude Include="src\Zote\Rendering\Mesh.h" />
-    <ClInclude Include="src\Zote\Rendering\Renderer.h" />
-    <ClInclude Include="src\Zote\Rendering\Shader.h" />
-    <ClInclude Include="src\Zote\Event.h" />
-    <ClInclude Include="src\Zote\Maths\Color.h" />
-    <ClInclude Include="src\ZoteCommon.h" />
-    <ClInclude Include="src\Zote\Application.h" />
-    <ClInclude Include="src\Zote\Core.h" />
-    <ClInclude Include="src\Zote\EntryPoint.h" />
-    <ClInclude Include="src\Zote\Rendering\VertexArray.h" />
-    <ClInclude Include="src\Zote\Rendering\VertexBuffer.h" />
-    <ClInclude Include="src\Zote\Rendering\VertexBufferLayout.h" />
-    <ClInclude Include="src\Zote\Rendering\Window.h" />
-    <ClInclude Include="src\Zote\Rendering\Texture.h" />
-    <ClInclude Include="src\Zote\Utils\CustomTypes.h" />
-    <ClInclude Include="src\Zote\Utils\GlobalStrings.h" />
-    <ClInclude Include="src\Zote\Utils\Log.h" />
-    <ClInclude Include="src\Zote\Utils\Math.h" />
-    <ClInclude Include="src\Zote\Utils\Memory.h" />
-    <ClInclude Include="src\Zote\Utils\String.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\Zote\ECS\Systems\Box2DGizmoSystem.cpp" />
-    <ClCompile Include="src\Zote\ECS\Systems\CircleGizmoSystem.cpp" />
-    <ClCompile Include="src\Zote\ECS\Systems\Collision2DCheckSystem.cpp" />
-    <ClCompile Include="src\Zote\ECS\Systems\TransformGizmoSystem.cpp" />
-    <ClCompile Include="src\Zote\ECS\Systems\MeshSystem.cpp" />
-    <ClCompile Include="src\Zote\ECS\Systems\Physic2DSystem.cpp" />
-    <ClCompile Include="src\Zote\ECS\Systems\ScriptSystem.cpp" />
-    <ClCompile Include="src\Zote\ECS\Systems\SpriteSystem.cpp" />
-    <ClCompile Include="src\Zote\Rendering\IndexBuffer.cpp" />
-    <ClCompile Include="src\Zote\Rendering\Line.cpp" />
-    <ClCompile Include="src\Zote\Input.cpp" />
-    <ClCompile Include="src\Zote\ECS\Entity.cpp" />
-    <ClCompile Include="src\Zote\Rendering\Renderer.cpp" />
-    <ClCompile Include="src\Zote\ECS\Scene.cpp" />
-    <ClCompile Include="src\Zote\Rendering\Mesh.cpp" />
-    <ClCompile Include="src\Zote\Rendering\Shader.cpp" />
-    <ClCompile Include="src\Zote\Maths\Color.cpp" />
-    <ClCompile Include="src\Zote\Application.cpp" />
-    <ClCompile Include="src\Zote\Rendering\stb_image.cpp" />
-    <ClCompile Include="src\Zote\Rendering\VertexArray.cpp" />
-    <ClCompile Include="src\Zote\Rendering\VertexBuffer.cpp" />
-    <ClCompile Include="src\Zote\Rendering\Window.cpp" />
-    <ClCompile Include="src\Zote\Rendering\Texture.cpp" />
+    <ProjectConfiguration Include="Dist|x64">
+      <Configuration>Dist</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{2751907C-1388-910D-BC74-7710A88A0D0F}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{88e09fb8-5c9b-462a-b136-93a6e5c53987}</ProjectGuid>
     <RootNamespace>Zote</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -93,20 +25,23 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
-  </ImportGroup>
-  <ImportGroup Label="Shared">
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -114,51 +49,177 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
-    <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\bin\Debug-windows-x86_64\Zote\</OutDir>
+    <IntDir>..\bin-int\Debug-windows-x86_64\Zote\</IntDir>
+    <TargetName>Zote</TargetName>
+    <TargetExt>.dll</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
-    <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\bin\Release-windows-x86_64\Zote\</OutDir>
+    <IntDir>..\bin-int\Release-windows-x86_64\Zote\</IntDir>
+    <TargetName>Zote</TargetName>
+    <TargetExt>.dll</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\bin\Dist-windows-x86_64\Zote\</OutDir>
+    <IntDir>..\bin-int\Dist-windows-x86_64\Zote\</IntDir>
+    <TargetName>Zote</TargetName>
+    <TargetExt>.dll</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>ZOTE_PLATFORM_WINDOWS;ZOTE_BUILD_DLL</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\glfw\include;$(SolutionDir)submodules\glm;$(SolutionDir)dependencies\glew\include;$(SolutionDir)dependencies\entt\include;$(SolutionDir)Zote\src\Zote;$(SolutionDir)dependencies\stb_image\include;$(SolutionDir)dependencies\box2d\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>ZOTE_PLATFORM_WINDOWS;ZOTE_BUILD_DLL;ZOTE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;src\Zote;..\dependencies\glfw\include;..\dependencies\glew\include;..\submodules\glm;..\dependencies\entt\include;..\dependencies\box2d\include;..\dependencies\stb_image\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\glfw\lib;$(SolutionDir)dependencies\glew\lib;$(SolutionDir)dependencies\box2d\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>box2d.lib;opengl32.lib;glew32.lib;glew32s.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>box2d.lib;opengl32.lib;glew32.lib;glew32s.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\dependencies\glfw\lib;..\dependencies\glew\lib;..\dependencies\box2d\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>..\bin\Debug-windows-x86_64\Zote\Zote.lib</ImportLibrary>
     </Link>
+    <PostBuildEvent>
+      <Command>IF EXIST ..\bin\Debug-windows-x86_64\Zote\Zote.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\Zote\Zote.dll ..\bin\Debug-windows-x86_64\Game &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\Zote\Zote.dll ..\bin\Debug-windows-x86_64\Game &gt; nul)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>ZOTE_PLATFORM_WINDOWS;ZOTE_BUILD_DLL;ZOTE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;src\Zote;..\dependencies\glfw\include;..\dependencies\glew\include;..\submodules\glm;..\dependencies\entt\include;..\dependencies\box2d\include;..\dependencies\stb_image\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>ZOTE_PLATFORM_WINDOWS;ZOTE_BUILD_DLL</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\glfw\include;$(SolutionDir)submodules\glm;$(SolutionDir)dependencies\glew\include;$(SolutionDir)dependencies\entt\include;$(SolutionDir)Zote\src\Zote;$(SolutionDir)dependencies\stb_image\include;$(SolutionDir)dependencies\box2d\include</AdditionalIncludeDirectories>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\glfw\lib;$(SolutionDir)dependencies\glew\lib;$(SolutionDir)dependencies\box2d\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>box2d.lib;opengl32.lib;glew32.lib;glew32s.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>box2d.lib;opengl32.lib;glew32.lib;glew32s.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\dependencies\glfw\lib;..\dependencies\glew\lib;..\dependencies\box2d\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>..\bin\Release-windows-x86_64\Zote\Zote.lib</ImportLibrary>
     </Link>
+    <PostBuildEvent>
+      <Command>IF EXIST ..\bin\Release-windows-x86_64\Zote\Zote.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\Zote\Zote.dll ..\bin\Release-windows-x86_64\Game &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\Zote\Zote.dll ..\bin\Release-windows-x86_64\Game &gt; nul)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>ZOTE_PLATFORM_WINDOWS;ZOTE_BUILD_DLL;ZOTE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;src\Zote;..\dependencies\glfw\include;..\dependencies\glew\include;..\submodules\glm;..\dependencies\entt\include;..\dependencies\box2d\include;..\dependencies\stb_image\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>box2d.lib;opengl32.lib;glew32.lib;glew32s.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\dependencies\glfw\lib;..\dependencies\glew\lib;..\dependencies\box2d\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>..\bin\Dist-windows-x86_64\Zote\Zote.lib</ImportLibrary>
+    </Link>
+    <PostBuildEvent>
+      <Command>IF EXIST ..\bin\Dist-windows-x86_64\Zote\Zote.dll\ (xcopy /Q /E /Y /I ..\bin\Dist-windows-x86_64\Zote\Zote.dll ..\bin\Dist-windows-x86_64\Game &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Dist-windows-x86_64\Zote\Zote.dll ..\bin\Dist-windows-x86_64\Game &gt; nul)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Zote\Application.h" />
+    <ClInclude Include="src\Zote\Core.h" />
+    <ClInclude Include="src\Zote\ECS\Components.h" />
+    <ClInclude Include="src\Zote\ECS\Components\BaseComponent.h" />
+    <ClInclude Include="src\Zote\ECS\Components\CameraComponent.h" />
+    <ClInclude Include="src\Zote\ECS\Components\MeshComponent.h" />
+    <ClInclude Include="src\Zote\ECS\Components\PBody2DComponent.h" />
+    <ClInclude Include="src\Zote\ECS\Components\ScriptComponent.h" />
+    <ClInclude Include="src\Zote\ECS\Components\SpriteComponent.h" />
+    <ClInclude Include="src\Zote\ECS\Components\TransformComponent.h" />
+    <ClInclude Include="src\Zote\ECS\Entity.h" />
+    <ClInclude Include="src\Zote\ECS\Scene.h" />
+    <ClInclude Include="src\Zote\ECS\Systems\Box2DGizmoSystem.h" />
+    <ClInclude Include="src\Zote\ECS\Systems\CircleGizmoSystem.h" />
+    <ClInclude Include="src\Zote\ECS\Systems\Collision2DCheckSystem.h" />
+    <ClInclude Include="src\Zote\ECS\Systems\MeshSystem.h" />
+    <ClInclude Include="src\Zote\ECS\Systems\Physic2DSystem.h" />
+    <ClInclude Include="src\Zote\ECS\Systems\ScriptSystem.h" />
+    <ClInclude Include="src\Zote\ECS\Systems\SpriteSystem.h" />
+    <ClInclude Include="src\Zote\ECS\Systems\TransformGizmoSystem.h" />
+    <ClInclude Include="src\Zote\EntryPoint.h" />
+    <ClInclude Include="src\Zote\Event.h" />
+    <ClInclude Include="src\Zote\Input.h" />
+    <ClInclude Include="src\Zote\KeyCodes.h" />
+    <ClInclude Include="src\Zote\Maths\Color.h" />
+    <ClInclude Include="src\Zote\MouseButtonCodes.h" />
+    <ClInclude Include="src\Zote\Rendering\IndexBuffer.h" />
+    <ClInclude Include="src\Zote\Rendering\Line.h" />
+    <ClInclude Include="src\Zote\Rendering\Mesh.h" />
+    <ClInclude Include="src\Zote\Rendering\Renderer.h" />
+    <ClInclude Include="src\Zote\Rendering\Shader.h" />
+    <ClInclude Include="src\Zote\Rendering\Texture.h" />
+    <ClInclude Include="src\Zote\Rendering\VertexArray.h" />
+    <ClInclude Include="src\Zote\Rendering\VertexBuffer.h" />
+    <ClInclude Include="src\Zote\Rendering\VertexBufferLayout.h" />
+    <ClInclude Include="src\Zote\Rendering\Window.h" />
+    <ClInclude Include="src\Zote\Utils\CustomTypes.h" />
+    <ClInclude Include="src\Zote\Utils\GlobalStrings.h" />
+    <ClInclude Include="src\Zote\Utils\Log.h" />
+    <ClInclude Include="src\Zote\Utils\Math.h" />
+    <ClInclude Include="src\Zote\Utils\Memory.h" />
+    <ClInclude Include="src\Zote\Utils\String.h" />
+    <ClInclude Include="src\ZoteApplication.h" />
+    <ClInclude Include="src\ZoteCommon.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Zote\Application.cpp" />
+    <ClCompile Include="src\Zote\ECS\Entity.cpp" />
+    <ClCompile Include="src\Zote\ECS\Scene.cpp" />
+    <ClCompile Include="src\Zote\ECS\Systems\Box2DGizmoSystem.cpp" />
+    <ClCompile Include="src\Zote\ECS\Systems\CircleGizmoSystem.cpp" />
+    <ClCompile Include="src\Zote\ECS\Systems\Collision2DCheckSystem.cpp" />
+    <ClCompile Include="src\Zote\ECS\Systems\MeshSystem.cpp" />
+    <ClCompile Include="src\Zote\ECS\Systems\Physic2DSystem.cpp" />
+    <ClCompile Include="src\Zote\ECS\Systems\ScriptSystem.cpp" />
+    <ClCompile Include="src\Zote\ECS\Systems\SpriteSystem.cpp" />
+    <ClCompile Include="src\Zote\ECS\Systems\TransformGizmoSystem.cpp" />
+    <ClCompile Include="src\Zote\Input.cpp" />
+    <ClCompile Include="src\Zote\Maths\Color.cpp" />
+    <ClCompile Include="src\Zote\Rendering\IndexBuffer.cpp" />
+    <ClCompile Include="src\Zote\Rendering\Line.cpp" />
+    <ClCompile Include="src\Zote\Rendering\Mesh.cpp" />
+    <ClCompile Include="src\Zote\Rendering\Renderer.cpp" />
+    <ClCompile Include="src\Zote\Rendering\Shader.cpp" />
+    <ClCompile Include="src\Zote\Rendering\Texture.cpp" />
+    <ClCompile Include="src\Zote\Rendering\VertexArray.cpp" />
+    <ClCompile Include="src\Zote\Rendering\VertexBuffer.cpp" />
+    <ClCompile Include="src\Zote\Rendering\Window.cpp" />
+    <ClCompile Include="src\Zote\Rendering\stb_image.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

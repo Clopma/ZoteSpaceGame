@@ -41,6 +41,9 @@ namespace Zote
 			mesh = MakeRef<Mesh>(ZOTE_2D_MESH, true, vertices, indices, 16, 6);
 			shader = MakeRef<Shader>(SHADER_VERT_SPRITE, SHADER_FRAG_SPRITE);
 			
+			if (std::string(path) == std::string(""))
+				return;
+
 			texture = MakeRef<Texture>(path);
 			texture->Load();
 		}

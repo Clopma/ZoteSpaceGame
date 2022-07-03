@@ -27,7 +27,8 @@ namespace Zote
 			auto& spriteComponent = view.get<SpriteComponent>(entity);
 			auto& transformComponent = spriteComponent.GetEntity()->GetComponent<TransformComponent>();
 
-			spriteComponent.texture->Use();
+			if (spriteComponent.HasTexture())
+				spriteComponent.texture->Use();
 
 			Renderer::SetUniformColor(UNIFORM_SPRITE_COLOR, spriteComponent.shader, spriteComponent.color);
 			Renderer::SetUniformFloat(UNIFORM_SPRITE_HAS_TEXTURE, spriteComponent.shader, 
