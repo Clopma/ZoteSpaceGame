@@ -23,6 +23,7 @@ namespace Zote
 
 	void Scene::OnRenderFrame(OnRenderFrameArgs args)
 	{
+		m_Physic2DSystem->m_frameRate = args.frameRate;
 		m_Physic2DSystem->Handle2dPhysics();
 //#ifdef ZOTE_DEBUG
 		m_transformGizmoSystem->HandleGizmos();

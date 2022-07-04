@@ -40,6 +40,16 @@ namespace Zote
 		lastTime = currentTime;
 	}
 
+	void Window::CalculateFrameRate()
+	{
+		frameRateTime += deltaTime;
+		currentFrames++;
+		if (frameRateTime < 1 || currentFrames == 0) return;
+		frameRate = currentFrames;
+		frameRateTime = 0;
+		currentFrames = 0;
+	}
+
 	bool Window::Init()
 	{
 		if (!glfwInit())
@@ -106,9 +116,10 @@ namespace Zote
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			CalculateDeltaTime();
+			CalculateFrameRate();
 
 			//DRAW STUFF
-			OnRenderFrame.Invoke({ GetAspect(), deltaTime });
+			OnRenderFrame.Invoke({ GetAspect(), deltaTime, frameRate });
 
 			glfwSwapBuffers(glfwWindow);
 		}

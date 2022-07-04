@@ -93,7 +93,7 @@ namespace Zote
 		auto& camera = m_scene->GetMainCamera().GetComponent<CameraComponent>();
 		auto& cameraTransform = m_scene->GetMainCamera().GetComponent<TransformComponent>();
 
-		m_world->Step(m_timeStep, m_velocityIterations, m_positionIterations);
+		m_world->Step(1.f / m_frameRate, m_velocityIterations, m_positionIterations);
 
 		for (auto entity : view)
 		{
