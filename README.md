@@ -6,7 +6,6 @@ Zote is a 2D Game Engine developed for my final university assignment.
 <br/><br/>
 
 ## Features
----
 - Scene
 - Camera (Orthographic and Perspective)
 - Entities and Components
@@ -18,7 +17,6 @@ Zote is a 2D Game Engine developed for my final university assignment.
 <br/><br/>
 
 ## Build
----
 - Ensure you are using Windows 64-bit
 - Ensure you have Visual Studio 2022 installed
 - Clone this project
@@ -31,7 +29,6 @@ Zote is a 2D Game Engine developed for my final university assignment.
 <p></p>
 
 ### Window setup
----
 Zote doesn't have an Editor yet. So if you want to create a brand new game some basic setup is required. In order to start writing code go to the Game project and open `Game.cpp`. Then, inside the `Run` method, create your first Window and call his `Init()` and `StartLoop()` methods.
 
 ```
@@ -49,7 +46,6 @@ Running the application now should open an empty grey window.
 <p></p>
 
 ### First entity
----
 In order to create entites a `Scene` instance is required. At this point you **can't** create multiple scenes. After the scene initialisation you can call the scene `CreateEntity()` method and start adding components to it.
 
 ```
