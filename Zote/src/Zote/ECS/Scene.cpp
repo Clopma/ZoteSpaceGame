@@ -25,16 +25,16 @@ namespace Zote
 	{
 		m_Physic2DSystem->m_frameRate = args.frameRate;
 		m_Physic2DSystem->Handle2dPhysics();
-//#ifdef ZOTE_DEBUG
+#ifdef ZOTE_DEBUG
 		m_transformGizmoSystem->HandleGizmos();
-//#endif	
+#endif	
 		m_meshSystem->HandleMeshes();
 		m_spriteSystem->HandleSprites();
 		m_scriptSystem->HandleScripts(args.deltaTime);
 		m_CollisionCheckSystem->Check2DCollisions();
-//#ifdef ZOTE_DEBUG
+#ifdef ZOTE_DEBUG
 		m_Box2DGizmoSystem->HandleBox2DGizmos();
-//#endif	
+#endif	
 	}
 
 	Entity Scene::CreateEntity()
