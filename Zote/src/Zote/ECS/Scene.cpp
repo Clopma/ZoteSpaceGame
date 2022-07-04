@@ -4,11 +4,14 @@
 
 namespace Zote
 {
+	vec3 Scene::MainCamStart = { 0, 0, -6 };
+
 	Scene::Scene(Ref<Window> window)
 	{
 		mainCamera = new Entity();
 		*mainCamera = CreateEntity();
 		mainCamera->AddComponent<CameraComponent>(window);
+		mainCamera->GetComponent<TransformComponent>().SetPosition(MainCamStart);
 
 		m_scriptSystem = MakeRef<ScriptSystem>(this);
 		m_meshSystem = MakeRef<MeshSystem>(this);

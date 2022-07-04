@@ -34,6 +34,8 @@ namespace Zote
 		friend class Box2DGizmoSystem;
 
 	public:
+		static vec3 MainCamStart;
+
 		Scene() {}
 		
 		Scene(Ref<Window> window);
@@ -59,6 +61,6 @@ namespace Zote
 		Ref<TransformGizmoSystem> m_transformGizmoSystem;
 		Ref<Physic2DSystem> m_Physic2DSystem;
 		Ref<Collision2DCheckSystem> m_CollisionCheckSystem;
-		Ref<Box2DGizmoSystem> m_Box2DGizmoSystem;
+		Ref<Box2DGizmoSystem> m_Box2DGizmoSystem;		
 	};
 }

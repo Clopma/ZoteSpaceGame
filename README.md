@@ -1,2 +1,74 @@
-# Zote
+<img src="Game/Textures/zote.png" alt="drawing" width="100"/>
+
+# **Zote Engine**
+
+Zote is a 2D Game Engine developed for my final university assignment. 
+<br/><br/>
+
+## Features
+---
+- Scene
+- Camera (Orthographic and Perspective)
+- Entities and Components
+- 2D Rendering
+- 2D Physics
+- Scripting System
+- Build System
+- Input System
+<br/><br/>
+
+## Build
+---
+- Ensure you are using Windows 64-bit
+- Ensure you have Visual Studio 2022 installed
+- Clone this project
+- Open the project's root folder
+- Run `GenerateProjects.bat`
+- Open `Zote.sln` and ✨Enjoy✨
+<br/><br/>
+
+## Hello Zote
+<p></p>
+
+### Window setup
+---
+Zote doesn't have an Editor yet. So if you want to create a brand new game some basic setup is required. In order to start writing code go to the Game project and open `Game.cpp`. Then, inside the `Run` method, create your first Window and call his `Init()` and `StartLoop()` methods.
+
+```
+Ref<Window> myWindow = MakeRef<Window>();
+myWindow->Init();
+
+//Your scene setup code goes HERE.
+
+myWindow->StartLoop();
+```
+
+The window **must** to be constructed as a reference. The `Ref` syntax is just a normal shared pointer. The `StartLoop()` method initialises the window loop. So if you write code after that function it won't execute until the Zote Window get's closed.
+<p></p>
+Running the application now should open an empty grey window.
+<p></p>
+
+### First entity
+---
+In order to create entites a `Scene` instance is required. At this point you **can't** create multiple scenes. After the scene initialisation you can call the scene `CreateEntity()` method and start adding components to it.
+
+```
+Scene myScene(myWindow);
+Entity zote = myScene.CreateEntity();
+zote.AddComponent<SpriteComponent>("Textures/zote.png");
+```
+<p></p>
+At this point by running the application you should be experiencing the pleasure of being in the presence of Zote, a kinght of great renown.
+
+
+
+
+
+
+
+
+
+
+
+
  

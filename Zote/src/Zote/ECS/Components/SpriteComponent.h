@@ -22,7 +22,6 @@ namespace Zote
 		bool HasTexture() { return std::string(m_path) != ""; }
 
 		SpriteComponent(cstr path = "")
-			: m_path(path)
 		{
 			//Quad data...
 			float vertices[] = {
@@ -44,6 +43,12 @@ namespace Zote
 			if (std::string(path) == std::string(""))
 				return;
 
+			AddTexture(path);
+		}
+
+		void AddTexture(cstr path)
+		{
+			m_path = path;
 			texture = MakeRef<Texture>(path);
 			texture->Load();
 		}
