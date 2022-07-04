@@ -18,7 +18,7 @@ workspace "Zote"
 	IncludeDir["GLEW"] = "dependencies/glew/include"
 	IncludeDir["GLM"] = "submodules/glm"
 	IncludeDir["ENTT"] = "dependencies/entt/include"
-	IncludeDir["BOX2D"] = "dependencies/box2d/include"
+	IncludeDir["BOX2D"] = "submodules/box2d/include"
 	IncludeDir["STBIMG"] = "dependencies/stb_image/include"
 
 	-- Library directories
@@ -35,6 +35,8 @@ workspace "Zote"
 	LibFile["GLEW"] = "glew32.lib"
 	LibFile["OPENGL"] = "opengl32.lib"
 	LibFile["BOX2D"] = "box2d.lib"
+
+	include "submodules/box2d/premake5.lua"
 
 	project "Zote"
 		location "Zote"
@@ -65,8 +67,7 @@ workspace "Zote"
 		libdirs
 		{
 			"%{LibDir.GLFW}",
-			"%{LibDir.GLEW}",
-			"%{LibDir.BOX2D}"
+			"%{LibDir.GLEW}"
 		}
 
 		links
@@ -74,7 +75,7 @@ workspace "Zote"
 			"%{LibFile.GLFW}",
 			"%{LibFile.GLEW}",
 			"%{LibFile.OPENGL}",
-			"%{LibFile.BOX2D}"
+			"Box2D"
 		}
 
 		filter "system:windows"
@@ -131,8 +132,7 @@ workspace "Zote"
 		libdirs
 		{
 			"%{LibDir.GLFW}",
-			"%{LibDir.GLEW}",
-			"%{LibDir.BOX2D}"
+			"%{LibDir.GLEW}"
 		}
 
 		links
@@ -141,7 +141,7 @@ workspace "Zote"
 			"%{LibFile.GLFW}",
 			"%{LibFile.GLEW}",
 			"%{LibFile.OPENGL}",
-			"%{LibFile.BOX2D}"
+			"Box2D"
 		}
 
 		filter "system:windows"
