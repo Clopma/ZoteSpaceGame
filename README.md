@@ -139,7 +139,7 @@ myEntity_Scripts.AddScript(switchScript);
 
 window->StartLoop();
 ```
-
+By hitting the run button you should see the amogus and zote textures switching in the screen.
 
 
 
