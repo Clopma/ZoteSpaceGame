@@ -7,6 +7,7 @@
 
 namespace Zote
 {
+	bool Window::openGLConsoleLogs = false;
 	const int Window::glMinorVersion = 3;
 	const int Window::glMajorVersion = 3;
 
@@ -92,6 +93,7 @@ namespace Zote
 
 		glEnable(GL_DEBUG_OUTPUT);
 		glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+
 		glDebugMessageCallback(OnDebugMessage, nullptr);
 
 		glEnable(GL_DEPTH_TEST);
@@ -126,6 +128,7 @@ namespace Zote
 	}
 	void Window::OnDebugMessage(GLenum source, GLenum type, unsigned int id, GLenum severity, GLsizei length, const char* message, const void* userParam)
 	{
-		std::cout << message << std::endl;
+		if (openGLConsoleLogs)
+			std::cout << message << std::endl;
 	}
 }

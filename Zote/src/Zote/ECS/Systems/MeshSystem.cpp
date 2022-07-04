@@ -26,6 +26,9 @@ namespace Zote
 			auto& meshComponent = group.get<MeshComponent>(entity);
 			auto& transformComponent = group.get<TransformComponent>(entity);
 
+			if (!meshComponent.enabled)
+				continue;
+
 			meshComponent.texture->Use();
 
 			meshComponent.mesh->Render(meshComponent.shader, 

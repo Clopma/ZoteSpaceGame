@@ -27,6 +27,9 @@ namespace Zote
 			auto& spriteComponent = view.get<SpriteComponent>(entity);
 			auto& transformComponent = spriteComponent.GetEntity()->GetComponent<TransformComponent>();
 
+			if (!spriteComponent.enabled)
+				continue;
+
 			if (spriteComponent.HasTexture())
 				spriteComponent.texture->Use();
 

@@ -6,6 +6,8 @@ namespace Zote
 {
 	class Entity
 	{
+		friend class Scene;
+
 		Scene* scene = nullptr;
 		entt::entity id{0};
 

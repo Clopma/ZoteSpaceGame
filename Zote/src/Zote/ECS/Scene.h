@@ -45,6 +45,7 @@ namespace Zote
 		Scene(const Scene& other) {};
 
 		Entity CreateEntity();
+		void DestroyEntity(Entity* entity);
 		~Scene();
 
 	private:

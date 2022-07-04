@@ -41,6 +41,10 @@ namespace Zote
 	{
 		return { registry.create(), this };
 	}
+	void Scene::DestroyEntity(Entity* entity)
+	{
+		registry.destroy(entity->id);
+	}
 	Scene::~Scene()
 	{
 		delete mainCamera;

@@ -36,7 +36,7 @@ public:
 
 		/*Entity testTriangle = scene->CreateEntity();
 		testTriangle.AddComponent<MeshComponent>();*/
-	
+
 		Entity blackSquare = scene->CreateEntity();
 		auto& blackSquareSprite = blackSquare.AddComponent<SpriteComponent>();
 		blackSquareSprite.color = { 0.f, 0.f, 0.f, 1.f };

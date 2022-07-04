@@ -46,6 +46,7 @@ namespace Zote
 
 	public:
 		Event<OnRenderFrameArgs> OnRenderFrame;
+		static bool openGLConsoleLogs;
 
 		Window();
 		Window(const std::string name, int width, int height, const Color color);
