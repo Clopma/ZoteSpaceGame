@@ -26,7 +26,6 @@ workspace "Zote"
 
 	LibDir["GLFW"] = "dependencies/glfw/lib"
 	LibDir["GLEW"] = "dependencies/glew/lib"
-	LibDir["BOX2D"] = "dependencies/box2d/lib"
 
 	-- Library files
 	LibFile = {}
@@ -34,7 +33,6 @@ workspace "Zote"
 	LibFile["GLFW"] = "glfw3.lib"
 	LibFile["GLEW"] = "glew32.lib"
 	LibFile["OPENGL"] = "opengl32.lib"
-	LibFile["BOX2D"] = "box2d.lib"
 
 	include "submodules/box2d/premake5.lua"
 
