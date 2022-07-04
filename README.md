@@ -63,11 +63,6 @@ At this point by running the application you should be experiencing the pleasure
 
 The script system is quite similar to the Unity Monobehiavours. Behind the scenes works with the ECS pattern but the usage is more simple. To start using scripts you must to add the `ScriptComponent` to your entity.
 
-```
-Entity myEntity = myScene.CreateEntity();
-myEntity.AddComponent<ScriptComponent>();
-```
-
 Then, you can create your script in new `.h` and `.cpp` separated files. The next example will show how to create a script that changes between two sprites:
 <p></p>
 
@@ -123,7 +118,7 @@ void SwitchBetweenSprites::Update(float deltaTime)
     LOG("Sprite texture updated to: " << path);
 }
 ```
-When the script is ready go back to `Game.cpp` and don't forget to write the preprocessor statement `#include "Scripts/SwitchBetweenSprites.h"`. Then, it's mandatory to create the script instance as a **pointer**. This is the final code inside the `Run()` method.
+When the script is ready go back to `Game.cpp` and don't forget to write the preprocessor statement, for this example: `#include "Scripts/SwitchBetweenSprites.h"`. By using the `AddScript()` method you can attach the script to the script component. It is possible to call this function with multiple scripts to attach them to a single Entity. It's mandatory to create the script instance as a **pointer**. This is the final code inside the `Run()` method.
 ```
 Ref<Window> window = MakeRef<Window>();
 window->Init();
