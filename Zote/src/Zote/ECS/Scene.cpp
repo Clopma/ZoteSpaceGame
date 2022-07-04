@@ -24,12 +24,16 @@ namespace Zote
 	void Scene::OnRenderFrame(OnRenderFrameArgs args)
 	{
 		m_Physic2DSystem->Handle2dPhysics();
+//#ifdef ZOTE_DEBUG
 		m_transformGizmoSystem->HandleGizmos();
+//#endif	
 		m_meshSystem->HandleMeshes();
 		m_spriteSystem->HandleSprites();
 		m_scriptSystem->HandleScripts(args.deltaTime);
 		m_CollisionCheckSystem->Check2DCollisions();
+//#ifdef ZOTE_DEBUG
 		m_Box2DGizmoSystem->HandleBox2DGizmos();
+//#endif	
 	}
 
 	Entity Scene::CreateEntity()

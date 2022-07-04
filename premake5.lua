@@ -10,14 +10,32 @@ workspace "Zote"
 
 	outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+	-- Include directories   
 	IncludeDir = {}
 
+	IncludeDir["ZOTE_SRC"] = "Zote/src"
+	IncludeDir["ZOTE_ENV"] = "Zote/src/Zote"
 	IncludeDir["GLFW"] = "dependencies/glfw/include"
 	IncludeDir["GLEW"] = "dependencies/glew/include"
 	IncludeDir["GLM"] = "submodules/glm"
 	IncludeDir["ENTT"] = "dependencies/entt/include"
 	IncludeDir["BOX2D"] = "dependencies/box2d/include"
 	IncludeDir["STBIMG"] = "dependencies/stb_image/include"
+
+	-- Library directories
+	LibDir = {}
+
+	LibDir["GLFW"] = "dependencies/glfw/lib"
+	LibDir["GLEW"] = "dependencies/glew/lib"
+	LibDir["BOX2D"] = "dependencies/box2d/lib"
+
+	-- Library files
+	LibFile = {}
+
+	LibFile["GLFW"] = "glfw3.lib"
+	LibFile["GLEW"] = "glew32.lib"
+	LibFile["OPENGL"] = "opengl32.lib"
+	LibFile["BOX2D"] = "box2d.lib"
 
 	project "Zote"
 		location "Zote"
@@ -35,8 +53,8 @@ workspace "Zote"
 
 		includedirs
 		{
-			"Zote/src",
-			"Zote/src/Zote",
+			"%{IncludeDir.ZOTE_SRC}",
+			"%{IncludeDir.ZOTE_ENV}",
 			"%{IncludeDir.GLFW}",
 			"%{IncludeDir.GLEW}",
 			"%{IncludeDir.GLM}",
@@ -47,18 +65,17 @@ workspace "Zote"
 
 		libdirs
 		{
-			"dependencies/glfw/lib",
-			"dependencies/glew/lib",
-			"dependencies/box2d/lib"
+			"%{LibDir.GLFW}",
+			"%{LibDir.GLEW}",
+			"%{LibDir.BOX2D}"
 		}
 
 		links
 		{
-			"box2d.lib",
-			"opengl32.lib",
-			"glew32.lib",
-			"glew32s.lib",
-			"glfw3.lib"
+			"%{LibFile.GLFW}",
+			"%{LibFile.GLEW}",
+			"%{LibFile.OPENGL}",
+			"%{LibFile.BOX2D}"
 		}
 
 		filter "system:windows"
@@ -85,11 +102,6 @@ workspace "Zote"
 			symbols "On"
 			optimize "On"
 
-		filter "configurations:Dist"
-			defines "ZOTE_DIST"
-			symbols "On"
-			optimize "On"
-
 	project "Game"
 		location "Game"
 		kind "ConsoleApp"
@@ -106,9 +118,9 @@ workspace "Zote"
 
 		includedirs
 		{
-			"Zote/src/Zote",
-			"Zote/src",
 			"%{prj.name}/src",
+			"%{IncludeDir.ZOTE_SRC}",
+			"%{IncludeDir.ZOTE_ENV}",
 			"%{IncludeDir.GLFW}",
 			"%{IncludeDir.GLEW}",
 			"%{IncludeDir.GLM}",
@@ -119,19 +131,18 @@ workspace "Zote"
 
 		libdirs
 		{
-			"dependencies/glfw/lib",
-			"dependencies/glew/lib",
-			"dependencies/box2d/lib"
+			"%{LibDir.GLFW}",
+			"%{LibDir.GLEW}",
+			"%{LibDir.BOX2D}"
 		}
 
 		links
 		{
 			"Zote",
-			"box2d.lib",
-			"opengl32.lib",
-			"glew32.lib",
-			"glew32s.lib",
-			"glfw3.lib"
+			"%{LibFile.GLFW}",
+			"%{LibFile.GLEW}",
+			"%{LibFile.OPENGL}",
+			"%{LibFile.BOX2D}"
 		}
 
 		filter "system:windows"
@@ -149,10 +160,5 @@ workspace "Zote"
 
 		filter "configurations:Release"
 			defines "ZOTE_RELEASE"
-			symbols "On"
-			optimize "On"
-
-		filter "configurations:Dist"
-			defines "ZOTE_DIST"
 			symbols "On"
 			optimize "On"
