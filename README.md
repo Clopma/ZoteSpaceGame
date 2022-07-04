@@ -40,7 +40,7 @@ myWindow->Init();
 myWindow->StartLoop();
 ```
 
-The window **must** to be constructed as a reference. The `Ref` syntax is just a normal shared pointer. The `StartLoop()` method initialises the window loop. So if you write code after that function it won't execute until the Zote Window get's closed.
+The window **must** be constructed as a reference. The `Ref` syntax is just a normal shared pointer. The `StartLoop()` method initialises the window loop. So if you write code after that function it won't execute until the Zote Window get's closed.
 <p></p>
 Running the application now should open an empty grey window.
 <p></p>
@@ -55,6 +55,100 @@ zote.AddComponent<SpriteComponent>("Textures/zote.png");
 ```
 <p></p>
 At this point by running the application you should be experiencing the pleasure of being in the presence of Zote, a kinght of great renown.
+
+<p></p>
+
+## Script System
+<p></p>
+
+The script system is quite similar to the Unity Monobehiavours. Behind the scenes works with the ECS pattern but the usage is more simple. To start using scripts you must to add the `ScriptComponent` to your entity.
+
+```
+Entity myEntity = myScene.CreateEntity();
+myEntity.AddComponent<ScriptComponent>();
+```
+
+Then, you can create your script in new `.h` and `.cpp` separated files. The next example will show how to create a script that changes between two sprites:
+<p></p>
+
+`SwitchBetweenSprites.h`
+```
+#pragma once
+#include <ZoteCommon.h>
+
+using namespace Zote;
+
+class SwitchBetweenSprites : public Script
+{
+public:
+	cstr pathA = "";
+	cstr pathB = "";
+	float timeToSwitch = 0;
+
+	void Start() override;
+	void Update(float deltaTime) override;
+
+private:
+	Entity* thisEntity = nullptr;
+	bool change = false;
+	float currentTime = 0;
+
+};
+```
+`SwitchBetweenSprites.cpp`
+```
+#include "SwitchBetweenSprites.h"
+
+void SwitchBetweenSprites::Start()
+{
+	LOG("Script SwitchBetweenSprites started");
+	thisEntity = GetEntity();
+}
+
+void SwitchBetweenSprites::Update(float deltaTime)
+{
+	auto& spriteComponent = thisEntity->GetComponent<SpriteComponent>();
+	
+	currentTime += deltaTime;
+
+	if (currentTime < timeToSwitch)
+		return;
+
+    currentTime = 0;
+
+	cstr path = change ? pathA : pathB;
+	spriteComponent.AddTexture(path);
+	change = !change;
+
+    LOG("Sprite texture updated to: " << path);
+}
+```
+When the script is ready go back to `Game.cpp` and don't forget to write the preprocessor statement `#include "Scripts/SwitchBetweenSprites.h"`. Then, it's mandatory to create the script instance as a **pointer**. This is the final code inside the `Run()` method.
+```
+Ref<Window> window = MakeRef<Window>();
+window->Init();
+
+Scene scene(window);
+
+Entity myEntity = scene.CreateEntity();
+myEntity.AddComponent<SpriteComponent>();
+		
+auto& myEntity_Scripts = myEntity.AddComponent<ScriptComponent>();
+		
+auto* switchScript = new SwitchBetweenSprites();
+switchScript->pathA = "Textures/zote.png";
+switchScript->pathB = "Textures/sus.png";
+switchScript->timeToSwitch = 1;
+
+myEntity_Scripts.AddScript(switchScript);
+
+window->StartLoop();
+```
+
+
+
+
+
 
 
 
