@@ -37,4 +37,5 @@ void PlayerController::CalculateMovement(float deltaTime)
 	vec3 newPosition = transform.GetPosition();
 	newPosition.x += moveInput * speed * deltaTime;
 	transform.SetPosition(newPosition);
+	LOG(transform.GetPosition().x);
 }

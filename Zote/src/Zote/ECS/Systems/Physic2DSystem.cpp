@@ -85,6 +85,12 @@ namespace Zote
 		m_world = MakeRef<b2World>(b2Vec2(m_worldGravity.x, m_worldGravity.y));
 	}
 
+	void Physic2DSystem::CleanBody(b2Body* body)
+	{
+		if (body->GetType() > 3 || body->GetType() < 0) return;
+		m_world->DestroyBody(body);
+	}
+
 	void Physic2DSystem::Handle2dPhysics()
 	{
 		auto view = m_scene->registry.view<PBody2DComponent, TransformComponent>();
@@ -101,6 +107,13 @@ namespace Zote
 				continue;
 
 			auto& transform = view.get<TransformComponent>(entity);
+
+			if (rb.m_mode == PBody2DComponent::Mode::kinematic)
+			{
+				vec3 pos = transform.GetPosition();
+				rb.m_body->data->SetTransform({ pos.x, pos.y }, glm::eulerAngles(transform.GetRotation()).z);
+				return;
+			}
 
 			//Apply physics to transforms
 			b2Vec2 position = rb.m_body->data->GetPosition();

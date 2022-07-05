@@ -35,6 +35,10 @@ namespace Zote
 			m_fixture = MakeRef<Fixture>();
 		}
 		PBody2DComponent(const PBody2DComponent& other) = default;
+		~PBody2DComponent()
+		{
+			m_physicsSystem->CleanBody(m_body->data);
+		}
 
 		enum class Mode { kinematic, dynamic };
 		enum class Shape { box, circle };

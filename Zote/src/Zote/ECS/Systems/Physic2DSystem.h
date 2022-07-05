@@ -34,5 +34,6 @@ namespace Zote
 	public:
 		vec2 m_worldGravity = { 0.f, -10.f };
 		Physic2DSystem(Scene* scene);
+		void CleanBody(b2Body* body);
 	};
 }
