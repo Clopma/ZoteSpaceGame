@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.h"
+#include "ECS/Entity.h"
 
 namespace Zote
 {
@@ -10,10 +11,10 @@ namespace Zote
 		friend class Entity;
 
 		bool enabled = true;
-		Entity* GetEntity() { return entity; }
+		Entity GetEntity() { return entity; }
 
 	private:
 		static constexpr auto in_place_delete = true;
-		Entity* entity = nullptr;
+		Entity entity;
 	};
 }

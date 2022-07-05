@@ -13,7 +13,7 @@ namespace Zote
 
 		bool enabled = true;
 
-		Entity* GetEntity() { return entity; }
+		Entity GetEntity() { return entity; }
 
 		Script() {}
 
@@ -21,10 +21,10 @@ namespace Zote
 
 		virtual void Start() {}
 		virtual void Update(float deltaTime) {}
-		virtual void OnCollision(Entity* entity) {}
+		virtual void OnCollision(Entity entity) {}
 
 	private:
-		Entity* entity = nullptr;
+		Entity entity;
 		bool started = false;
 	};
 

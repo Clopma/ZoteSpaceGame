@@ -13,11 +13,11 @@ public:
 
 	void Start() override;
 	void Update(float deltaTime) override;
-	void OnCollision(Entity* other) override;
+	void OnCollision(Entity other) override;
 
 private:
 
-	Entity* thisEntity = nullptr;
+	Entity thisEntity;
 	void CalculateMoveInput();
 	void CalculateMovement(float deltaTime);
 };

@@ -15,7 +15,7 @@ public:
 
 private:
 	
-	Entity* thisEntity = nullptr;
+	Entity thisEntity;
 	bool change = false;
 	float currentTime = 0;
 

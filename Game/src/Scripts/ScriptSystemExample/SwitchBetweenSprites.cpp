@@ -8,7 +8,7 @@ void SwitchBetweenSprites::Start()
 
 void SwitchBetweenSprites::Update(float deltaTime)
 {
-	auto& spriteComponent = thisEntity->GetComponent<SpriteComponent>();
+	auto& spriteComponent = thisEntity.GetComponent<SpriteComponent>();
 	
 	currentTime += deltaTime;
 

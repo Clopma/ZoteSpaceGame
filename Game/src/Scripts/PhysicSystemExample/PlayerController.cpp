@@ -11,10 +11,11 @@ void PlayerController::Update(float deltaTime)
 	CalculateMovement(deltaTime);
 }
 
-void PlayerController::OnCollision(Entity* other)
+void PlayerController::OnCollision(Entity other)
 {
-	if (!other->CompareTag("Enemy")) return;
-	LOG("Destroyed: " << other->name);
+	auto& otherTag = other.GetComponent<TagComponent>();
+	if (!otherTag.CompareTag("Enemy")) return;
+	LOG("Destroyed: " << otherTag.name);
 	scene->DestroyEntity(other);
 }
 
@@ -32,7 +33,7 @@ void PlayerController::CalculateMovement(float deltaTime)
 {
 	if (moveInput == 0) return;
 	//Movement
-	auto& transform = thisEntity->GetComponent<TransformComponent>();
+	auto& transform = thisEntity.GetComponent<TransformComponent>();
 	vec3 newPosition = transform.GetPosition();
 	newPosition.x += moveInput * speed * deltaTime;
 	transform.SetPosition(newPosition);

@@ -3,9 +3,9 @@
 #include "ECS/Scene.h"
 #include "ECS/Entity.h"
 #include "ECS/Components/CameraComponent.h"
+#include "ECS/Components/TransformComponent.h"
 
 #include "Rendering/Renderer.h"
-
 
 namespace Zote
 {

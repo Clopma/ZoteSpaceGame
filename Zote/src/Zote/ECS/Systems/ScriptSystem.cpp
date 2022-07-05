@@ -1,5 +1,7 @@
 #include "ScriptSystem.h"
+
 #include "ECS/Scene.h"
+#include "ECS/Components/ScriptComponent.h"
 
 namespace Zote
 {

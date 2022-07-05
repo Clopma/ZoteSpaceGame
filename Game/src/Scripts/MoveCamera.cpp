@@ -2,7 +2,7 @@
 
 void MoveCamera::Start()
 {
-	transform = &GetEntity()->GetComponent<TransformComponent>();
+	transform = &GetEntity().GetComponent<TransformComponent>();
 	lastMousePos = Input::GetMousePosition();
 }
 

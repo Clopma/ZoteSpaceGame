@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Core.h"
-#include "ECS/Components/ScriptComponent.h"
 
 namespace Zote
 {

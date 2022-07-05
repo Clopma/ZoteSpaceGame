@@ -7,22 +7,19 @@ namespace Zote
 {
 	class Entity
 	{
-		friend class Scene;
-
 		Scene* scene = nullptr;
 		entt::entity id{0};
 
 	public:
-		str name = str("Default Name");
-		str tag = str("Default Tag");
-
 		Entity() {}
-		Entity(entt::entity id, Scene* scene);
+		Entity(entt::entity id, Scene* scene, str name = "Entity", str tag = "Default");
 		Entity(const Entity& other) = default;
 
-		bool CompareTag(const str& otherTag) const
+		entt::entity GetId() const { return id; }
+
+		bool operator==(Entity other)
 		{
-			return !tag.compare(otherTag);
+			return id == other.id;
 		}
 
 		template<typename TComponent>
@@ -36,7 +33,7 @@ namespace Zote
 		{
 			TComponent& component = scene->registry.emplace<TComponent>(id, std::forward<Args>(args)...);
 			BaseComponent& baseComponent = static_cast<BaseComponent&>(component);
-			baseComponent.entity = this;
+			baseComponent.entity = *this;
 			scene->OnComponentAdded(id);
 			return component;
 		}

@@ -48,8 +48,8 @@ namespace Zote
 
 		void OnComponentAdded(entt::entity entity);
 
-		Entity CreateEntity();
-		void DestroyEntity(Entity* entity);
+		Entity CreateEntity(str name = "Entity", str tag = "Default");
+		void DestroyEntity(Entity entity);
 		~Scene();
 
 	private:

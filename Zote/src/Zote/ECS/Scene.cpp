@@ -53,13 +53,14 @@ namespace Zote
 		}
 	}
 
-	Entity Scene::CreateEntity()
+	Entity Scene::CreateEntity(str name, str tag)
 	{
-		return { registry.create(), this };
+		entt::entity entity = registry.create();
+		return { entity, this, name, tag };
 	}
-	void Scene::DestroyEntity(Entity* entity)
+	void Scene::DestroyEntity(Entity entity)
 	{
-		registry.destroy(entity->id);
+		registry.destroy(entity.GetId());
 	}
 	Scene::~Scene()
 	{

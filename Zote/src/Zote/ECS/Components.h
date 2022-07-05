@@ -7,3 +7,4 @@
 #include "Components/SpriteComponent.h"
 #include "Components/TransformComponent.h"
 #include "Components/PBody2DComponent.h"
+#include "Components/TagComponent.h"

@@ -23,9 +23,7 @@ namespace PhysicSystemExample
 
 		void CreateEnemy(vec2 spawn)
 		{
-			Entity enemy = scene->CreateEntity();
-			enemy.name = "Enemy Entity";
-			enemy.tag = "Enemy";
+			Entity enemy = scene->CreateEntity("Enemy Entity", "Enemy");
 
 			enemy.AddComponent<SpriteComponent>().color = Color::red;
 			auto& transform = enemy.GetComponent<TransformComponent>();

@@ -3,8 +3,6 @@
 #include <entt.hpp>
 #include <vector>
 
-#include "ECS/Components/TransformComponent.h"
-
 #include "Rendering/Line.h"
 
 #include "Utils/Memory.h"
