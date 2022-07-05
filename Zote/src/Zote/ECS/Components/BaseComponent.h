@@ -13,6 +13,7 @@ namespace Zote
 		Entity* GetEntity() { return entity; }
 
 	private:
+		static constexpr auto in_place_delete = true;
 		Entity* entity = nullptr;
 	};
 }

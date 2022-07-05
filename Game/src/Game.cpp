@@ -50,8 +50,7 @@ public:
 	void Run() override
 	{
 		//ScriptSystemExample();
-		//PhysicSystemExample();
-		Test();
+		PhysicSystemExample();
 	}
 
 	void ScriptSystemExample()
@@ -88,24 +87,11 @@ public:
 		camera_cc.size *= 5;
 
 		//Game Manager setup
-		/*Entity gm = scene.CreateEntity();
+		Entity gm = scene.CreateEntity();
 		auto& gm_sc = gm.AddComponent<ScriptComponent>();
 		auto* gmScript = new PhysicSystemExample::GameManager();
 		gmScript->scene = &scene;
-		gm_sc.AddScript(gmScript);*/
-
-		Entity enemy = scene.CreateEntity();
-		enemy.name = "Enemy Entity";
-		enemy.tag = "Enemy";
-
-		enemy.AddComponent<SpriteComponent>().color = Color::red;
-		auto& transform = enemy.GetComponent<TransformComponent>();
-		transform.SetPosition({ 0, 0, 0 });
-		transform.SetScale({ .5f, .5f, .5f });
-		auto& pb = enemy.AddComponent<PBody2DComponent>();
-		pb.SetMode(PBody2DComponent::Mode::dynamic);
-		pb.SetGScale(0);
-		pb.ApplyLinearImpulse({ 0, -5 });
+		gm_sc.AddScript(gmScript);
 
 		//Player setup
 		Entity player = scene.CreateEntity();
@@ -121,26 +107,6 @@ public:
 		auto* playerController = new PlayerController();
 		playerController->scene = &scene;
 		player_sc.AddScript(playerController);
-
-		window->StartLoop();
-	}
-	void Test()
-	{
-		Ref<Window> window = MakeRef<Window>();
-		if (!window->Init()) return;
-		Scene scene(window);
-
-		Entity entity = scene.CreateEntity();
-		entity.AddComponent<SpriteComponent>();
-		auto& pb = entity.AddComponent<PBody2DComponent>();
-		
-		//pb.ApplyLinearImpulse({ 1, 0 });
-
-		//pb.SetGScale(0);
-		pb.SetMode(PBody2DComponent::Mode::dynamic);
-		pb.SetGScale(0);
-		pb.ApplyLinearImpulse({ 1, 0 });
-		
 
 		window->StartLoop();
 	}

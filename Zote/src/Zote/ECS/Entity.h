@@ -13,8 +13,8 @@ namespace Zote
 		entt::entity id{0};
 
 	public:
-		str name = "Default Entity";
-		str tag = "Default Tag";
+		str name = str("Default Name");
+		str tag = str("Default Tag");
 
 		Entity() {}
 		Entity(entt::entity id, Scene* scene);
@@ -22,7 +22,7 @@ namespace Zote
 
 		bool CompareTag(const str& otherTag) const
 		{
-			return tag.compare(otherTag);
+			return !tag.compare(otherTag);
 		}
 
 		template<typename TComponent>
