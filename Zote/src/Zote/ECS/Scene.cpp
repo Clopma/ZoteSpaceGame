@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "Entity.h"
 #include "Components/CameraComponent.h"
+#include "Components/PBody2DComponent.h"
 
 namespace Zote
 {
@@ -27,17 +28,29 @@ namespace Zote
 	void Scene::OnRenderFrame(OnRenderFrameArgs args)
 	{
 		m_Physic2DSystem->m_frameRate = args.frameRate;
-		m_Physic2DSystem->Handle2dPhysics();
 #ifdef ZOTE_DEBUG
 		m_transformGizmoSystem->HandleGizmos();
 #endif	
 		m_meshSystem->HandleMeshes();
 		m_spriteSystem->HandleSprites();
 		m_scriptSystem->HandleScripts(args.deltaTime);
+		m_Physic2DSystem->Handle2dPhysics();
 		m_CollisionCheckSystem->Check2DCollisions();
 #ifdef ZOTE_DEBUG
 		m_Box2DGizmoSystem->HandleBox2DGizmos();
 #endif	
+	}
+
+	void Scene::OnComponentAdded(entt::entity entity)
+	{
+		if (auto* tryPb = registry.try_get<PBody2DComponent>(entity))
+		{
+			auto& pb = registry.get<PBody2DComponent>(entity);
+			m_Physic2DSystem->UpdateBodyDef(entity);
+
+			pb.m_physicsSystem = m_Physic2DSystem;
+			pb.entity = entity;
+		}
 	}
 
 	Entity Scene::CreateEntity()

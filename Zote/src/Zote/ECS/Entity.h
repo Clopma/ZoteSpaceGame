@@ -1,6 +1,7 @@
 #pragma once
 #include <entt.hpp>
 #include "Scene.h"
+#include "Utils/String.h"
 
 namespace Zote
 {
@@ -12,9 +13,17 @@ namespace Zote
 		entt::entity id{0};
 
 	public:
+		str name = "Default Entity";
+		str tag = "Default Tag";
+
 		Entity() {}
 		Entity(entt::entity id, Scene* scene);
 		Entity(const Entity& other) = default;
+
+		bool CompareTag(const str& otherTag) const
+		{
+			return tag.compare(otherTag);
+		}
 
 		template<typename TComponent>
 		bool HasComponent()
@@ -28,6 +37,7 @@ namespace Zote
 			TComponent& component = scene->registry.emplace<TComponent>(id, std::forward<Args>(args)...);
 			BaseComponent& baseComponent = static_cast<BaseComponent&>(component);
 			baseComponent.entity = this;
+			scene->OnComponentAdded(id);
 			return component;
 		}
 

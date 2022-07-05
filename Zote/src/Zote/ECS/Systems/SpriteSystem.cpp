@@ -20,12 +20,12 @@ namespace Zote
 		auto& camera = m_scene->GetMainCamera().GetComponent<CameraComponent>();
 		auto& cameraTransform = m_scene->GetMainCamera().GetComponent<TransformComponent>();
 
-		auto view = m_scene->registry.view<SpriteComponent>();
+		auto view = m_scene->registry.view<SpriteComponent, TransformComponent>();
 
 		for (auto entity : view)
 		{
 			auto& spriteComponent = view.get<SpriteComponent>(entity);
-			auto& transformComponent = spriteComponent.GetEntity()->GetComponent<TransformComponent>();
+			auto& transformComponent = view.get<TransformComponent>(entity);
 
 			if (!spriteComponent.enabled)
 				continue;

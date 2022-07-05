@@ -1,23 +1,24 @@
 #include "Physic2DSystem.h"
 
-#include <entt.hpp>
 
 #include <box2d/b2_body.h>
 #include <box2d/b2_polygon_shape.h>
 #include <box2d/b2_fixture.h>
-
 #include <box2d/b2_math.h>
 #include <box2d/b2_body.h>
-#include <box2d/b2_polygon_shape.h>
 
 #include "ECS/Entity.h"
 #include "ECS/Scene.h"
 #include "ECS/Components/CameraComponent.h"
+#include "ECS/Components/PBody2DComponent.h"
+#include "ECS/Components/TransformComponent.h"
 
 namespace Zote
 {
-	void Physic2DSystem::UpdateFixture(PBody2DComponent& rb)
+	void Physic2DSystem::UpdateFixture(entt::entity entity)
 	{
+		auto& rb = m_scene->registry.get<PBody2DComponent>(entity);
+
 		b2FixtureDef fixtureDef;
 
 		switch (rb.m_shape)
@@ -35,33 +36,30 @@ namespace Zote
 		fixtureDef.friction = rb.m_friction;
 		fixtureDef.isSensor = rb.m_isTrigger;
 
-		if (rb.m_fixture != nullptr)
-		{
-			rb.m_body->DestroyFixture(rb.m_fixture);
-			rb.m_fixture = nullptr;
-		}
-
-		rb.m_fixture = rb.m_body->CreateFixture(&fixtureDef);
-		rb.m_fixtureUpdated = true;
+		rb.m_fixture->data = rb.m_body->data->CreateFixture(&fixtureDef);
 	}
 
-	void Physic2DSystem::UpdateBodyDef(PBody2DComponent& rb, TransformComponent& transform)
+	void Physic2DSystem::UpdateBodyDef(entt::entity entity)
 	{
+		auto& rb = m_scene->registry.get<PBody2DComponent>(entity);
+		auto& transform = m_scene->registry.get<TransformComponent>(entity);
+
 		b2BodyDef bodyDef;
 		bodyDef.type = rb.m_mode == PBody2DComponent::Mode::dynamic ?
 			b2_dynamicBody : b2_staticBody;
-
+		
+		//bodyDef.type = b2_dynamicBody; //TEMP
+		
 		bodyDef.position.Set(transform.GetPosition().x, transform.GetPosition().y);
 		bodyDef.angle = glm::eulerAngles(transform.GetRotation()).z;
 		bodyDef.gravityScale = rb.m_gScale;
 
-		if (rb.m_body != nullptr)
-		{
-			m_world->DestroyBody(rb.m_body);
-			rb.m_body = nullptr;
-		}
+		//bodyDef.gravityScale = 0; //TEMP
 
-		rb.m_body = m_world->CreateBody(&bodyDef);
+		if (rb.m_body->data != nullptr) //CLEAN
+			m_world->DestroyBody(rb.m_body->data);
+		
+		rb.m_body->data = m_world->CreateBody(&bodyDef);
 		
 		switch (rb.m_shape)
 		{
@@ -78,7 +76,7 @@ namespace Zote
 		}
 
 		rb.m_bodyUpdated = true;
-		UpdateFixture(rb);
+		UpdateFixture(entity);
 	}
 
 	Physic2DSystem::Physic2DSystem(Scene* scene)
@@ -89,7 +87,7 @@ namespace Zote
 
 	void Physic2DSystem::Handle2dPhysics()
 	{
-		auto view = m_scene->registry.view<PBody2DComponent>();
+		auto view = m_scene->registry.view<PBody2DComponent, TransformComponent>();
 		auto& camera = m_scene->GetMainCamera().GetComponent<CameraComponent>();
 		auto& cameraTransform = m_scene->GetMainCamera().GetComponent<TransformComponent>();
 
@@ -102,20 +100,13 @@ namespace Zote
 			if (!rb.enabled)
 				continue;
 
-			auto& transform = rb.GetEntity()->GetComponent<TransformComponent>();
-			
-			//Keep data updated
-			if (!rb.m_bodyUpdated)
-				UpdateBodyDef(rb, transform);
-
-			else if (!rb.m_fixtureUpdated)
-				UpdateFixture(rb);
+			auto& transform = view.get<TransformComponent>(entity);
 
 			//Apply physics to transforms
-			b2Vec2 position = rb.m_body->GetPosition();
+			b2Vec2 position = rb.m_body->data->GetPosition();
 			transform.SetPosition({ position.x, position.y, transform.GetPosition().z });
 			
-			float angle = rb.m_body->GetAngle();
+			float angle = rb.m_body->data->GetAngle();
 			float selfAngle = glm::eulerAngles(transform.GetRotation()).z;
 			
 			float dif = std::abs(std::abs(angle) - std::abs(selfAngle));

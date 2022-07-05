@@ -3,24 +3,37 @@
 #include "Core.h"
 #include "BaseComponent.h"
 
+#include <entt.hpp>
+#include "ECS/Systems/Physic2DSystem.h"
+
 #include <box2d/b2_body.h>
 #include <box2d/b2_polygon_shape.h>
 #include <box2d/b2_circle_shape.h>
 
 #include "Utils/Math.h"
+#include "Utils/Memory.h"
 
 namespace Zote
 {
+	struct Body { b2Body* data = nullptr;};
+	struct Fixture { b2Fixture* data = nullptr; };
+
 	struct ZOTE_API PBody2DComponent : public BaseComponent
 	{
 		friend class Physic2DSystem;
 		friend class ScriptSystem;
 		friend class Collision2DCheckSystem;
 		friend class Box2DGizmoSystem;
+		friend class PBodyManager;
+		friend class Scene;
 
 	public:
 
-		PBody2DComponent() {}
+		PBody2DComponent() 
+		{
+			m_body = MakeRef<Body>();
+			m_fixture = MakeRef<Fixture>();
+		}
 		PBody2DComponent(const PBody2DComponent& other) = default;
 
 		enum class Mode { kinematic, dynamic };
@@ -39,82 +52,83 @@ namespace Zote
 		{
 			if (m_gScale == newGScale)
 				return;
-			m_bodyUpdated = false;
 			m_gScale = newGScale;
+			m_physicsSystem->UpdateBodyDef(entity);
 		}
 		void SetMode(const Mode& newMode) 
 		{
 			if (m_mode == newMode)
 				return;
-			m_bodyUpdated = false;
-			m_mode = newMode; 
+			m_mode = newMode;
+			m_physicsSystem->UpdateBodyDef(entity);
 		}
 		void SetColliderSize(const vec2& newSize) 
 		{
 			if (m_colliderSize == newSize)
 				return;
-			m_bodyUpdated = false; 
 			m_colliderSize = newSize; 
+			m_physicsSystem->UpdateBodyDef(entity);
 		}
 		void SetDensity(float newDensity)
 		{
 			if (m_density == newDensity)
 				return;
-			m_fixtureUpdated = false;
 			m_density = newDensity;
+			m_physicsSystem->UpdateBodyDef(entity);
 		}
 		void SetFriction(float newFriction)
 		{
 			if (m_friction == newFriction)
 				return;
-			m_fixtureUpdated = false;
 			m_friction = newFriction;
+			m_physicsSystem->UpdateBodyDef(entity);
 		}
 		void SetIsTrigger(bool isTrigger) 
 		{
 			if (m_isTrigger == isTrigger)
 				return;
 			m_isTrigger = isTrigger;
-			m_fixtureUpdated = false;
+			m_physicsSystem->UpdateBodyDef(entity);
 		}
 		void SetShape(Shape newShape)
 		{
 			if (m_shape == newShape)
 				return;
 			m_shape = newShape;
-			m_bodyUpdated = false;
+			m_physicsSystem->UpdateBodyDef(entity);
 		}
 		void SetRadius(float newRadius) 
 		{ 
 			if (m_radius == newRadius)
 				return;
 			m_radius = newRadius;
-			m_bodyUpdated = false;
+			m_physicsSystem->UpdateBodyDef(entity);
 		}
+
 		void SetLinearVelocity(const vec2 velocity)
 		{
-			m_body->SetLinearVelocity({ velocity.x, velocity.y });
+			m_body->data->SetLinearVelocity({ velocity.x, velocity.y });
 		}
 		void SetAngularVelocity(float velocity)
 		{
-			m_body->SetAngularVelocity(velocity);
+			m_body->data->SetAngularVelocity(velocity);
 		}
 		
 		void ApplyForce(const vec2& force)
 		{
-			m_body->ApplyForceToCenter({ force.x, force.y }, true);
+			m_body->data->ApplyForceToCenter({ force.x, force.y }, true);
 		}
 		void ApplyTorque(float torque)
 		{
-			m_body->ApplyTorque(torque, true);
+			m_body->data->ApplyTorque(torque, true);
 		}		
 		void ApplyLinearImpulse(const vec2& impulse)
 		{
-			m_body->ApplyLinearImpulseToCenter({ impulse.x, impulse.y }, true);
+			m_body->data->ApplyLinearImpulseToCenter({ impulse.x, impulse.y }, true);
 		}
 		void ApplyAngularImpulse(float impulse)
 		{
-			m_body->ApplyAngularImpulse(impulse, true);
+			m_body->data->ApplyAngularImpulse(impulse, true);
 		}
 
 	private:
@@ -130,11 +144,13 @@ namespace Zote
 		float m_radius = 0.5f;
 
 		bool m_bodyUpdated = false;
-		bool m_fixtureUpdated = false;
-		
-		b2Body* m_body = nullptr;
-		b2Fixture* m_fixture = nullptr;
-		
+
+		Ref<Body> m_body;
+		Ref<Fixture> m_fixture;
+
+		Ref<Physic2DSystem> m_physicsSystem;
+		entt::entity entity;
+
 		b2PolygonShape m_box;
 		b2CircleShape m_circle;
 	};

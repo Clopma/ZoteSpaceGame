@@ -33,8 +33,8 @@ namespace Zote
 
 				if (currentRb.GetEntity() == otherRb.GetEntity()) continue; //Omitimos el suyo propio
 
-				bool collision = b2TestOverlap(currentRb.m_fixture->GetShape(), 0, otherRb.m_fixture->GetShape(), 0,
-					currentRb.m_body->GetTransform(), otherRb.m_body->GetTransform()); //Comprobamos si colisiona con alguno de los demás
+				bool collision = b2TestOverlap(currentRb.m_fixture->data->GetShape(), 0, otherRb.m_fixture->data->GetShape(), 0,
+					currentRb.m_body->data->GetTransform(), otherRb.m_body->data->GetTransform()); //Comprobamos si colisiona con alguno de los demás
 
 				if (!collision) continue;
 

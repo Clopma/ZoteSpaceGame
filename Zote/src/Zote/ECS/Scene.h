@@ -46,6 +46,8 @@ namespace Zote
 
 		Scene(const Scene& other) {};
 
+		void OnComponentAdded(entt::entity entity);
+
 		Entity CreateEntity();
 		void DestroyEntity(Entity* entity);
 		~Scene();
@@ -61,6 +63,6 @@ namespace Zote
 		Ref<TransformGizmoSystem> m_transformGizmoSystem;
 		Ref<Physic2DSystem> m_Physic2DSystem;
 		Ref<Collision2DCheckSystem> m_CollisionCheckSystem;
-		Ref<Box2DGizmoSystem> m_Box2DGizmoSystem;		
+		Ref<Box2DGizmoSystem> m_Box2DGizmoSystem;
 	};
 }

@@ -1,7 +1,7 @@
 #include "Box2DGizmoSystem.h"
 
 #include "ECS/Components/CameraComponent.h"
-#include "ECS/Components/CameraComponent.h"
+#include "ECS/Components/PBody2DComponent.h"
 #include "ECS/Entity.h"
 
 namespace Zote
