@@ -15,7 +15,7 @@ void PlayerController::OnCollision(Entity other)
 {
 	auto& otherTag = other.GetComponent<TagComponent>();
 	if (!otherTag.CompareTag("Enemy")) return;
-	LOG("Destroyed: " << otherTag.name);
+	//LOG("Destroyed: " << otherTag.name);
 	scene->DestroyEntity(other);
 }
 

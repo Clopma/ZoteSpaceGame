@@ -36,7 +36,7 @@ namespace Zote
 		fixtureDef.friction = rb.m_friction;
 		fixtureDef.isSensor = rb.m_isTrigger;
 
-		rb.m_fixture->data = rb.m_body->data->CreateFixture(&fixtureDef);
+		rb.m_fixture = rb.m_body->CreateFixture(&fixtureDef);
 	}
 
 	void Physic2DSystem::UpdateBodyDef(entt::entity entity)
@@ -56,10 +56,10 @@ namespace Zote
 
 		//bodyDef.gravityScale = 0; //TEMP
 
-		if (rb.m_body->data != nullptr) //CLEAN
-			m_world->DestroyBody(rb.m_body->data);
+		if (rb.m_body != nullptr) //CLEAN
+			m_world->DestroyBody(rb.m_body);
 		
-		rb.m_body->data = m_world->CreateBody(&bodyDef);
+		rb.m_body = m_world->CreateBody(&bodyDef);
 		
 		switch (rb.m_shape)
 		{
@@ -74,8 +74,6 @@ namespace Zote
 					(rb.m_colliderSize.y / 2.f) * transform.GetScale().y);		
 				break;
 		}
-
-		rb.m_bodyUpdated = true;
 		UpdateFixture(entity);
 	}
 
@@ -87,8 +85,7 @@ namespace Zote
 
 	void Physic2DSystem::CleanBody(b2Body* body)
 	{
-		if (body->GetType() > 3 || body->GetType() < 0) return;
-		m_world->DestroyBody(body);
+		m_world->DestroyBody(body);		
 	}
 
 	void Physic2DSystem::Handle2dPhysics()
@@ -111,15 +108,15 @@ namespace Zote
 			if (rb.m_mode == PBody2DComponent::Mode::kinematic)
 			{
 				vec3 pos = transform.GetPosition();
-				rb.m_body->data->SetTransform({ pos.x, pos.y }, glm::eulerAngles(transform.GetRotation()).z);
+				rb.m_body->SetTransform({ pos.x, pos.y }, glm::eulerAngles(transform.GetRotation()).z);
 				return;
 			}
 
 			//Apply physics to transforms
-			b2Vec2 position = rb.m_body->data->GetPosition();
+			b2Vec2 position = rb.m_body->GetPosition();
 			transform.SetPosition({ position.x, position.y, transform.GetPosition().z });
 			
-			float angle = rb.m_body->data->GetAngle();
+			float angle = rb.m_body->GetAngle();
 			float selfAngle = glm::eulerAngles(transform.GetRotation()).z;
 			
 			float dif = std::abs(std::abs(angle) - std::abs(selfAngle));

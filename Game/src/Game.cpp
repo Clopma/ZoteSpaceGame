@@ -37,7 +37,7 @@ namespace PhysicSystemExample
 			auto& pb = enemy.AddComponent<PBody2DComponent>();
 			pb.SetMode(PBody2DComponent::Mode::dynamic);
 			pb.SetGScale(0);
-			pb.ApplyLinearImpulse({ 0, -5 });
+			pb.ApplyLinearImpulse({ 0, -1 });
 		}
 
 	private:	
@@ -54,6 +54,7 @@ public:
 	{
 		//ScriptSystemExample();
 		PhysicSystemExample();
+		//Test();
 	}
 
 	void ScriptSystemExample()
@@ -118,6 +119,24 @@ public:
 		auto& detal_tc = detail.GetComponent<TransformComponent>();
 		detal_tc.SetParent(player);
 		detal_tc.SetPosition({ 0, 1, 0 });
+
+		window->StartLoop();
+	}
+
+
+	void Test()
+	{
+		Ref<Window> window = MakeRef<Window>();
+		if (!window->Init()) return;
+		Scene scene(window);
+
+		Entity a = scene.CreateEntity("A");
+		a.AddComponent<PBody2DComponent>();
+
+		Entity b = scene.CreateEntity("B");
+		b.AddComponent<PBody2DComponent>();
+
+		scene.DestroyEntity(a);
 
 		window->StartLoop();
 	}

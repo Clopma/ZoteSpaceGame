@@ -60,7 +60,9 @@ namespace Zote
 	}
 	void Scene::DestroyEntity(Entity entity)
 	{
-		registry.destroy(entity.GetId());
+		entt::entity id = entity.GetId();
+		if (registry.valid(id))
+			registry.destroy(id);
 	}
 	Scene::~Scene()
 	{

@@ -9,15 +9,13 @@
 #include <box2d/b2_body.h>
 #include <box2d/b2_polygon_shape.h>
 #include <box2d/b2_circle_shape.h>
+#include "TagComponent.h"
 
 #include "Utils/Math.h"
 #include "Utils/Memory.h"
 
 namespace Zote
 {
-	struct Body { b2Body* data = nullptr;};
-	struct Fixture { b2Fixture* data = nullptr; };
-
 	struct ZOTE_API PBody2DComponent : public BaseComponent
 	{
 		friend class Physic2DSystem;
@@ -29,15 +27,33 @@ namespace Zote
 
 	public:
 
-		PBody2DComponent() 
+		PBody2DComponent() {}
+		
+		PBody2DComponent(const PBody2DComponent& other)
 		{
-			m_body = MakeRef<Body>();
-			m_fixture = MakeRef<Fixture>();
+			m_mode = Mode::kinematic;
+			m_shape = Shape::box;
+			m_gScale = other.m_gScale;
+			m_colliderSize = other.m_colliderSize;
+			m_density = other.m_density;
+			m_friction = other.m_friction;
+			m_isTrigger = other.m_isTrigger;
+			m_radius = other.m_radius;
+			m_body = other.m_body;
+			m_fixture = other.m_fixture;
+			m_physicsSystem = other.m_physicsSystem;
+			entity = other.entity;
+			m_box = other.m_box;
+			m_circle = other.m_circle;
+
+			coping = true;
 		}
-		PBody2DComponent(const PBody2DComponent& other) = default;
+
 		~PBody2DComponent()
 		{
-			m_physicsSystem->CleanBody(m_body->data);
+			if (coping) return;
+			str name = GetEntity().GetComponent<TagComponent>().name;
+			coping = false;
 		}
 
 		enum class Mode { kinematic, dynamic };
@@ -111,28 +127,28 @@ namespace Zote
 
 		void SetLinearVelocity(const vec2 velocity)
 		{
-			m_body->data->SetLinearVelocity({ velocity.x, velocity.y });
+			m_body->SetLinearVelocity({ velocity.x, velocity.y });
 		}
 		void SetAngularVelocity(float velocity)
 		{
-			m_body->data->SetAngularVelocity(velocity);
+			m_body->SetAngularVelocity(velocity);
 		}
 		
 		void ApplyForce(const vec2& force)
 		{
-			m_body->data->ApplyForceToCenter({ force.x, force.y }, true);
+			m_body->ApplyForceToCenter({ force.x, force.y }, true);
 		}
 		void ApplyTorque(float torque)
 		{
-			m_body->data->ApplyTorque(torque, true);
+			m_body->ApplyTorque(torque, true);
 		}		
 		void ApplyLinearImpulse(const vec2& impulse)
 		{
-			m_body->data->ApplyLinearImpulseToCenter({ impulse.x, impulse.y }, true);
+			m_body->ApplyLinearImpulseToCenter({ impulse.x, impulse.y }, true);
 		}
 		void ApplyAngularImpulse(float impulse)
 		{
-			m_body->data->ApplyAngularImpulse(impulse, true);
+			m_body->ApplyAngularImpulse(impulse, true);
 		}
 
 	private:
@@ -147,13 +163,14 @@ namespace Zote
 		bool m_isTrigger = false;
 		float m_radius = 0.5f;
 
-		bool m_bodyUpdated = false;
+		static constexpr auto in_place_delete = true;
 
-		Ref<Body> m_body;
-		Ref<Fixture> m_fixture;
+		b2Body* m_body = nullptr;
+		b2Fixture* m_fixture = nullptr;
+		bool coping = false;
 
 		Ref<Physic2DSystem> m_physicsSystem;
-		entt::entity entity;
+		entt::entity entity{0};
 
 		b2PolygonShape m_box;
 		b2CircleShape m_circle;
