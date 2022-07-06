@@ -1,7 +1,6 @@
 #pragma once
 #include "Core.h"
 #include "BaseComponent.h"
-
 #include "Utils/Math.h"
 
 namespace Zote
@@ -16,6 +15,14 @@ namespace Zote
 		}
 
 		TransformComponent(const TransformComponent& other) = default;
+
+		void SetParent(Entity parent)
+		{
+			this->parent = parent;
+			hasParent = true;
+		}
+
+		void RemoveParent() { hasParent = false; }
 
 		void SetPosition(const vec3& newPos) { position = newPos; }
 		const vec3& GetPosition() const { return position; }
@@ -44,16 +51,29 @@ namespace Zote
 			UpdateAxis();
 		}
 
-		const mat4 GetModel() const
+		const mat4 GetModel()
 		{
 			mat4 model = mat4(1.0f);
-			model = glm::translate(model, GetPosition());
-			model = model * glm::toMat4(GetRotation());
+
+			vec3 position = GetPosition();
+			quat rotation = GetRotation();
+
+			if (hasParent)
+			{
+				auto& parentTransform = parent.GetComponent<TransformComponent>();
+				position += parentTransform.GetPosition();
+				rotation += parentTransform.GetRotation();
+			}			
+
+			model = glm::translate(model, position);
+			model = model * glm::toMat4(rotation);
 			model = glm::scale(model, GetScale());
 			return model;
 		}
 
 	private:
+		Entity parent;
+		bool hasParent = false;
 
 		vec3 position = { 0, 0, 0 };
 		quat rotation = { 1, 0, 0, 0 };

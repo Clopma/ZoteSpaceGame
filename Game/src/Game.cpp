@@ -16,9 +16,14 @@ namespace PhysicSystemExample
 		void Update(float deltaTime) override
 		{
 			time += deltaTime;
+			
 			if (time < spawnRate) return;
+			
 			time = 0;
-			CreateEnemy({ 0, 0 });
+			vec2 spawn;
+			spawn.x = RandomFloat(-3, 3);
+
+			CreateEnemy({ spawn.x, 7 });
 		}
 
 		void CreateEnemy(vec2 spawn)
@@ -99,12 +104,20 @@ public:
 		auto& player_tc = player.GetComponent<TransformComponent>();
 		player_tc.SetPosition({ 0, -6.5f, 0 });
 		player_tc.SetScale({ 3, 1, 1 });
+		player_tc.RotateLocal(10, { 0, 0, 1 });
 
 		player.AddComponent<PBody2DComponent>();
 		auto& player_sc = player.AddComponent<ScriptComponent>();
 		auto* playerController = new PlayerController();
 		playerController->scene = &scene;
 		player_sc.AddScript(playerController);
+
+		Entity detail = scene.CreateEntity();
+		auto& detail_sc = detail.AddComponent<SpriteComponent>();
+		detail_sc.color = Color::green;
+		auto& detal_tc = detail.GetComponent<TransformComponent>();
+		detal_tc.SetParent(player);
+		detal_tc.SetPosition({ 0, 1, 0 });
 
 		window->StartLoop();
 	}

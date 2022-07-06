@@ -18,3 +18,10 @@ using quat = glm::quat;
 
 #define VEC2_UP vec2(0, 1)
 #define VEC2_RIGHT vec2(1, 0)
+
+inline float RandomFloat(float a, float b) {
+    float random = ((float)rand()) / (float)RAND_MAX;
+    float diff = b - a;
+    float r = random * diff;
+    return a + r;
+}

@@ -24,5 +24,4 @@ void main()
     fragColor = vec4(color, 1.0);
     fragColor.rgb *= circleColor;
 
-    //fragColor = vec4(circleColor, 1.0);
 }
