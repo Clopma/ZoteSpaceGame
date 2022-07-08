@@ -84,7 +84,7 @@ public:
 	void Update(float deltaTime) override;
 
 private:
-	Entity* thisEntity = nullptr;
+	Entity thisEntity;
 	bool change = false;
 	float currentTime = 0;
 
@@ -102,7 +102,7 @@ void SwitchBetweenSprites::Start()
 
 void SwitchBetweenSprites::Update(float deltaTime)
 {
-	auto& spriteComponent = thisEntity->GetComponent<SpriteComponent>();
+	auto& spriteComponent = thisEntity.GetComponent<SpriteComponent>();
 	
 	currentTime += deltaTime;
 
