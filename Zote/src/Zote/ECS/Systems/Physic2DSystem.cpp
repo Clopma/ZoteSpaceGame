@@ -15,6 +15,14 @@
 
 namespace Zote
 {
+	void Physic2DSystem::OnDestroyEntity(OnDestroyEntityArgs args)
+	{
+		if (args.entity->HasComponent<PBody2DComponent>())
+		{
+			auto& body = args.entity->GetComponent<PBody2DComponent>();
+			CleanBody(body.m_body);
+		}
+	}
 	void Physic2DSystem::UpdateFixture(entt::entity entity)
 	{
 		auto& rb = m_scene->registry.get<PBody2DComponent>(entity);
@@ -81,6 +89,7 @@ namespace Zote
 		: m_scene(scene)
 	{
 		m_world = MakeRef<b2World>(b2Vec2(m_worldGravity.x, m_worldGravity.y));
+		m_scene->OnDestroyEntity.AddListener(new Delegate<OnDestroyEntityArgs>(this, &Physic2DSystem::OnDestroyEntity));
 	}
 
 	void Physic2DSystem::CleanBody(b2Body* body)

@@ -28,33 +28,8 @@ namespace Zote
 	public:
 
 		PBody2DComponent() {}
-		
-		PBody2DComponent(const PBody2DComponent& other)
-		{
-			m_mode = Mode::kinematic;
-			m_shape = Shape::box;
-			m_gScale = other.m_gScale;
-			m_colliderSize = other.m_colliderSize;
-			m_density = other.m_density;
-			m_friction = other.m_friction;
-			m_isTrigger = other.m_isTrigger;
-			m_radius = other.m_radius;
-			m_body = other.m_body;
-			m_fixture = other.m_fixture;
-			m_physicsSystem = other.m_physicsSystem;
-			entity = other.entity;
-			m_box = other.m_box;
-			m_circle = other.m_circle;
 
-			coping = true;
-		}
-
-		~PBody2DComponent()
-		{
-			if (coping) return;
-			str name = GetEntity().GetComponent<TagComponent>().name;
-			coping = false;
-		}
+		PBody2DComponent(const PBody2DComponent& other) = default;
 
 		enum class Mode { kinematic, dynamic };
 		enum class Shape { box, circle };
@@ -167,7 +142,6 @@ namespace Zote
 
 		b2Body* m_body = nullptr;
 		b2Fixture* m_fixture = nullptr;
-		bool coping = false;
 
 		Ref<Physic2DSystem> m_physicsSystem;
 		entt::entity entity{0};

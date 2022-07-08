@@ -25,7 +25,6 @@ namespace PhysicSystemExample
 
 			CreateEnemy({ spawn.x, 7 });
 		}
-
 		void CreateEnemy(vec2 spawn)
 		{
 			Entity enemy = scene->CreateEntity("Enemy Entity", "Enemy");
@@ -105,7 +104,6 @@ public:
 		auto& player_tc = player.GetComponent<TransformComponent>();
 		player_tc.SetPosition({ 0, -6.5f, 0 });
 		player_tc.SetScale({ 3, 1, 1 });
-		player_tc.RotateLocal(10, { 0, 0, 1 });
 
 		player.AddComponent<PBody2DComponent>();
 		auto& player_sc = player.AddComponent<ScriptComponent>();
@@ -117,26 +115,23 @@ public:
 		auto& detail_sc = detail.AddComponent<SpriteComponent>();
 		detail_sc.color = Color::green;
 		auto& detal_tc = detail.GetComponent<TransformComponent>();
-		detal_tc.SetParent(player);
 		detal_tc.SetPosition({ 0, 1, 0 });
 
 		window->StartLoop();
 	}
-
-
 	void Test()
 	{
 		Ref<Window> window = MakeRef<Window>();
 		if (!window->Init()) return;
 		Scene scene(window);
 
-		Entity a = scene.CreateEntity("A");
-		a.AddComponent<PBody2DComponent>();
+		Entity A = scene.CreateEntity("A");
+		A.AddComponent<PBody2DComponent>();
 
-		Entity b = scene.CreateEntity("B");
-		b.AddComponent<PBody2DComponent>();
+		Entity B = scene.CreateEntity("B");
+		B.AddComponent<PBody2DComponent>();
 
-		scene.DestroyEntity(a);
+		scene.DestroyEntity(A);
 
 		window->StartLoop();
 	}

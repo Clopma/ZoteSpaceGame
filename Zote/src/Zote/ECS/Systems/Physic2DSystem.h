@@ -7,6 +7,7 @@
 
 #include "Utils/Memory.h"
 #include "Utils/Math.h"
+#include "ECS/SceneEvents.h"
 
 namespace Zote
 {
@@ -26,6 +27,7 @@ namespace Zote
 		int32 m_positionIterations = 2;
 		float m_rotationOffset = .01f;
 
+		void OnDestroyEntity(OnDestroyEntityArgs args);
 		void UpdateFixture(entt::entity entity);
 		void UpdateBodyDef(entt::entity entity);
 

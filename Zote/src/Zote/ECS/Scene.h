@@ -16,6 +16,7 @@
 #include "Systems/Box2DGizmoSystem.h"
 
 #include "Utils/Memory.h"
+#include "SceneEvents.h"
 
 namespace Zote
 {
@@ -34,6 +35,7 @@ namespace Zote
 		friend class Box2DGizmoSystem;
 
 	public:
+		Event<OnDestroyEntityArgs> OnDestroyEntity;
 		static vec3 MainCamStart;
 
 		Scene() {}

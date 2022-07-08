@@ -25,7 +25,7 @@ namespace Zote
 		template<typename TComponent>
 		bool HasComponent()
 		{
-			return scene->registry.valid<TComponent>(id);
+			return scene->registry.try_get<TComponent>(id);
 		}
 
 		template<typename TComponent, typename... Args>
