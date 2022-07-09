@@ -22,7 +22,9 @@ Zote is a 2D Game Engine developed for my final university assignment.
 - Clone this project
 - Open the project's root folder
 - Run `GenerateProjects.bat`
-- Open `Zote.sln` and ✨Enjoy✨
+- Open `Zote.sln`
+- Build the `Game` project
+- Hit the play button and ✨Enjoy✨
 <br/><br/>
 
 ## Hello Zote
