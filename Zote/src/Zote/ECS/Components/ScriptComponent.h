@@ -53,7 +53,7 @@ namespace Zote
 			scripts.erase(scripts.begin() + index);
 		}
 
-		~ScriptComponent()
+		void ClearScripts()
 		{
 			for (auto script : scripts)
 				delete script;

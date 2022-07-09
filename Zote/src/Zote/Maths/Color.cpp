@@ -18,6 +18,16 @@ namespace Zote
 		return c;
 	}
 
+	Color Color::Random()
+	{
+		Color c;
+		c.r = RandomFloat(0, 1);
+		c.g = RandomFloat(0, 1);
+		c.b = RandomFloat(0, 1);
+		c.a = 1;
+		return c;
+	}
+
 	const Color Color::grey(108.0f, 122.0f, 137.0f, 1.0f);
 	const Color Color::red(1, 0, 0, 1);
 	const Color Color::green(0, 1, 0, 1);

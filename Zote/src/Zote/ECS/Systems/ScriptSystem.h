@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core.h"
+#include "ECS/SceneEvents.h"
 
 namespace Zote
 {
@@ -13,5 +14,6 @@ namespace Zote
 	public:
 		ScriptSystem(Scene* scene);
 		void HandleScripts(float deltaTime);
+		void OnDestroyEntity(OnDestroyEntityArgs args);
 	};
 }

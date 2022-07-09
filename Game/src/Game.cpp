@@ -2,47 +2,9 @@
 
 #include "Scripts/ScriptSystemExample/SwitchBetweenSprites.h"
 #include "Scripts/PhysicSystemExample/PlayerController.h"
+#include "Scripts/PhysicSystemExample/GameManager.h"
 
 using namespace Zote;
-
-namespace PhysicSystemExample
-{
-	class GameManager : public Script
-	{
-	public:
-		float spawnRate = 2;
-		Scene* scene = nullptr;
-
-		void Update(float deltaTime) override
-		{
-			time += deltaTime;
-			
-			if (time < spawnRate) return;
-			
-			time = 0;
-			vec2 spawn;
-			spawn.x = RandomFloat(-3, 3);
-
-			CreateEnemy({ spawn.x, 7 });
-		}
-		void CreateEnemy(vec2 spawn)
-		{
-			Entity enemy = scene->CreateEntity("Enemy Entity", "Enemy");
-
-			enemy.AddComponent<SpriteComponent>().color = Color::red;
-			auto& transform = enemy.GetComponent<TransformComponent>();
-			transform.SetPosition({ spawn.x, spawn.y, 0 });
-			transform.SetScale({ .5f, .5f, .5f });
-			auto& pb = enemy.AddComponent<PBody2DComponent>();
-			pb.SetMode(PBody2DComponent::Mode::dynamic);
-			pb.SetGScale(0);
-			pb.ApplyLinearImpulse({ 0, -1 });
-		}
-
-	private:	
-		float time = 0;
-	};
-}
 
 class Game : public Application
 {
@@ -51,9 +13,8 @@ public:
 
 	void Run() override
 	{
-		ScriptSystemExample();
-		//PhysicSystemExample();
-		//Test();
+		//ScriptSystemExample();
+		PhysicSystemExample();
 	}
 
 	void ScriptSystemExample()
@@ -84,48 +45,28 @@ public:
 		camera_cc.size *= 5;
 
 		//Game Manager setup
-		Entity gm = scene.CreateEntity();
-		auto& gm_sc = gm.AddComponent<ScriptComponent>();
-		auto* gmScript = new PhysicSystemExample::GameManager();
-		gmScript->scene = &scene;
-		gm_sc.AddScript(gmScript);
+		{
+			auto* gameManager = new GameManager();
+			gameManager->scene = &scene;
+			Entity gm = scene.CreateScriptableEntity(gameManager);
+		}
 
 		//Player setup
-		Entity player = scene.CreateEntity();
-		auto& player_spc = player.AddComponent<SpriteComponent>();
-		player_spc.color = Color::blue;
+		{
+			auto playerController = new PlayerController();
+			playerController->scene = &scene;
+			Entity player = scene.CreateScriptableEntity(playerController, "Player Entity", "Player");
+		}
 
-		auto& player_tc = player.GetComponent<TransformComponent>();
-		player_tc.SetPosition({ 0, -6.5f, 0 });
-		player_tc.SetScale({ 3, 1, 1 });
-
-		player.AddComponent<PBody2DComponent>();
-		auto& player_sc = player.AddComponent<ScriptComponent>();
-		auto* playerController = new PlayerController();
-		playerController->scene = &scene;
-		player_sc.AddScript(playerController);
-
-		Entity detail = scene.CreateEntity();
-		auto& detail_sc = detail.AddComponent<SpriteComponent>();
-		detail_sc.color = Color::green;
-		auto& detal_tc = detail.GetComponent<TransformComponent>();
-		detal_tc.SetPosition({ 0, 1, 0 });
-
-		window->StartLoop();
-	}
-	void Test()
-	{
-		Ref<Window> window = MakeRef<Window>();
-		if (!window->Init()) return;
-		Scene scene(window);
-
-		Entity A = scene.CreateEntity("A");
-		A.AddComponent<PBody2DComponent>();
-
-		Entity B = scene.CreateEntity("B");
-		B.AddComponent<PBody2DComponent>();
-
-		scene.DestroyEntity(A);
+		//Lose Trigger
+		{
+			Entity groundTrigger = scene.CreateEntity("Ground Trigger", "Ground");
+			auto& transform = groundTrigger.GetComponent<TransformComponent>();
+			transform.SetPosition({ 0, -7, 0 });
+			transform.SetScale({ 20, 1, 0 });
+			auto& body = groundTrigger.AddComponent<PBody2DComponent>();
+			body.SetIsTrigger(true);
+		}
 
 		window->StartLoop();
 	}

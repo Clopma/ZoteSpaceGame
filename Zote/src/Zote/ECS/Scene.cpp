@@ -9,6 +9,7 @@ namespace Zote
 	vec3 Scene::MainCamStart = { 0, 0, -6 };
 
 	Scene::Scene(Ref<Window> window)
+		: m_window(window)
 	{
 		mainCamera = new Entity();
 		*mainCamera = CreateEntity();
@@ -42,6 +43,7 @@ namespace Zote
 #endif	
 	}
 
+	//TOFIX: This updates the PBody every new component added after it...
 	void Scene::OnComponentAdded(entt::entity entity)
 	{
 		if (auto* tryPb = registry.try_get<PBody2DComponent>(entity))

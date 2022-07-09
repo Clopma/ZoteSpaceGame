@@ -18,5 +18,6 @@ namespace Zote
 		static const Color blue;
 		
 		static Color Normalize(const Color& color);
+		static Color Random();
 	};
 }

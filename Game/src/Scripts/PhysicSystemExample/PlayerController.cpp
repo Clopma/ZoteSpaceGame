@@ -3,20 +3,52 @@
 void PlayerController::Start()
 {
 	thisEntity = GetEntity();
+	thisEntity.AddComponent<SpriteComponent>().color = color;
+	auto& transform = thisEntity.GetComponent<TransformComponent>();
+	transform.SetPosition(startPos);
+	transform.SetScale(startScale);
+	thisEntity.AddComponent<PBody2DComponent>();
 }
 
 void PlayerController::Update(float deltaTime)
 {
 	CalculateMoveInput();
 	CalculateMovement(deltaTime);
+	CalculateShootInput();
 }
 
-void PlayerController::OnCollision(Entity other)
+void PlayerController::Shot()
 {
-	auto& otherTag = other.GetComponent<TagComponent>();
-	if (!otherTag.CompareTag("Enemy")) return;
-	//LOG("Destroyed: " << otherTag.name);
-	scene->DestroyEntity(other);
+	Entity bullet = scene->CreateEntity("Bullet Entity", "Bullet");
+	
+	//Transform
+	auto& transform = thisEntity.GetComponent<TransformComponent>();
+	auto& bulletTransform = bullet.GetComponent<TransformComponent>();
+	bulletTransform.SetPosition(transform.GetPosition() + VEC3_UP * bulletOffset);
+	bulletTransform.SetScale(bulletScale);
+	
+	//Visuals
+	bullet.AddComponent<SpriteComponent>().color = bulletColor;
+
+	//Physics
+	auto& body = bullet.AddComponent<PBody2DComponent>();
+	body.SetGScale(0);
+	body.SetMode(PBody2DComponent::Mode::dynamic);
+	body.ApplyLinearImpulse(bulletImpulse);
+}
+
+void PlayerController::CalculateShootInput()
+{
+	bool shootInput = Input::GetKeyPressed(ZOTE_KEY_SPACE);
+	if (shootInput && !fire)
+	{
+		fire = true;
+		Shot();
+	}
+	else if (!shootInput && fire)
+	{
+		fire = false;
+	}	
 }
 
 void PlayerController::CalculateMoveInput()
@@ -37,5 +69,4 @@ void PlayerController::CalculateMovement(float deltaTime)
 	vec3 newPosition = transform.GetPosition();
 	newPosition.x += moveInput * speed * deltaTime;
 	transform.SetPosition(newPosition);
-	LOG(transform.GetPosition().x);
 }

@@ -19,12 +19,12 @@ namespace Zote
 		auto& camera = m_scene->GetMainCamera().GetComponent<CameraComponent>();
 		auto& cameraTransform = m_scene->GetMainCamera().GetComponent<TransformComponent>();
 
-		auto group = m_scene->registry.group<TransformComponent>(entt::get<MeshComponent>);
+		auto view = m_scene->registry.view<MeshComponent, TransformComponent>();
 
-		for (auto entity : group)
+		for (auto entity : view)
 		{
-			auto& meshComponent = group.get<MeshComponent>(entity);
-			auto& transformComponent = group.get<TransformComponent>(entity);
+			auto& meshComponent = view.get<MeshComponent>(entity);
+			auto& transformComponent = view.get<TransformComponent>(entity);
 
 			if (!meshComponent.enabled)
 				continue;

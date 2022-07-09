@@ -65,8 +65,11 @@ namespace Zote
 		//bodyDef.gravityScale = 0; //TEMP
 
 		if (rb.m_body != nullptr) //CLEAN
+		{
 			m_world->DestroyBody(rb.m_body);
-		
+			rb.m_body = nullptr;
+		}
+
 		rb.m_body = m_world->CreateBody(&bodyDef);
 		
 		switch (rb.m_shape)
@@ -118,7 +121,7 @@ namespace Zote
 			{
 				vec3 pos = transform.GetPosition();
 				rb.m_body->SetTransform({ pos.x, pos.y }, glm::eulerAngles(transform.GetRotation()).z);
-				return;
+				continue;
 			}
 
 			//Apply physics to transforms

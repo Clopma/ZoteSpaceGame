@@ -46,6 +46,7 @@ namespace Zote
 		void OnRenderFrame(OnRenderFrameArgs args);
 		
 		Entity& GetMainCamera() { return *mainCamera; }
+		Ref<Window> GetWindow() { return m_window; }
 
 		Scene(const Scene& other) {};
 
@@ -61,6 +62,7 @@ namespace Zote
 		entt::registry registry;
 
 		Entity* mainCamera = nullptr;
+		Ref<Window> m_window;
 
 		Ref<ScriptSystem> m_scriptSystem;
 		Ref<MeshSystem> m_meshSystem;

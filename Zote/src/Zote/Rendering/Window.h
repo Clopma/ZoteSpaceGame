@@ -45,6 +45,7 @@ namespace Zote
 		void CalculateFrameRate();
 
 	public:
+		bool close = false;
 		Event<OnRenderFrameArgs> OnRenderFrame;
 		static bool openGLConsoleLogs;
 

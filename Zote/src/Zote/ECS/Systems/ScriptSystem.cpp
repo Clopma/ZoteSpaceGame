@@ -6,7 +6,10 @@
 namespace Zote
 {
 	ScriptSystem::ScriptSystem(Scene* scene)
-		: m_scene(scene) {}
+		: m_scene(scene) 
+	{
+		m_scene->OnDestroyEntity.AddListener(new Delegate<OnDestroyEntityArgs>(this, &ScriptSystem::OnDestroyEntity));
+	}
 
 	void ScriptSystem::HandleScripts(float deltaTime)
 	{
@@ -33,5 +36,10 @@ namespace Zote
 				script->Update(deltaTime);
 			}
 		}		
+	}
+	void ScriptSystem::OnDestroyEntity(OnDestroyEntityArgs args)
+	{
+		if (args.entity->HasComponent<ScriptComponent>())
+			args.entity->GetComponent<ScriptComponent>().ClearScripts();
 	}
 }

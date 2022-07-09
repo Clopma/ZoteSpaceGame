@@ -15,9 +15,11 @@ using quat = glm::quat;
 #define VEC3_UP vec3(0, 1, 0)
 #define VEC3_RIGHT vec3(1, 0, 0)
 #define VEC3_FORWARD vec3(0, 0, 1)
+#define VEC3_ONE vec3(1, 1, 1)
 
 #define VEC2_UP vec2(0, 1)
 #define VEC2_RIGHT vec2(1, 0)
+#define VEC2_ONE vec2(1, 1)
 
 inline float RandomFloat(float a, float b) {
     float random = ((float)rand()) / (float)RAND_MAX;

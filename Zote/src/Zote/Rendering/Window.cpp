@@ -109,7 +109,7 @@ namespace Zote
 		if (!initialized)
 			return;
 
-		while (!glfwWindowShouldClose(glfwWindow))
+		while (!glfwWindowShouldClose(glfwWindow) && !close)
 		{
 			//Input events
 			glfwPollEvents();

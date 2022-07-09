@@ -51,10 +51,10 @@ In order to create entites a `Scene` instance is required. At this point you **c
 ```
 Scene myScene(myWindow);
 Entity zote = myScene.CreateEntity();
-zote.AddComponent<SpriteComponent>("Textures/zote.png");
+zote.AddComponent<SpriteComponent>("Textures/alex.png");
 ```
 <p></p>
-At this point by running the application you should be experiencing the pleasure of being in the presence of Zote, a kinght of great renown.
+At this point by running the application you should be experiencing the pleasure of being in the presence of Alex, the creator of this high tech engine.
 
 <p></p>
 
@@ -76,14 +76,15 @@ using namespace Zote;
 class SwitchBetweenSprites : public Script
 {
 public:
-	cstr pathA = "";
-	cstr pathB = "";
-	float timeToSwitch = 0;
+	cstr pathA = "Textures/csharp.png";
+	cstr pathB = "Textures/cpp.png";
+	float timeToSwitch = 1;
 
 	void Start() override;
 	void Update(float deltaTime) override;
 
 private:
+	
 	Entity thisEntity;
 	bool change = false;
 	float currentTime = 0;
@@ -109,13 +110,13 @@ void SwitchBetweenSprites::Update(float deltaTime)
 	if (currentTime < timeToSwitch)
 		return;
 
-    currentTime = 0;
+	currentTime = 0;
 
 	cstr path = change ? pathA : pathB;
 	spriteComponent.AddTexture(path);
 	change = !change;
 
-    LOG("Sprite texture updated to: " << path);
+	LOG("Sprite texture updated to: " << path);
 }
 ```
 When the script is ready go back to `Game.cpp` and don't forget to write the preprocessor statement, for this example: `#include "Scripts/SwitchBetweenSprites.h"`. By using the `AddScript()` method you can attach the script to the script component. It is possible to call this function with multiple scripts to attach them to a single Entity. It's mandatory to create the script instance as a **pointer**. This is the final code inside the `Run()` method.
@@ -127,19 +128,13 @@ Scene scene(window);
 
 Entity myEntity = scene.CreateEntity();
 myEntity.AddComponent<SpriteComponent>();
-		
-auto& myEntity_Scripts = myEntity.AddComponent<ScriptComponent>();
-		
-auto* switchScript = new SwitchBetweenSprites();
-switchScript->pathA = "Textures/zote.png";
-switchScript->pathB = "Textures/sus.png";
-switchScript->timeToSwitch = 1;
 
-myEntity_Scripts.AddScript(switchScript);
+auto& myEntity_Scripts = myEntity.AddComponent<ScriptComponent>();
+myEntity_Scripts.AddScript(new SwitchBetweenSprites());
 
 window->StartLoop();
 ```
-By hitting the run button you should see the amogus and zote textures switching in the screen.
+By hitting the run button you should see, in first place a blank quad, and then the csharp and cpp textures switching in the screen.
 
 
 
