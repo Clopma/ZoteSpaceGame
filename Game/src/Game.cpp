@@ -51,8 +51,8 @@ public:
 
 	void Run() override
 	{
-		//ScriptSystemExample();
-		PhysicSystemExample();
+		ScriptSystemExample();
+		//PhysicSystemExample();
 		//Test();
 	}
 
@@ -65,15 +65,9 @@ public:
 
 		Entity myEntity = scene.CreateEntity();
 		myEntity.AddComponent<SpriteComponent>();
-		
-		auto& myEntity_Scripts = myEntity.AddComponent<ScriptComponent>();
-		
-		auto* switchScript = new SwitchBetweenSprites();
-		switchScript->pathA = "Textures/zote.png";
-		switchScript->pathB = "Textures/sus.png";
-		switchScript->timeToSwitch = 1;
 
-		myEntity_Scripts.AddScript(switchScript);
+		auto& myEntity_Scripts = myEntity.AddComponent<ScriptComponent>();
+		myEntity_Scripts.AddScript(new SwitchBetweenSprites());
 
 		window->StartLoop();
 	}

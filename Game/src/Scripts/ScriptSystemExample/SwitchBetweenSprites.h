@@ -6,9 +6,9 @@ using namespace Zote;
 class SwitchBetweenSprites : public Script
 {
 public:
-	cstr pathA = "";
-	cstr pathB = "";
-	float timeToSwitch = 0;
+	cstr pathA = "Textures/csharp.png";
+	cstr pathB = "Textures/cpp.png";
+	float timeToSwitch = 1;
 
 	void Start() override;
 	void Update(float deltaTime) override;

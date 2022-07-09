@@ -22,6 +22,7 @@ namespace Zote
 {
 	class Entity;
 	class Renderer;
+	class Script;
 
 	class ZOTE_API Scene
 	{
@@ -51,6 +52,8 @@ namespace Zote
 		void OnComponentAdded(entt::entity entity);
 
 		Entity CreateEntity(str name = "Entity", str tag = "Default");
+		Entity CreateScriptableEntity(Script* script, str name = "Scriptable Entity", str tag = "Default");
+
 		void DestroyEntity(Entity entity);
 		~Scene();
 

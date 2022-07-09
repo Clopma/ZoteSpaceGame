@@ -2,6 +2,7 @@
 #include "Entity.h"
 #include "Components/CameraComponent.h"
 #include "Components/PBody2DComponent.h"
+#include "Components/ScriptComponent.h"
 
 namespace Zote
 {
@@ -58,6 +59,15 @@ namespace Zote
 		entt::entity entity = registry.create();
 		return { entity, this, name, tag };
 	}
+
+	Entity Scene::CreateScriptableEntity(Script* script, str name, str tag)
+	{
+		Entity se = CreateEntity(name, tag);
+		auto& sc = se.AddComponent<ScriptComponent>();
+		sc.AddScript(script);
+		return se;
+	}
+
 	void Scene::DestroyEntity(Entity entity)
 	{
 		entt::entity id = entity.GetId();

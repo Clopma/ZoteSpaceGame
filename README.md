@@ -1,4 +1,4 @@
-<img src="Game/Textures/zote.png" alt="drawing" width="100"/>
+<img src="Game/Textures/alex.png" alt="drawing" width="100"/>
 
 # **Zote Engine**
 
