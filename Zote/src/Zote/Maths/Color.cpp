@@ -28,6 +28,11 @@ namespace Zote
 		return c;
 	}
 
+	bool Color::operator==(Color color)
+	{
+		return r == color.r &&  g == color.g && b == color.b && a == color.a;
+	}
+
 	const Color Color::grey(108.0f, 122.0f, 137.0f, 1.0f);
 	const Color Color::red(1, 0, 0, 1);
 	const Color Color::green(0, 1, 0, 1);

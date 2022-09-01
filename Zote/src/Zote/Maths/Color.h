@@ -19,5 +19,6 @@ namespace Zote
 		
 		static Color Normalize(const Color& color);
 		static Color Random();
+		bool operator==(Color color);
 	};
 }

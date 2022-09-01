@@ -19,6 +19,11 @@ namespace Zote
 		{
 			return !tag.compare(other);
 		}
+
+		bool CompareName(str other)
+		{
+			return !name.compare(other);
+		}
 	};
 }
 

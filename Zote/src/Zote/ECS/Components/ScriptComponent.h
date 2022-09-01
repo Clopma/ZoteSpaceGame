@@ -8,12 +8,17 @@ namespace Zote
 {
 	struct ZOTE_API Script
 	{
+		virtual ~Script() = default;
 		friend class ScriptSystem;
 		friend class ScriptComponent;
 
 		bool enabled = true;
 
 		Entity GetEntity() { return entity; }
+
+		Entity CreateEntity() { return scene->CreateEntity(); }
+		void DestroyEntity(Entity entity) { return scene->DestroyEntity(entity); }
+		Entity& GetMainCamera() { return scene->GetMainCamera(); }
 
 		Script() {}
 
@@ -25,6 +30,7 @@ namespace Zote
 
 	private:
 		Entity entity;
+		Scene* scene = nullptr;
 		bool started = false;
 	};
 
@@ -43,6 +49,11 @@ namespace Zote
 			scripts.push_back(script);
 			count++;
 			return count - 1;
+		}
+
+		Script* GetScript(int id)
+		{
+			return scripts[id];
 		}
 
 		void RemoveScript(int index)

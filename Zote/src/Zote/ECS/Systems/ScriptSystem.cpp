@@ -17,6 +17,8 @@ namespace Zote
 
 		for (auto entity : view)
 		{
+			if (!m_scene->registry.valid(entity)) continue;
+			
 			ScriptComponent& scriptComponent = view.get<ScriptComponent>(entity);
 
 			if (!scriptComponent.enabled || scriptComponent.count == 0)
@@ -29,10 +31,10 @@ namespace Zote
 
 				if (!script->started)
 				{
+					script->scene = m_scene;
 					script->Start();
 					script->started = true;
 				}
-
 				script->Update(deltaTime);
 			}
 		}		

@@ -11,6 +11,7 @@ namespace Zote
 	public:
 		static void Init(GLFWwindow* window);
 		static bool GetKeyPressed(int keycode);
+		static bool GetKeyReleased(int keycode);
 		static bool GetMouseButtonPressed(int button);
 		static vec2 GetMousePosition();
 

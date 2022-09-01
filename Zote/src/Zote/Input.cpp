@@ -13,14 +13,18 @@ namespace Zote
 	{
 		int state = glfwGetKey(m_window, keycode);
 		return state == GLFW_PRESS || state == GLFW_REPEAT;
-		return false;
 	}
+
+	bool Input::GetKeyReleased(int keycode)
+	{
+		int state = glfwGetKey(m_window, keycode);
+		return state == GLFW_RELEASE;
+	} 
 
 	bool Input::GetMouseButtonPressed(int button)
 	{
 		int state = glfwGetMouseButton(m_window, button);
 		return state == GLFW_PRESS || state == GLFW_REPEAT;
-		return false;
 	}
 
 	glm::vec2 Input::GetMousePosition()

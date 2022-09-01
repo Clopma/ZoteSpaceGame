@@ -34,6 +34,11 @@ namespace Zote
 		enum class Mode { kinematic, dynamic };
 		enum class Shape { box, circle };
 
+		vec2 GetLinearVelocity() const
+		{
+			auto linearVel = m_body->GetLinearVelocity();
+			return { linearVel.x, linearVel.y };
+		}
 		float GetGScale() const { return m_gScale; }
 		const Mode& GetMode() const { return m_mode; }
 		const vec2& GetColliderSize() const { return m_colliderSize; }
